@@ -1,2 +1,0 @@
-This is a dummy text file to prove that the repository works.
-We'll delete this once we start work.
