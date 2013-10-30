@@ -16,8 +16,8 @@ public class DummySword extends ItemSword {
 	/**
 	 * Constructor for the DummySword.
 	 */
-	public DummySword() {
-		super(5000, EnumToolMaterial.IRON);
+	public DummySword(int itemID) {
+		super(itemID, EnumToolMaterial.IRON);
 		setCreativeTab(CreativeTabs.tabCombat);
 		setTextureName("gold_sword");
 		setUnlocalizedName("dummySword");

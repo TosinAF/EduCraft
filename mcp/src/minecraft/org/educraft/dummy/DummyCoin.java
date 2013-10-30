@@ -15,8 +15,8 @@ public class DummyCoin extends Item {
 	/**
 	 * Constructor for a DummyCoin.
 	 */
-	public DummyCoin() {
-		super(6000);
+	public DummyCoin(int itemID) {
+		super(itemID);
 		setCreativeTab(CreativeTabs.tabMisc);
 		setTextureName("emerald");
 		setMaxStackSize(64);
