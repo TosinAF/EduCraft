@@ -10,24 +10,18 @@
 # By default, ignore everything
 /*
 /*/
-client/
-common/
-fml/
-patches/
-*.txt
-forge*
-install*
 
 # Explicitly include readme file, and team-added files
 !.gitignore
 !README.md
 !PxbComment.txt
 
-# Configure src directory
-!mcp
-mcp/*
-!mcp/src
-mcp/src/*
-!mcp/src/minecraft
-mcp/src/minecraft/*
-!mcp/src/minecraft/org
+!/mcp/
+/mcp/*
+!/mcp/src/
+/mcp/src/*
+!/mcp/src/minecraft/
+/mcp/src/minecraft/*
+!/mcp/src/minecraft/org
+/mcp/src/minecraft/org/*
+!/mcp/src/minecraft/org/educraft/
