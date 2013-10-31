@@ -17,32 +17,36 @@ import org.educraft.DummyMod;
  * 
  */
 public class DummyZombie extends EntityZombie {
-	private Random itemRandomiser;
+	private int droppedItemId;
 
 	public DummyZombie(World world) {
 		super(world);
-		this.itemRandomiser = new Random();
 		setCustomNameTag("Dummy Zombie");
+		this.droppedItemId = Item.rottenFlesh.itemID;
 	}
 
 	/**
-	 * Determines whether or not the DummyZombie can be harmed by a particular
-	 * damage source.
+	 * Checks what sort of damage the zombie is taking, and sets the ID of the
+	 * item to drop accordingly.
 	 * 
-	 * @param source
-	 *            the source of the damage
-	 * @param damage
-	 *            the amount of damage being caused
+	 * If hit by a dummy weapon, then the zombie should drop a DummyCoin if
+	 * killed. If hit by a regular weapon, the zombie should drop rotten flesh.
+	 * If it takes damage from any other source, the item dropped should be
+	 * unchanged.
 	 */
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float damage) {
-		if (!source.getDamageType().equals("dummy")) {
-			// regular damage, let the superclass handle it
+		if (source.getDamageType().equals("dummy")) {
+			// dummy damage, set the dropped item to DummyCoin
+			this.droppedItemId = DummyMod.DUMMY_COIN.itemID;
+			return super.attackEntityFrom(source, damage);
+		} else if (source.getDamageType().equals("player")) {
+			// other damage caused by player, set dropped item to rotten flesh
+			this.droppedItemId = Item.rottenFlesh.itemID;
 			return super.attackEntityFrom(source, damage);
 		} else {
-			// dummy damage, handle specially
-			// TODO implement properly
-			return false;
+			// miscellaneous damage, don't change the dropped item
+			return super.attackEntityFrom(source, damage);
 		}
 	}
 
@@ -55,8 +59,7 @@ public class DummyZombie extends EntityZombie {
 	 */
 	@Override
 	protected int getDropItemId() {
-		return (this.itemRandomiser.nextInt(3) == 0) ? DummyMod.DUMMY_COIN.itemID
-				: Item.rottenFlesh.itemID;
+		return this.droppedItemId;
 	}
 
 }
