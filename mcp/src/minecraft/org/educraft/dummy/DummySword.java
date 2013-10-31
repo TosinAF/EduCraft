@@ -12,7 +12,7 @@ import net.minecraft.item.ItemSword;
  * 
  */
 public class DummySword extends ItemSword {
-
+	
 	/**
 	 * Constructor for the DummySword.
 	 */

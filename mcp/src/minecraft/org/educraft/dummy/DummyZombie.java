@@ -2,11 +2,12 @@ package org.educraft.dummy;
 
 import java.util.Random;
 
-import org.educraft.DummyMod;
-
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+
+import org.educraft.DummyMod;
 
 /**
  * The DummyZombie exists to drop DummyCoins when he dies, with a 0.33
@@ -21,6 +22,28 @@ public class DummyZombie extends EntityZombie {
 	public DummyZombie(World world) {
 		super(world);
 		this.itemRandomiser = new Random();
+		setCustomNameTag("Dummy Zombie");
+	}
+
+	/**
+	 * Determines whether or not the DummyZombie can be harmed by a particular
+	 * damage source.
+	 * 
+	 * @param source
+	 *            the source of the damage
+	 * @param damage
+	 *            the amount of damage being caused
+	 */
+	@Override
+	public boolean attackEntityFrom(DamageSource source, float damage) {
+		if (!source.getDamageType().equals("dummy")) {
+			// regular damage, let the superclass handle it
+			return super.attackEntityFrom(source, damage);
+		} else {
+			// dummy damage, handle specially
+			// TODO implement properly
+			return false;
+		}
 	}
 
 	/**
