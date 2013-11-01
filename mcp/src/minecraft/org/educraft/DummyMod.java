@@ -24,7 +24,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "DummyModID", name = "Dummy Mod", version = "0.3.0")
+@Mod(modid = "DummyModID", name = "Dummy Mod", version = "0.4.0")
 @NetworkMod(clientSideRequired = true)
 public class DummyMod {
 
