@@ -10,8 +10,9 @@ import net.minecraft.world.World;
 import org.educraft.DummyMod;
 
 /**
- * The DummyZombie exists to drop DummyCoins when he dies, with a 0.33
- * probability that he will drop a coin instead of his normal drops.
+ * The DummyZombie exists as a source of DummyCoins. If he is killed by a dummy
+ * weapon, he will drop a DummyCoin; otherwise, he will drop rotten flesh as
+ * normal.
  * 
  * @author iak12u
  * 
@@ -51,11 +52,9 @@ public class DummyZombie extends EntityZombie {
 	}
 
 	/**
-	 * Sets the ID of the item this mob should drop when killed. 33% of the
-	 * time, it will drop a DummyCoin; the rest of the time, it will drop rotten
-	 * flesh as per usual.
+	 * Returns the ID of the item to drop when killed.
 	 * 
-	 * @return the ID of the item to be dropped
+	 * @return the item ID, set according to the most recent damage source
 	 */
 	@Override
 	protected int getDropItemId() {

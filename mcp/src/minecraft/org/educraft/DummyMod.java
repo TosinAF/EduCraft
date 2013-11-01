@@ -1,11 +1,12 @@
 package org.educraft;
 
-import net.minecraft.client.resources.Language;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.MinecraftForge;
 
+import org.educraft.dummy.DummyAttackHandler;
 import org.educraft.dummy.DummyCoin;
 import org.educraft.dummy.DummyCoinPile;
 import org.educraft.dummy.DummySword;
@@ -55,6 +56,9 @@ public class DummyMod {
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
+		// register the zombie-killing event
+		MinecraftForge.EVENT_BUS.register(new DummyAttackHandler());
+		
 		// register recipes for making and breaking DummyCoinPiles
 		GameRegistry.addRecipe(new ItemStack(DUMMY_COIN_PILE), "ccc", "ccc",
 				"ccc", 'c', new ItemStack(DUMMY_COIN));
