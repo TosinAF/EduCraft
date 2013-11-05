@@ -24,7 +24,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "DummyModID", name = "Dummy Mod", version = "0.4.0")
+@Mod(modid = "DummyModID", name = "Dummy Mod", version = "1.0.0")
 @NetworkMod(clientSideRequired = true)
 public class DummyMod {
 
@@ -48,11 +48,6 @@ public class DummyMod {
 	// Says where the client and server 'proxy' code is loaded.
 	@SidedProxy(clientSide = "org.educraft.client.ClientProxy", serverSide = "org.educraft.CommonProxy")
 	public static CommonProxy proxy;
-
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
-		// Stub Method
-	}
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
@@ -84,8 +79,4 @@ public class DummyMod {
 		proxy.registerRenderers();
 	}
 
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
-		// Stub Method
-	}
 }
