@@ -9,7 +9,7 @@ import net.minecraftforge.common.MinecraftForge;
 import org.educraft.dummy.DummyAttackHandler;
 import org.educraft.dummy.DummyCoin;
 import org.educraft.dummy.DummyCoinPile;
-import org.educraft.dummy.DummySword;
+import org.educraft.dummy.MathsWand;
 import org.educraft.dummy.DummyZombie;
 
 import cpw.mods.fml.common.Mod;
@@ -31,7 +31,7 @@ public class DummyMod {
 	/**
 	 * Adds an instance of DummySword into the mod.
 	 */
-	public static final Item DUMMY_SWORD = new DummySword(5000);
+	public static final Item MATHS_WAND = new MathsWand(5000);
 	/**
 	 * Adds an instance of DummyCoin into the mod.
 	 */
@@ -70,7 +70,7 @@ public class DummyMod {
 				EnumCreatureType.monster, BiomeGenBase.plains);
 
 		// add localised names to language registry
-		LanguageRegistry.addName(DUMMY_SWORD, "Dummy Sword");
+		LanguageRegistry.addName(MATHS_WAND, "Maths Wand");
 		LanguageRegistry.addName(DUMMY_COIN, "Dummy Coin");
 		LanguageRegistry.addName(DUMMY_COIN_PILE, "Pile of Dummy Coins");
 		LanguageRegistry.instance().addStringLocalization(

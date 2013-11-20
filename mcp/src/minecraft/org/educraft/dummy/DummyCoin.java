@@ -19,7 +19,7 @@ public class DummyCoin extends Item {
 		super(itemID);
 		setCreativeTab(CreativeTabs.tabMisc);
 		setTextureName("emerald");
-		setMaxStackSize(64);
+		setMaxStackSize(16);
 		setUnlocalizedName("dummyCoin");
 	}
 

@@ -22,7 +22,7 @@ public class DummyZombie extends EntityZombie {
 
 	public DummyZombie(World world) {
 		super(world);
-		setCustomNameTag("Dummy Zombie");
+		setCustomNameTag("7");
 		this.droppedItemId = Item.rottenFlesh.itemID;
 	}
 

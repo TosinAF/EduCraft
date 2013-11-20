@@ -35,7 +35,7 @@ public class DummyAttackHandler {
 		// DummyZombie
 		if (target.getClass().equals(DummyZombie.class)) {
 			// deal dummy damage if the player is wielding a DummySword
-			if (weapon.itemID == DummyMod.DUMMY_SWORD.itemID) {
+			if (weapon.itemID == DummyMod.MATHS_WAND.itemID) {
 				target.attackEntityFrom(
 						DummyDamageSource.causeDummyDamage(player), 5F);
 			}

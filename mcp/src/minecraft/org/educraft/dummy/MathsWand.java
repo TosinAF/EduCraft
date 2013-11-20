@@ -11,16 +11,16 @@ import net.minecraft.item.ItemSword;
  * @author iak12u
  * 
  */
-public class DummySword extends ItemSword {
+public class MathsWand extends ItemSword {
 	
 	/**
 	 * Constructor for the DummySword.
 	 */
-	public DummySword(int itemID) {
+	public MathsWand(int itemID) {
 		super(itemID, EnumToolMaterial.IRON);
 		setCreativeTab(CreativeTabs.tabCombat);
-		setTextureName("gold_sword");
-		setUnlocalizedName("dummySword");
+		setTextureName("stick");
+		setUnlocalizedName("mathsWand");
 	}
 
 }
