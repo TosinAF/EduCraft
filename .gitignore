@@ -19,8 +19,11 @@
 !/mcp/
 /mcp/*
 !/mcp/src/
+!/mcp/jars/
 /mcp/src/*
+/mcp/jars/*
 !/mcp/src/minecraft/
+!/mcp/jars/saves/
 /mcp/src/minecraft/*
 !/mcp/src/minecraft/org
 /mcp/src/minecraft/org/*
