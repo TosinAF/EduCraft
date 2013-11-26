@@ -7,6 +7,14 @@
 *.ear
 
 ## CUSTOM RULES
+# Ignore LaTeX processing
+*.aux
+*.toc
+*.log
+*.bbl
+*.blg
+*.pdf
+
 # By default, ignore everything
 /*
 /*/
