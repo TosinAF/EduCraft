@@ -1,19 +1,59 @@
 \chapter{Design and Implementation}
 
 \section{Overview}
-A discussion of the design of the system, and key factors that influenced our design. We should talk about the requirement to develop using Java, and the decision to use the MinecraftForge API.
+A discussion of the design of the system, and key factors that 
+influenced our design. We should talk about the requirement to 
+develop using Java, and the decision to use the MinecraftForge API.
 
 \section{Using Java}
-Minecraft is a game written in the Java language, and so it is only logical that when we mod the game it is required that we use Java. This links in with the API we use, which is also dependent on Java and specifically is made with support for Eclipse (in terms for example of online tutorials for setting up and coding in the Eclipse JDK environment). 
+Minecraft is a game written in the Java language, and so it is 
+only logical that when we mod the game it is required that we use 
+Java. This links in with the API we use, which is also dependent 
+on Java and specifically is made with support for Eclipse (in 
+terms for example of online tutorials for setting up and coding 
+in the Eclipse JDK environment). 
 
 \section{Decision to use MinecraftForge API}
-Before creating our mod we had to choose the method for modding the game. Our final choice was to use the MinecraftForge API, which is a mod/application layer for Minecraft which lets us create and run Minecraft mods. The decision to use MinecraftForge API was because of its versatility and usefulness. Furthermore, we decided to use MinecraftForge over other alternatives because, while other tools like ModLoader may have been arguably easier to use, MinecraftForge is much more suited for our purposes – namely, creating a more complex mod. This is because MinecraftForge has a lot more possibilities, whereas with ModLoader there is more limited scope for creating complex Minecraft mods. Aside from ModLoader and MinecraftForge, there wasn’t much else choice; these two mod tools are the most popular by far in the Minecraft community.  
+Before creating our mod we had to choose the method for modding 
+the game. Our final choice was to use the MinecraftForge API, which 
+is a mod/application layer for Minecraft which lets us create and 
+run Minecraft mods. The decision to use MinecraftForge API was 
+because of its versatility and usefulness. Furthermore, we decided 
+to use MinecraftForge over other alternatives because, while other 
+tools like ModLoader may have been arguably easier to use, MinecraftForge 
+is much more suited for our purposes – namely, creating a more complex 
+mod. This is because MinecraftForge has a lot more possibilities, whereas 
+with ModLoader there is more limited scope for creating complex Minecraft 
+mods. Aside from ModLoader and MinecraftForge, there wasn’t much else 
+choice; these two mod tools are the most popular by far in the Minecraft 
+community.  
 
 \section{Discussion of the design of the system}
-Because of the very nature of MinecraftForge and our design, all modifications are done by creating new classes – we are creating a mod that adds and extends from Minecraft, we are not creating a core mod. Because of this we have our mod in a new package: package org.educraft, which can be implemented by MinecraftForge and run in Minecraft. 
+Because of the very nature of MinecraftForge and our design, 
+all modifications are done by creating new classes – we are 
+creating a mod that adds and extends from Minecraft, we are 
+not creating a core mod. Because of this we have our mod in 
+a new package: package org.educraft, which can be implemented 
+by MinecraftForge and run in Minecraft. 
 
-Our system design has proxy classes, which at the moment aren’t used for much but will be used later (when our mod is more developed) for purposes such as rendering entities in the Minecraft world (e.g. monsters, items). In the current dummy mod we have produced, we have a base class (DummyMod.java), which is the first class that MinecraftForge loads. The base class uses other classes such as DummyCoin, DummyAttackHandler etc. These separate classes control specific individual elements of the mod. For example, DummyCoin extends the item class, and is a custom item that we have created for use in our mod. Likewise, we use similar tactics in other classes, such as a ‘maths wand’ which extends the Minecraft Sword item, and has unique interactions with other aspects of the mod such as our dummy zombie. 
+Our system design has proxy classes, which at the moment aren’t used 
+for much but will be used later (when our mod is more developed) for 
+purposes such as rendering entities in the Minecraft world (e.g. monsters, items). 
+In the current dummy mod we have produced, we have a base class (DummyMod.java), 
+which is the first class that MinecraftForge loads. The base class uses other 
+classes such as DummyCoin, DummyAttackHandler etc. These separate classes 
+control specific individual elements of the mod. For example, DummyCoin extends 
+the item class, and is a custom item that we have created for use in our mod. 
+Likewise, we use similar tactics in other classes, such as a ‘maths wand’ 
+which extends the Minecraft Sword item, and has unique interactions with other 
+aspects of the mod such as our dummy zombie. 
 
-In its current state the mod is obviously fairly basic, but we have the foundations for an organised system design which can and will be the basis for a sophisticated and elegant mod. A key reason for this system design is that it follows the standard format of a MinecraftForge mod, meaning it is easy to understand, and is well organised. 
+In its current state the mod is obviously fairly basic, but we have the 
+foundations for an organised system design which can and will be the basis 
+for a sophisticated and elegant mod. A key reason for this system design 
+is that it follows the standard format of a MinecraftForge mod, meaning it 
+is easy to understand, and is well organised. 
 
-Examples of/ tutorials for MinecraftForge mods informed our decision to create our mod following this system design; examples can be found on the wiki page: http://www.minecraftforge.net/wiki/Tutorials
+Examples of/ tutorials for MinecraftForge mods informed our decision to 
+create our mod following this system design; examples can be found on the 
+wiki page: http://www.minecraftforge.net/wiki/Tutorials
