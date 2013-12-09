@@ -5,7 +5,9 @@ A discussion of the design of the system, and key factors that
 influenced our design. We should talk about the requirement to 
 develop using Java, and the decision to use the MinecraftForge API.
 
-\section{Using Java}
+\section{Key Implementation Decisions}
+
+\subsection{Programming Language}
 Minecraft is a game written in the Java language, and so it is 
 only logical that when we mod the game it is required that we use 
 Java. This links in with the API we use, which is also dependent 
@@ -13,7 +15,7 @@ on Java and specifically is made with support for Eclipse (in
 terms for example of online tutorials for setting up and coding 
 in the Eclipse JDK environment). 
 
-\section{Decision to use MinecraftForge API}
+\subsection{Application Programming Interface (API)}
 Before creating our mod we had to choose the method for modding 
 the game. Our final choice was to use the MinecraftForge API, which 
 is a mod/application layer for Minecraft which lets us create and 
@@ -28,7 +30,7 @@ mods. Aside from ModLoader and MinecraftForge, there wasn’t much else
 choice; these two mod tools are the most popular by far in the Minecraft 
 community.  
 
-\section{Discussion of the design of the system}
+\section{Initial Design of the System}
 Because of the very nature of MinecraftForge and our design, 
 all modifications are done by creating new classes – we are 
 creating a mod that adds and extends from Minecraft, we are 
