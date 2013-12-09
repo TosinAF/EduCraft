@@ -1,13 +1,17 @@
 \chapter{Design and Implementation}
 
-\section{Overview}
-A discussion of the design of the system, and key factors that 
-influenced our design. We should talk about the requirement to 
-develop using Java, and the decision to use the MinecraftForge API.
+\section{Introduction}
+In this chapter we present a discussion of the design of the system, 
+and key factors that influenced our design. We will explain the requirement 
+to develop using Java, and our decision to use the MinecraftForge API.
 
-\section{Key Implementation Decisions}
+The online tutorials for making MinecraftForge mods informed our decision to 
+create our mod following this system design; examples can be found on the
+MinecraftForge wiki page \cite{website:mcforgewiki}.
 
-\subsection{Programming Language}
+\section{Key implementation decisions}
+
+\subsection{Programming language}
 Minecraft is a game written in the Java language, and so it is 
 only logical that when we mod the game it is required that we use 
 Java. This links in with the API we use, which is also dependent 
@@ -15,12 +19,14 @@ on Java and specifically is made with support for Eclipse (in
 terms for example of online tutorials for setting up and coding 
 in the Eclipse JDK environment). 
 
-\subsection{Application Programming Interface (API)}
+\subsection{Application programming interface (API)}
 Before creating our mod we had to choose the method for modding 
 the game. Our final choice was to use the MinecraftForge API, which 
 is a mod/application layer for Minecraft which lets us create and 
 run Minecraft mods. The decision to use MinecraftForge API was 
-because of its versatility and usefulness. Furthermore, we decided 
+because of its versatility and usefulness.
+
+Furthermore, we decided 
 to use MinecraftForge over other alternatives because, while other 
 tools like ModLoader may have been arguably easier to use, MinecraftForge 
 is much more suited for our purposes – namely, creating a more complex 
@@ -30,32 +36,48 @@ mods. Aside from ModLoader and MinecraftForge, there wasn’t much else
 choice; these two mod tools are the most popular by far in the Minecraft 
 community.  
 
-\section{Initial Design of the System}
+\section{Initial design of the system}
 Because of the very nature of MinecraftForge and our design, 
-all modifications are done by creating new classes – we are 
-creating a mod that adds and extends from Minecraft, we are 
-not creating a core mod. Because of this we have our mod in 
-a new package: package org.educraft, which can be implemented 
-by MinecraftForge and run in Minecraft. 
+all modifications are done by creating new classes. Mods in Minecraft
+are divided into two types: regular mods, which simply add new
+functionality to the game, and `core mods' which alter some of the
+game's existing functionality (changing gravity, for example).
+Because our mod is a regular mod, our code is placed in a new package
+separate from the rest of Minecraft's code, called \texttt{org.educraft}.
 
-Our system design has proxy classes, which at the moment aren’t used 
-for much but will be used later (when our mod is more developed) for 
-purposes such as rendering entities in the Minecraft world (e.g. monsters, items). 
-In the current dummy mod we have produced, we have a base class (DummyMod.java), 
-which is the first class that MinecraftForge loads. The base class uses other 
-classes such as DummyCoin, DummyAttackHandler etc. These separate classes 
-control specific individual elements of the mod. For example, DummyCoin extends 
-the item class, and is a custom item that we have created for use in our mod. 
-Likewise, we use similar tactics in other classes, such as a ‘maths wand’ 
-which extends the Minecraft Sword item, and has unique interactions with other 
-aspects of the mod such as our dummy zombie. 
+\subsection{Proxy classes}
+All mods require proxy classses, which handle the rendering of entities.
+Given the simple nature of our mod, our proxy classes are currently empty.
 
-In its current state the mod is obviously fairly basic, but we have the 
-foundations for an organised system design which can and will be the basis 
-for a sophisticated and elegant mod. A key reason for this system design 
-is that it follows the standard format of a MinecraftForge mod, meaning it 
-is easy to understand, and is well organised. 
+\subsection{Base class}
+Mods made with MinecraftForge require a base class which provides instances
+of all blocks and items which the mod adds into the game. For the dummy mod,
+this is found in \texttt{org.educraft.DummyMod}.
 
-Examples of/ tutorials for MinecraftForge mods informed our decision to 
-create our mod following this system design; examples can be found on the 
-wiki page: http://www.minecraftforge.net/wiki/Tutorials
+\subsection{Item and entity classes}
+All items, blocks, and entities that are added into the game extend the appropriate
+pre-existing Minecraft classes: \texttt{net.minecraft.item.Item} in the case of
+items and \texttt{net.minecraft.entity.Entity} in the case of blocks.
+
+All of our custom items and entities were placed in the \texttt{org.educraft.dummy}
+package. As far as possible, we chose to inherit from core classes which provided
+the functionality we desired, to minimise the amount of new code that needed
+to be written:
+\begin{itemize}
+    \item{\texttt{DummyCoin} and \texttt{DummyCoinPile} both inherit from 
+            \texttt{net.minecraft.item.Item}, as they are simple items with no extra
+            functions.}
+    \item{\texttt{MathsWand} inherits from \texttt{net.minecraft.item.ItemSword},
+            since it is an item that gets used as a weapon.}
+    \item{\texttt{DummyZombie} inherits from \texttt{net.minecraft.entity.monster.EntityZombie},
+            so that we can reuse the model and animation provided for the existing
+            zombie entity.}
+\end{itemize}
+
+\subsection{Damage handling classes}
+We also created two classes to handle the requirement that killing a Dummy Zombie
+with the Dummy Sword / Maths Wand should cause a different item from normal
+to be dropped. These were \texttt{DummyDamageSource}, which defined a new type
+of damage in addition to the pre-existing types such as `fire', `physical', and
+so on, and \texttt{DummyAttackHandler}, which provded a new event handler to
+ensure that striking a zombie with the Dummy Sword inflicted the new damage type.
