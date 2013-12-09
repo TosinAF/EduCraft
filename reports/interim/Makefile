@@ -12,3 +12,4 @@ clean:
 	rm *.bbl
 	rm *.blg
 	rm *.out
+	rm *.lof

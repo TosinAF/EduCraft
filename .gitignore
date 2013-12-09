@@ -13,7 +13,7 @@
 *.log
 *.bbl
 *.blg
-*.pdf
+*.lof
 
 # By default, ignore everything
 /*
