@@ -64,6 +64,11 @@ public class EduCraft {
 				'c', new ItemStack(Item.stick));
 		GameRegistry.addRecipe(new ItemStack(DIV_OPR), "  s", " s ", "s  ",
 				'c', new ItemStack(Item.stick));
+		// recipes to break operators down into sticks
+		GameRegistry.addShapedRecipe(new ItemStack(Item.stick, 4), new ItemStack(ADD_OPR));
+		GameRegistry.addShapedRecipe(new ItemStack(Item.stick, 2), new ItemStack(SUB_OPR));
+		GameRegistry.addShapedRecipe(new ItemStack(Item.stick, 4), new ItemStack(MUL_OPR));
+		GameRegistry.addShapedRecipe(new ItemStack(Item.stick, 2), new ItemStack(DIV_OPR));
 
 		proxy.registerRenderers();
 	}
