@@ -56,19 +56,24 @@ public class EduCraft {
 		LanguageRegistry.addName(MUL_OPR, "Multiplication sign");
 		LanguageRegistry.addName(DIV_OPR, "Division sign");
 		// crafting recipes for mathematical operators
+		ItemStack sticks = new ItemStack(Item.stick);
 		GameRegistry.addRecipe(new ItemStack(ADD_OPR), " s ", "sss", " s ",
-				'c', new ItemStack(Item.stick));
+				's', sticks);
 		GameRegistry.addRecipe(new ItemStack(SUB_OPR), "   ", "sss", "   ",
-				'c', new ItemStack(Item.stick));
+				's', sticks);
 		GameRegistry.addRecipe(new ItemStack(MUL_OPR), "s s", " s ", "s s",
-				'c', new ItemStack(Item.stick));
+				's', sticks);
 		GameRegistry.addRecipe(new ItemStack(DIV_OPR), "  s", " s ", "s  ",
-				'c', new ItemStack(Item.stick));
+				's', sticks);
 		// recipes to break operators down into sticks
-		GameRegistry.addShapedRecipe(new ItemStack(Item.stick, 4), new ItemStack(ADD_OPR));
-		GameRegistry.addShapedRecipe(new ItemStack(Item.stick, 2), new ItemStack(SUB_OPR));
-		GameRegistry.addShapedRecipe(new ItemStack(Item.stick, 4), new ItemStack(MUL_OPR));
-		GameRegistry.addShapedRecipe(new ItemStack(Item.stick, 2), new ItemStack(DIV_OPR));
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.stick, 4),
+				new ItemStack(ADD_OPR));
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.stick, 2),
+				new ItemStack(SUB_OPR));
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.stick, 4),
+				new ItemStack(MUL_OPR));
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.stick, 2),
+				new ItemStack(DIV_OPR));
 
 		proxy.registerRenderers();
 	}

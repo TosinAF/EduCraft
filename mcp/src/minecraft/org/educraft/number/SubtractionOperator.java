@@ -7,6 +7,7 @@ public class SubtractionOperator extends Item implements MathematicalOperator {
 	
 	public SubtractionOperator() {
 		super(5001);
+		setUnlocalizedName("subOperator");
 	}
 
 	@Override

@@ -6,6 +6,7 @@ public class AdditionOperator extends Item implements MathematicalOperator {
 	
 	public AdditionOperator() {
 		super(5000);
+		setUnlocalizedName("addOperator");
 	}
 
 	@Override

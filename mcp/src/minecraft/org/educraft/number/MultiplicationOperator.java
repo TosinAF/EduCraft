@@ -7,6 +7,7 @@ public class MultiplicationOperator extends Item implements
 	
 	public MultiplicationOperator() {
 		super(5002);
+		setUnlocalizedName("multOperator");
 	}
 
 	@Override
