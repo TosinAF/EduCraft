@@ -11,6 +11,10 @@ import org.educraft.dummy.DummyCoin;
 import org.educraft.dummy.DummyCoinPile;
 import org.educraft.dummy.MathsWand;
 import org.educraft.dummy.DummyZombie;
+import org.educraft.number.AdditionOperator;
+import org.educraft.number.DivisionOperator;
+import org.educraft.number.MultiplicationOperator;
+import org.educraft.number.SubtractionOperator;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -28,6 +32,12 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @NetworkMod(clientSideRequired = true)
 public class EduCraft {
 
+	// instances of the mathematical operators
+	public static final Item ADD_OPR = new AdditionOperator();
+	public static final Item SUB_OPR = new SubtractionOperator();
+	public static final Item MUL_OPR = new MultiplicationOperator();
+	public static final Item DIV_OPR = new DivisionOperator();
+
 	// The instance of your mod that Forge uses.
 	@Instance(value = "EduCraft")
 	public static EduCraft instance;
@@ -39,7 +49,22 @@ public class EduCraft {
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
 		// TODO implement with EduCraft files
-	
+
+		// localised names for mathematical operators
+		LanguageRegistry.addName(ADD_OPR, "Addition sign");
+		LanguageRegistry.addName(SUB_OPR, "Subtraction sign");
+		LanguageRegistry.addName(MUL_OPR, "Multiplication sign");
+		LanguageRegistry.addName(DIV_OPR, "Division sign");
+		// crafting recipes for mathematical operators
+		GameRegistry.addRecipe(new ItemStack(ADD_OPR), " s ", "sss", " s ",
+				'c', new ItemStack(Item.stick));
+		GameRegistry.addRecipe(new ItemStack(SUB_OPR), "   ", "sss", "   ",
+				'c', new ItemStack(Item.stick));
+		GameRegistry.addRecipe(new ItemStack(MUL_OPR), "s s", " s ", "s s",
+				'c', new ItemStack(Item.stick));
+		GameRegistry.addRecipe(new ItemStack(DIV_OPR), "  s", " s ", "s  ",
+				'c', new ItemStack(Item.stick));
+
 		proxy.registerRenderers();
 	}
 
