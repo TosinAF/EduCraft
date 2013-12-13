@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
-import org.educraft.DummyMod;
+import org.educraft.EduCraft;
 import org.educraft.number.Number15Zombie;
 import org.educraft.number.Number2Zombie;
 
@@ -35,9 +35,9 @@ public class DummyAttackHandler {
 
 		// handle the attack specially if the target of the attack is a
 		// DummyZombie
-		if (target.getClass().equals(DummyZombie.class) || target.getClass().equals(Number2Zombie.class) || target.getClass().equals(Number15Zombie.class)) {
+		if (target instanceof DummyZombie || target instanceof Number2Zombie || target instanceof Number15Zombie) {
 			// deal dummy damage if the player is wielding a DummySword
-			if (weapon.itemID == DummyMod.MATHS_WAND.itemID) {
+			if (weapon.itemID == EduCraft.MATHS_WAND.itemID) {
 				target.attackEntityFrom(
 						DummyDamageSource.causeDummyDamage(player), 5F);
 			}
