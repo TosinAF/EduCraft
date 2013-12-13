@@ -7,6 +7,8 @@ import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
 import org.educraft.DummyMod;
+import org.educraft.number.Number15Zombie;
+import org.educraft.number.Number2Zombie;
 
 /**
  * This class is used to handle AttackEntityEvents, which arise when a player
@@ -33,7 +35,7 @@ public class DummyAttackHandler {
 
 		// handle the attack specially if the target of the attack is a
 		// DummyZombie
-		if (target.getClass().equals(DummyZombie.class)) {
+		if (target.getClass().equals(DummyZombie.class) || target.getClass().equals(Number2Zombie.class) || target.getClass().equals(Number15Zombie.class)) {
 			// deal dummy damage if the player is wielding a DummySword
 			if (weapon.itemID == DummyMod.MATHS_WAND.itemID) {
 				target.attackEntityFrom(
