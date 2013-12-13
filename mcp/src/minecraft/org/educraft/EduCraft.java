@@ -32,6 +32,8 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @NetworkMod(clientSideRequired = true)
 public class EduCraft {
 
+	// instance of the maths wand
+	public static final Item MATHS_WAND = new MathsWand(6000);
 	// instances of the mathematical operators
 	public static final Item ADD_OPR = new AdditionOperator();
 	public static final Item SUB_OPR = new SubtractionOperator();
@@ -50,6 +52,11 @@ public class EduCraft {
 	public void load(FMLInitializationEvent event) {
 		// TODO implement with EduCraft files
 
+		/* MATHS WAND */
+		// localised name for maths wand
+		LanguageRegistry.addName(MATHS_WAND, "Maths Wand");
+		
+		/* MATHEMATICAL OPERATORS */
 		// localised names for mathematical operators
 		LanguageRegistry.addName(ADD_OPR, "Addition sign");
 		LanguageRegistry.addName(SUB_OPR, "Subtraction sign");
