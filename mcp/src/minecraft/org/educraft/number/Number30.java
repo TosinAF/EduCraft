@@ -8,7 +8,7 @@ public class Number30 extends Item {
 		super(itemID);
 		setCreativeTab(CreativeTabs.tabMisc);
 		setTextureName("diamond");
-		setMaxStackSize(1); // Change this later perhaps
+		setMaxStackSize(16);
 		setUnlocalizedName("Number30");
 	}
 }

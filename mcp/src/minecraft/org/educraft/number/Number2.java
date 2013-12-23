@@ -8,7 +8,7 @@ public class Number2 extends Item {
 		super(itemID);
 		setCreativeTab(CreativeTabs.tabMisc);
 		setTextureName("emerald");
-		setMaxStackSize(1); // Change this later perhaps
+		setMaxStackSize(16); // Change this later perhaps
 		setUnlocalizedName("Number2");
 	}
 }
