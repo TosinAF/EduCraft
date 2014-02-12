@@ -34,6 +34,9 @@
 !/mcp/src/minecraft/
 !/mcp/jars/saves/
 /mcp/src/minecraft/*
-!/mcp/src/minecraft/org
+!/mcp/src/minecraft/org/
+!/mcp/src/minecraft/assets/
 /mcp/src/minecraft/org/*
 !/mcp/src/minecraft/org/educraft/
+/mcp/src/minecraft/assets/*
+!/mcp/src/minecraft/assets/educraft/

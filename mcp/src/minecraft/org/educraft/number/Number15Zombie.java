@@ -5,6 +5,7 @@ import org.educraft.EduCraft;
 
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
@@ -22,7 +23,7 @@ public class Number15Zombie extends EntityZombie {
 	public boolean attackEntityFrom(DamageSource source, float damage) {
 		if (source.getDamageType().equals("dummy")) {
 			// dummy damage, set the dropped item to DummyCoin
-			this.droppedItemId = EduCraft.NUMBER15.itemID;
+			this.droppedItemId = new ItemStack (EduCraft.NUMBER, 10).getItem().itemID;
 			return super.attackEntityFrom(source, damage);
 		} else if (source.getDamageType().equals("player")) {
 			// other damage caused by player, set dropped item to rotten flesh

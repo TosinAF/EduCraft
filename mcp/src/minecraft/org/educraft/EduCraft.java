@@ -16,6 +16,7 @@ import org.educraft.number.Number15Zombie;
 import org.educraft.number.Number2;
 import org.educraft.number.Number2Zombie;
 import org.educraft.number.Number30;
+import org.educraft.number.Numbers;
 import org.educraft.number.SubtractionOperator;
 
 import cpw.mods.fml.common.Mod;
@@ -39,7 +40,7 @@ public class EduCraft {
 	public static final Item SUB_OPR = new SubtractionOperator();
 	public static final Item MUL_OPR = new MultiplicationOperator();
 	public static final Item DIV_OPR = new DivisionOperator();
-	public static final Item NUMBER15 = new Number15(6005);
+	public static final Item NUMBER = new Numbers(6005);
 	public static final Item NUMBER30 = new Number30(6006);
 	public static final Item NUMBER2 = new Number2(6007);
 	
@@ -61,7 +62,7 @@ public class EduCraft {
 		
 		/* MATHEMATICAL OPERATORS */
 		// localised names for mathematical operators
-		LanguageRegistry.addName(NUMBER15, "15");
+		LanguageRegistry.addName(NUMBER, "15");
 		LanguageRegistry.addName(NUMBER30, "30");
 		LanguageRegistry.addName(NUMBER2, "2");
 		LanguageRegistry.addName(ADD_OPR, "Addition sign");
@@ -71,12 +72,8 @@ public class EduCraft {
 		
 		// crafting recipes for mathematical operators
 		ItemStack sticks = new ItemStack(Item.stick);
-		GameRegistry.addRecipe(new ItemStack(NUMBER30), "xyz", 'x', NUMBER15,'y', MUL_OPR,'z', NUMBER2);
-		GameRegistry.addRecipe(new ItemStack(NUMBER30), "xyz", 'x', NUMBER2,'y', MUL_OPR,'z', NUMBER15);
-		GameRegistry.addRecipe(new ItemStack(NUMBER2), "xyz", 'x', NUMBER30,'y', DIV_OPR,'z', NUMBER15);
-		GameRegistry.addRecipe(new ItemStack(NUMBER15), "xyz", 'x', NUMBER30,'y', DIV_OPR,'z', NUMBER2);
-		GameRegistry.addRecipe(new ItemStack(Item.coal), "xyz", 'x', NUMBER15,'y', DIV_OPR,'z', NUMBER30); //Put coal item here instead of COAL
-		GameRegistry.addRecipe(new ItemStack(Item.coal), "xyz", 'x', NUMBER2,'y', DIV_OPR,'z', NUMBER30); //Put coal item here instead of COAL
+		GameRegistry.addRecipe(new ItemStack(NUMBER), "xyz", 'x', NUMBER,'y', MUL_OPR,'z', NUMBER);
+		GameRegistry.addRecipe(new ItemStack(NUMBER), "xyz", 'x', NUMBER,'y', DIV_OPR,'z', NUMBER);
 		
 		GameRegistry.addRecipe(new ItemStack(ADD_OPR), " s ", "sss", " s ",
 				's', sticks);
