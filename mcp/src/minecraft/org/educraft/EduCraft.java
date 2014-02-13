@@ -11,11 +11,11 @@ import org.educraft.dummy.MathsWand;
 import org.educraft.number.AdditionOperator;
 import org.educraft.number.DivisionOperator;
 import org.educraft.number.MultiplicationOperator;
-import org.educraft.number.Number15;
 import org.educraft.number.Number15Zombie;
 import org.educraft.number.Number2;
 import org.educraft.number.Number2Zombie;
 import org.educraft.number.Number30;
+import org.educraft.number.NumberZombie;
 import org.educraft.number.Numbers;
 import org.educraft.number.SubtractionOperator;
 
@@ -36,14 +36,18 @@ public class EduCraft {
 	// instance of the maths wand
 	public static final Item MATHS_WAND = new MathsWand(6000);
 	// instances of the mathematical operators
-	public static final Item ADD_OPR = new AdditionOperator().setTextureName("educraft:addition");
-	public static final Item SUB_OPR = new SubtractionOperator().setTextureName("educraft:subtraction");
-	public static final Item MUL_OPR = new MultiplicationOperator().setTextureName("educraft:multiplication");
-	public static final Item DIV_OPR = new DivisionOperator().setTextureName("educraft:division");
+	public static final Item ADD_OPR = new AdditionOperator()
+			.setTextureName("educraft:addition");
+	public static final Item SUB_OPR = new SubtractionOperator()
+			.setTextureName("educraft:subtraction");
+	public static final Item MUL_OPR = new MultiplicationOperator()
+			.setTextureName("educraft:multiplication");
+	public static final Item DIV_OPR = new DivisionOperator()
+			.setTextureName("educraft:division");
 	public static final Item NUMBER = new Numbers(6005);
 	public static final Item NUMBER30 = new Number30(6006);
 	public static final Item NUMBER2 = new Number2(6007);
-	
+
 	// The instance of your mod that Forge uses.
 	@Instance(value = "EduCraft")
 	public static EduCraft instance;
@@ -59,7 +63,7 @@ public class EduCraft {
 		/* MATHS WAND */
 		// localised name for maths wand
 		LanguageRegistry.addName(MATHS_WAND, "Maths Wand");
-		
+
 		/* MATHEMATICAL OPERATORS */
 		// localised names for mathematical operators
 		LanguageRegistry.addName(NUMBER, "15");
@@ -69,14 +73,18 @@ public class EduCraft {
 		LanguageRegistry.addName(SUB_OPR, "Subtraction sign");
 		LanguageRegistry.addName(MUL_OPR, "Multiplication sign");
 		LanguageRegistry.addName(DIV_OPR, "Division sign");
-		
+
 		// crafting recipes for mathematical operators
 		ItemStack sticks = new ItemStack(Item.stick);
-		GameRegistry.addRecipe(new ItemStack(NUMBER), "xyz", 'x', NUMBER,'y', ADD_OPR,'z', NUMBER);
-		GameRegistry.addRecipe(new ItemStack(NUMBER), "xyz", 'x', NUMBER,'y', SUB_OPR,'z', NUMBER);
-		GameRegistry.addRecipe(new ItemStack(NUMBER), "xyz", 'x', NUMBER,'y', MUL_OPR,'z', NUMBER);
-		GameRegistry.addRecipe(new ItemStack(NUMBER), "xyz", 'x', NUMBER,'y', DIV_OPR,'z', NUMBER);
-		
+		GameRegistry.addRecipe(new ItemStack(NUMBER), "xyz", 'x', NUMBER, 'y',
+				ADD_OPR, 'z', NUMBER);
+		GameRegistry.addRecipe(new ItemStack(NUMBER), "xyz", 'x', NUMBER, 'y',
+				SUB_OPR, 'z', NUMBER);
+		GameRegistry.addRecipe(new ItemStack(NUMBER), "xyz", 'x', NUMBER, 'y',
+				MUL_OPR, 'z', NUMBER);
+		GameRegistry.addRecipe(new ItemStack(NUMBER), "xyz", 'x', NUMBER, 'y',
+				DIV_OPR, 'z', NUMBER);
+
 		GameRegistry.addRecipe(new ItemStack(ADD_OPR), " s ", "sss", " s ",
 				's', sticks);
 		GameRegistry.addRecipe(new ItemStack(SUB_OPR), "   ", "sss", "   ",
@@ -94,22 +102,33 @@ public class EduCraft {
 				new ItemStack(MUL_OPR));
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.stick, 2),
 				new ItemStack(DIV_OPR));
-		
+
 		/* NUMBER ZOMBIES */
+		// register the generic number zombie
+		EntityRegistry.registerGlobalEntityID(NumberZombie.class,
+				"Number Zombie", EntityRegistry.findGlobalUniqueEntityId(),
+				20000,2500);
+		EntityRegistry.registerModEntity(NumberZombie.class,
+				"Number Zombie", EntityRegistry.findGlobalUniqueEntityId(),
+				this, 60, 3, true);
+		EntityRegistry.addSpawn(Number2Zombie.class, 10, 1, 2,
+				EnumCreatureType.monster, BiomeGenBase.plains);
 		// register the number 2 zombie
 		EntityRegistry.registerGlobalEntityID(Number2Zombie.class,
 				"Number 2 Zombie", EntityRegistry.findGlobalUniqueEntityId(),
 				32324, 2243);
-		EntityRegistry.registerModEntity(Number2Zombie.class, "Number 2 Zombie",
-				EntityRegistry.findGlobalUniqueEntityId(), this, 60, 3, true);
+		EntityRegistry.registerModEntity(Number2Zombie.class,
+				"Number 2 Zombie", EntityRegistry.findGlobalUniqueEntityId(),
+				this, 60, 3, true);
 		EntityRegistry.addSpawn(Number2Zombie.class, 10, 1, 2,
 				EnumCreatureType.monster, BiomeGenBase.plains);
 		// register the number 15 zombie
 		EntityRegistry.registerGlobalEntityID(Number15Zombie.class,
 				"Number 15 Zombie", EntityRegistry.findGlobalUniqueEntityId(),
 				32324, 2243);
-		EntityRegistry.registerModEntity(Number15Zombie.class, "Number 15 Zombie",
-				EntityRegistry.findGlobalUniqueEntityId(), this, 60, 3, true);
+		EntityRegistry.registerModEntity(Number15Zombie.class,
+				"Number 15 Zombie", EntityRegistry.findGlobalUniqueEntityId(),
+				this, 60, 3, true);
 		EntityRegistry.addSpawn(Number15Zombie.class, 10, 1, 2,
 				EnumCreatureType.monster, BiomeGenBase.plains);
 		// register the attack handler
