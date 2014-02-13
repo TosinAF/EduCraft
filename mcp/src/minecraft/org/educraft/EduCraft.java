@@ -36,10 +36,10 @@ public class EduCraft {
 	// instance of the maths wand
 	public static final Item MATHS_WAND = new MathsWand(6000);
 	// instances of the mathematical operators
-	public static final Item ADD_OPR = new AdditionOperator();
-	public static final Item SUB_OPR = new SubtractionOperator();
-	public static final Item MUL_OPR = new MultiplicationOperator();
-	public static final Item DIV_OPR = new DivisionOperator();
+	public static final Item ADD_OPR = new AdditionOperator().setTextureName("educraft:addition");
+	public static final Item SUB_OPR = new SubtractionOperator().setTextureName("educraft:subtraction");
+	public static final Item MUL_OPR = new MultiplicationOperator().setTextureName("educraft:multiplication");
+	public static final Item DIV_OPR = new DivisionOperator().setTextureName("educraft:division");
 	public static final Item NUMBER = new Numbers(6005);
 	public static final Item NUMBER30 = new Number30(6006);
 	public static final Item NUMBER2 = new Number2(6007);

@@ -9,6 +9,7 @@ public class MultiplicationOperator extends Item implements
 		super(5002);
 		setUnlocalizedName("multOperator");
 		setMaxStackSize(4);
+		
 	}
 
 	@Override
