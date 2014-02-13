@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 public class Numbers extends Item {
 
-	public Numbers(int itemID, int value) {
+	public Numbers(int itemID) {
 		super(itemID);
 		setHasSubtypes(true);
 		setMaxDamage(0);
