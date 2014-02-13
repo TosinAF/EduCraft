@@ -36,14 +36,10 @@ public class EduCraft {
 	// instance of the maths wand
 	public static final Item MATHS_WAND = new MathsWand(6000);
 	// instances of the mathematical operators
-	public static final Item ADD_OPR = new AdditionOperator()
-			.setTextureName("educraft:addition");
-	public static final Item SUB_OPR = new SubtractionOperator()
-			.setTextureName("educraft:subtraction");
-	public static final Item MUL_OPR = new MultiplicationOperator()
-			.setTextureName("educraft:multiplication");
-	public static final Item DIV_OPR = new DivisionOperator()
-			.setTextureName("educraft:division");
+	public static final Item ADD_OPR = new AdditionOperator();
+	public static final Item SUB_OPR = new SubtractionOperator();
+	public static final Item MUL_OPR = new MultiplicationOperator();
+	public static final Item DIV_OPR = new DivisionOperator();
 	public static final Item NUMBER = new Numbers(6005);
 	public static final Item NUMBER30 = new Number30(6006);
 	public static final Item NUMBER2 = new Number2(6007);
@@ -76,14 +72,14 @@ public class EduCraft {
 
 		// crafting recipes for mathematical operators
 		ItemStack sticks = new ItemStack(Item.stick);
-		GameRegistry.addRecipe(new ItemStack(NUMBER), "xyz", 'x', NUMBER, 'y',
-				ADD_OPR, 'z', NUMBER);
-		GameRegistry.addRecipe(new ItemStack(NUMBER), "xyz", 'x', NUMBER, 'y',
-				SUB_OPR, 'z', NUMBER);
-		GameRegistry.addRecipe(new ItemStack(NUMBER), "xyz", 'x', NUMBER, 'y',
-				MUL_OPR, 'z', NUMBER);
-		GameRegistry.addRecipe(new ItemStack(NUMBER), "xyz", 'x', NUMBER, 'y',
-				DIV_OPR, 'z', NUMBER);
+		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", 'x',
+				NUMBER, 'y', ADD_OPR);
+		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", 'x',
+				NUMBER, 'y', SUB_OPR);
+		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", 'x',
+				NUMBER, 'y', MUL_OPR);
+		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", 'x',
+				NUMBER, 'y', DIV_OPR);
 
 		GameRegistry.addRecipe(new ItemStack(ADD_OPR), " s ", "sss", " s ",
 				's', sticks);
@@ -107,10 +103,9 @@ public class EduCraft {
 		// register the generic number zombie
 		EntityRegistry.registerGlobalEntityID(NumberZombie.class,
 				"Number Zombie", EntityRegistry.findGlobalUniqueEntityId(),
-				20000,2500);
-		EntityRegistry.registerModEntity(NumberZombie.class,
-				"Number Zombie", EntityRegistry.findGlobalUniqueEntityId(),
-				this, 60, 3, true);
+				20000, 2500);
+		EntityRegistry.registerModEntity(NumberZombie.class, "Number Zombie",
+				EntityRegistry.findGlobalUniqueEntityId(), this, 60, 3, true);
 		EntityRegistry.addSpawn(Number2Zombie.class, 10, 1, 2,
 				EnumCreatureType.monster, BiomeGenBase.plains);
 		// register the number 2 zombie

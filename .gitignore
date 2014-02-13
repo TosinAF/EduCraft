@@ -14,6 +14,7 @@
 *.bbl
 *.blg
 *.lof
+*.png
 
 # By default, ignore everything
 /*
@@ -33,6 +34,7 @@
 /mcp/jars/*
 !/mcp/src/minecraft/
 !/mcp/jars/saves/
+/mcp/jars/saves/Test world/
 /mcp/src/minecraft/*
 !/mcp/src/minecraft/org/
 !/mcp/src/minecraft/assets/

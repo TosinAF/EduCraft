@@ -131,20 +131,21 @@ public class ShapedRecipes implements IRecipe {
 		if (output.getItem() instanceof Numbers) {
 			int opd1 = -1, opd2 = -1, res;
 			OperatorType opr = null;
+			ItemStack tempStack;
 
 			// get first operand
 			for (int i : new int[] { 0, 3, 6 }) {
-				if (par1InventoryCrafting.getStackInSlot(i).getItem() instanceof Numbers) {
-					opd1 = par1InventoryCrafting.getStackInSlot(i)
-							.getItemDamage();
+				tempStack = par1InventoryCrafting.getStackInSlot(i); 
+				if ((tempStack != null) && (tempStack.getItem() instanceof Numbers)) {
+					opd1 = tempStack.getItemDamage();
 					break;
 				}
 			}
 			// get second operand
 			for (int i : new int[] { 2, 5, 8 }) {
-				if (par1InventoryCrafting.getStackInSlot(i).getItem() instanceof Numbers) {
-					opd2 = par1InventoryCrafting.getStackInSlot(i)
-							.getItemDamage();
+				tempStack = par1InventoryCrafting.getStackInSlot(i); 
+				if ((tempStack != null) && (tempStack.getItem() instanceof Numbers)) {
+					opd2 = tempStack.getItemDamage();
 					break;
 				}
 			}
