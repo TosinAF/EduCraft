@@ -135,32 +135,34 @@ public class ShapedRecipes implements IRecipe {
 
 			// get first operand
 			for (int i : new int[] { 0, 3, 6 }) {
-				tempStack = par1InventoryCrafting.getStackInSlot(i); 
-				if ((tempStack != null) && (tempStack.getItem() instanceof Numbers)) {
+				tempStack = par1InventoryCrafting.getStackInSlot(i);
+				if ((tempStack != null)
+						&& (tempStack.getItem() instanceof Numbers)) {
 					opd1 = tempStack.getItemDamage();
 					break;
 				}
 			}
 			// get second operand
 			for (int i : new int[] { 2, 5, 8 }) {
-				tempStack = par1InventoryCrafting.getStackInSlot(i); 
-				if ((tempStack != null) && (tempStack.getItem() instanceof Numbers)) {
+				tempStack = par1InventoryCrafting.getStackInSlot(i);
+				if ((tempStack != null)
+						&& (tempStack.getItem() instanceof Numbers)) {
 					opd2 = tempStack.getItemDamage();
 					break;
 				}
 			}
 			// get operator
 			for (int i : new int[] { 1, 4, 7 }) {
-				if (par1InventoryCrafting.getStackInSlot(i) != null) {
-					Item operator = par1InventoryCrafting.getStackInSlot(i)
-							.getItem();
-					if (operator instanceof AdditionOperator) {
+				tempStack = par1InventoryCrafting.getStackInSlot(i);
+				if (tempStack != null) {
+					Item item = tempStack.getItem();
+					if (item instanceof AdditionOperator) {
 						opr = OperatorType.PLUS;
-					} else if (operator instanceof SubtractionOperator) {
+					} else if (item instanceof SubtractionOperator) {
 						opr = OperatorType.MINUS;
-					} else if (operator instanceof MultiplicationOperator) {
+					} else if (item instanceof MultiplicationOperator) {
 						opr = OperatorType.TIMES;
-					} else if (operator instanceof DivisionOperator) {
+					} else if (item instanceof DivisionOperator) {
 						opr = OperatorType.DIVIDE;
 					}
 					break;
@@ -188,7 +190,7 @@ public class ShapedRecipes implements IRecipe {
 					res = 1;
 					break;
 				}
-			
+
 			output.setItemDamage(res);
 		}
 

@@ -12,13 +12,14 @@ import net.minecraft.world.World;
 import org.educraft.EduCraft;
 
 public class NumberZombie extends EntityZombie {
-	int droppedItemId, value;
+	private static Random rnd = new Random();
+	private int droppedItemId, value;
 
 	public NumberZombie(World world) {
 		super(world);
 		setCustomNameTag("Number Zombie");
 		this.droppedItemId = Item.rottenFlesh.itemID;
-		this.value = (new Random().nextInt(10)) + 1;
+		this.value = (rnd.nextInt(10)) + 1;
 	}
 	
 	@Override

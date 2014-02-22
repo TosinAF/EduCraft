@@ -72,13 +72,13 @@ public class EduCraft {
 
 		// crafting recipes for mathematical operators
 		ItemStack sticks = new ItemStack(Item.stick);
-		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", 'x',
+		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ", 'x',
 				NUMBER, 'y', ADD_OPR);
-		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", 'x',
+		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ", 'x',
 				NUMBER, 'y', SUB_OPR);
-		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", 'x',
+		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ", 'x',
 				NUMBER, 'y', MUL_OPR);
-		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", 'x',
+		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ", 'x',
 				NUMBER, 'y', DIV_OPR);
 
 		GameRegistry.addRecipe(new ItemStack(ADD_OPR), " s ", "sss", " s ",
