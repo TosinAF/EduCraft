@@ -1,5 +1,7 @@
 package org.educraft.dummy;
 
+import org.educraft.EduCraft;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemSword;
@@ -18,7 +20,7 @@ public class MathsWand extends ItemSword {
 	 */
 	public MathsWand(int itemID) {
 		super(itemID, EnumToolMaterial.IRON);
-		setCreativeTab(CreativeTabs.tabCombat);
+		setCreativeTab(EduCraft.tabEduCraft);
 		setTextureName("stick");
 		setUnlocalizedName("mathsWand");
 	}

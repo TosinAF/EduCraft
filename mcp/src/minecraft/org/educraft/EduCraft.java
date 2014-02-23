@@ -1,5 +1,6 @@
 package org.educraft;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -9,6 +10,7 @@ import net.minecraftforge.common.MinecraftForge;
 import org.educraft.dummy.DummyAttackHandler;
 import org.educraft.dummy.MathsWand;
 import org.educraft.number.AdditionOperator;
+import org.educraft.number.BaseNumber;
 import org.educraft.number.DivisionOperator;
 import org.educraft.number.MultiplicationOperator;
 import org.educraft.number.Number15Zombie;
@@ -16,7 +18,6 @@ import org.educraft.number.Number2;
 import org.educraft.number.Number2Zombie;
 import org.educraft.number.Number30;
 import org.educraft.number.NumberZombie;
-import org.educraft.number.BaseNumber;
 import org.educraft.number.SubtractionOperator;
 
 import cpw.mods.fml.common.Mod;
@@ -32,6 +33,12 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @Mod(modid = "EduCraft", name = "EduCraft", version = "0.1.0")
 @NetworkMod(clientSideRequired = true)
 public class EduCraft {
+	// EduCraft creative tab
+	public static CreativeTabs tabEduCraft = new CreativeTabs("tabEduCraft") {
+		public ItemStack getIconItemStack() {
+			return new ItemStack(ADD_OPR, 1, 0);
+		}
+	};
 
 	// instance of the maths wand
 	public static final Item MATHS_WAND = new MathsWand(6000);
@@ -54,7 +61,9 @@ public class EduCraft {
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
-		// TODO implement with EduCraft files
+		// localised name for the EduCraft tab
+		LanguageRegistry.instance().addStringLocalization(
+				"itemgroup.tabEduCraft", "en_us", "EduCraft");
 
 		/* MATHS WAND */
 		// localised name for maths wand

@@ -1,5 +1,7 @@
 package org.educraft.number;
 
+import org.educraft.EduCraft;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
@@ -9,7 +11,7 @@ public class AdditionOperator extends Item implements MathematicalOperator {
 		super(5000);
 		setUnlocalizedName("addOperator");
 		setMaxStackSize(4);
-		setCreativeTab(CreativeTabs.tabMisc);
+		setCreativeTab(EduCraft.tabEduCraft);
 		setTextureName("educraft:addition");
 	}
 

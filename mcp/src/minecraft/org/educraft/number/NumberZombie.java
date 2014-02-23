@@ -45,7 +45,7 @@ public class NumberZombie extends EntityZombie {
 	
 	@Override
 	public EntityItem entityDropItem(ItemStack stack, float par2) {
-		if (stack.getItem() instanceof Numbers) {
+		if (stack.getItem() instanceof BaseNumber) {
 			stack.setItemDamage(value);
 		}
 		return super.entityDropItem(stack, par2);
