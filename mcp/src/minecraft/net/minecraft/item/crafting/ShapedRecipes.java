@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import org.educraft.number.AdditionOperator;
 import org.educraft.number.DivisionOperator;
 import org.educraft.number.MultiplicationOperator;
-import org.educraft.number.Numbers;
+import org.educraft.number.BaseNumber;
 import org.educraft.number.OperatorType;
 import org.educraft.number.SubtractionOperator;
 
@@ -114,6 +114,7 @@ public class ShapedRecipes implements IRecipe {
 	 * Returns an Item that is the result of this recipe
 	 */
 	public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting) {
+		System.out.println("Entering ShapedRecipes#getCraftingResult");
 		ItemStack output = this.getRecipeOutput().copy();
 
 		if (this.field_92101_f) {
@@ -128,7 +129,9 @@ public class ShapedRecipes implements IRecipe {
 		}
 
 		/* CUSTOM CODE FOR HANDLING NUMBER CALCULATIONS */
-		if (output.getItem() instanceof Numbers) {
+		if (output.getItem() instanceof BaseNumber) {
+			System.out.println("Processing a number recipe");
+			
 			int opd1 = -1, opd2 = -1, res;
 			OperatorType opr = null;
 			ItemStack tempStack;
@@ -137,7 +140,7 @@ public class ShapedRecipes implements IRecipe {
 			for (int i : new int[] { 0, 3, 6 }) {
 				tempStack = par1InventoryCrafting.getStackInSlot(i);
 				if ((tempStack != null)
-						&& (tempStack.getItem() instanceof Numbers)) {
+						&& (tempStack.getItem() instanceof BaseNumber)) {
 					opd1 = tempStack.getItemDamage();
 					break;
 				}
@@ -146,7 +149,7 @@ public class ShapedRecipes implements IRecipe {
 			for (int i : new int[] { 2, 5, 8 }) {
 				tempStack = par1InventoryCrafting.getStackInSlot(i);
 				if ((tempStack != null)
-						&& (tempStack.getItem() instanceof Numbers)) {
+						&& (tempStack.getItem() instanceof BaseNumber)) {
 					opd2 = tempStack.getItemDamage();
 					break;
 				}

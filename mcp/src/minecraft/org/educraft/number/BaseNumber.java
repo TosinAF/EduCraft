@@ -4,9 +4,15 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class Numbers extends Item {
+public class BaseNumber extends Item {
+	public static final String[] NAMES = new String[100];
+	static {
+		for (int i = 0; i < 100; i++) {
+			NAMES[i] = String.format("number%d", i+1);
+		}
+	}
 
-	public Numbers(int itemID) {
+	public BaseNumber(int itemID) {
 		super(itemID);
 		setHasSubtypes(true);
 		setMaxDamage(0);
@@ -14,6 +20,10 @@ public class Numbers extends Item {
 		setCreativeTab(CreativeTabs.tabMisc);
 		setTextureName("diamond");
 		setMaxStackSize(16); // Change this later perhaps
-		setUnlocalizedName("Number");
+	}
+
+	@Override
+	public String getUnlocalizedName(ItemStack is) {
+		return NAMES[is.getItemDamage() - 1];
 	}
 }

@@ -16,7 +16,7 @@ import org.educraft.number.Number2;
 import org.educraft.number.Number2Zombie;
 import org.educraft.number.Number30;
 import org.educraft.number.NumberZombie;
-import org.educraft.number.Numbers;
+import org.educraft.number.BaseNumber;
 import org.educraft.number.SubtractionOperator;
 
 import cpw.mods.fml.common.Mod;
@@ -40,7 +40,7 @@ public class EduCraft {
 	public static final Item SUB_OPR = new SubtractionOperator();
 	public static final Item MUL_OPR = new MultiplicationOperator();
 	public static final Item DIV_OPR = new DivisionOperator();
-	public static final Item NUMBER = new Numbers(6005);
+	public static final Item NUMBER = new BaseNumber(6005);
 	public static final Item NUMBER30 = new Number30(6006);
 	public static final Item NUMBER2 = new Number2(6007);
 
@@ -61,8 +61,11 @@ public class EduCraft {
 		LanguageRegistry.addName(MATHS_WAND, "Maths Wand");
 
 		/* MATHEMATICAL OPERATORS */
-		// localised names for mathematical operators
-		LanguageRegistry.addName(NUMBER, "15");
+		// localised names for numbers and mathematical operators
+		for (int i = 0; i < BaseNumber.NAMES.length; i++) {
+			LanguageRegistry.addName(new ItemStack(NUMBER, 1, i + 1),
+					String.valueOf(i + 1));
+		}
 		LanguageRegistry.addName(NUMBER30, "30");
 		LanguageRegistry.addName(NUMBER2, "2");
 		LanguageRegistry.addName(ADD_OPR, "Addition sign");
