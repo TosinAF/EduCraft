@@ -1,5 +1,6 @@
 package org.educraft;
 
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
@@ -19,6 +20,7 @@ import org.educraft.number.Number2Zombie;
 import org.educraft.number.Number30;
 import org.educraft.number.NumberZombie;
 import org.educraft.number.SubtractionOperator;
+import org.educraft.number.calculator.Calculator;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -50,6 +52,9 @@ public class EduCraft {
 	public static final Item NUMBER = new BaseNumber(6005);
 	public static final Item NUMBER30 = new Number30(6006);
 	public static final Item NUMBER2 = new Number2(6007);
+	
+	// instance of the calculator
+	public static final Block CALCULATOR = new Calculator(7000);
 
 	// The instance of your mod that Forge uses.
 	@Instance(value = "EduCraft")
