@@ -7,10 +7,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-import org.educraft.number.AdditionOperator;
-import org.educraft.number.DivisionOperator;
-import org.educraft.number.MultiplicationOperator;
 import org.educraft.number.BaseNumber;
+import org.educraft.number.DivisionOperator;
+import org.educraft.number.MathematicalOperator;
+import org.educraft.number.MultiplicationOperator;
 import org.educraft.number.OperatorType;
 import org.educraft.number.SubtractionOperator;
 
@@ -131,7 +131,7 @@ public class ShapedRecipes implements IRecipe {
 		/* CUSTOM CODE FOR HANDLING NUMBER CALCULATIONS */
 		if (output.getItem() instanceof BaseNumber) {
 			System.out.println("Processing a number recipe");
-			
+
 			int opd1 = -1, opd2 = -1, res;
 			OperatorType opr = null;
 			ItemStack tempStack;
@@ -157,17 +157,11 @@ public class ShapedRecipes implements IRecipe {
 			// get operator
 			for (int i : new int[] { 1, 4, 7 }) {
 				tempStack = par1InventoryCrafting.getStackInSlot(i);
-				if (tempStack != null) {
-					Item item = tempStack.getItem();
-					if (item instanceof AdditionOperator) {
-						opr = OperatorType.PLUS;
-					} else if (item instanceof SubtractionOperator) {
-						opr = OperatorType.MINUS;
-					} else if (item instanceof MultiplicationOperator) {
-						opr = OperatorType.TIMES;
-					} else if (item instanceof DivisionOperator) {
-						opr = OperatorType.DIVIDE;
-					}
+				if ((tempStack != null)
+						&& (tempStack.getItem() instanceof MathematicalOperator)) {
+					MathematicalOperator oprItem = (MathematicalOperator) tempStack
+							.getItem();
+					opr = oprItem.getOperator();
 					break;
 				}
 			}
