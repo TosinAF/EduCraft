@@ -10,6 +10,7 @@ public class Calculator extends BlockWorkbench {
 	
 	public Calculator(int id) {
 		super(id);
+		setUnlocalizedName("calculatorTable");
 		setCreativeTab(EduCraft.tabEduCraft);
 	}
 	

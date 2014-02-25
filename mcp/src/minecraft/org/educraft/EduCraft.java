@@ -54,7 +54,7 @@ public class EduCraft {
 	public static final Item NUMBER2 = new Number2(6007);
 	
 	// instance of the calculator
-	public static final Block CALCULATOR = new Calculator(7000);
+	public static final Block CALCULATOR = new Calculator(500);
 
 	// The instance of your mod that Forge uses.
 	@Instance(value = "EduCraft")
@@ -70,6 +70,11 @@ public class EduCraft {
 		LanguageRegistry.instance().addStringLocalization(
 				"itemgroup.tabEduCraft", "en_us", "EduCraft");
 
+		// localised name for the calculator table
+		GameRegistry.registerBlock(CALCULATOR, "calculatorTable");
+		MinecraftForge.setBlockHarvestLevel(CALCULATOR, "axe", 0);
+		LanguageRegistry.addName(CALCULATOR, "Calculator Table");
+		
 		/* MATHS WAND */
 		// localised name for maths wand
 		LanguageRegistry.addName(MATHS_WAND, "Maths Wand");
