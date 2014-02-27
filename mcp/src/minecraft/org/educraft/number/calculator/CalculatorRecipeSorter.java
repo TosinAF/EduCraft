@@ -16,6 +16,7 @@ import net.minecraft.item.crafting.ShapelessRecipes;
  * 
  */
 class CalculatorRecipeSorter implements Comparator {
+	
 	private final CalculatorCraftingManager MANAGER;
 
 	CalculatorRecipeSorter(CalculatorCraftingManager manager) {

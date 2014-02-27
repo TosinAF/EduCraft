@@ -6,9 +6,11 @@ import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.world.World;
 
+import org.educraft.number.calculator.Calculator;
 import org.educraft.EduCraft;
 
 public class CalculatorContainer extends ContainerWorkbench {
+	
 	private World worldObj;
 	private int posX;
 	private int posY;

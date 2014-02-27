@@ -21,6 +21,7 @@ import org.educraft.number.Number30;
 import org.educraft.number.NumberZombie;
 import org.educraft.number.SubtractionOperator;
 import org.educraft.number.calculator.Calculator;
+import org.educraft.number.calculator.CalculatorGuiHandler;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -63,7 +64,7 @@ public class EduCraft {
 	
 	
 	//GUIHandler for calculator
-//	private GuiHandlerCalculator guiHandlerCalculator = new GuiHandlerCalculator();
+	private CalculatorGuiHandler guiHandlerCalculator = new CalculatorGuiHandler();
 
 	// Says where the client and server 'proxy' code is loaded.
 	@SidedProxy(clientSide = "org.educraft.client.ClientProxy", serverSide = "org.educraft.CommonProxy")
@@ -160,7 +161,7 @@ public class EduCraft {
 		
 		
 		//Important
-//		NetworkRegistry.instance().registerGuiHandler(this, guiHandlerCalculator);
+		NetworkRegistry.instance().registerGuiHandler(this, guiHandlerCalculator);
 
 		proxy.registerRenderers();
 	}
