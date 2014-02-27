@@ -2,17 +2,40 @@ package org.educraft.number.calculator;
 
 import org.educraft.EduCraft;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockWorkbench;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import net.minecraft.util.Icon;
 
 public class Calculator extends BlockWorkbench {
+	
+//	@SideOnly(Side.CLIENT)
+//	private Icon calculatorIconTop;
+//	@SideOnly(Side.CLIENT)
+//	private Icon calculatorIconFront;
 	
 	public Calculator(int id) {
 		super(id);
 		setUnlocalizedName("calculatorTable");
 		setCreativeTab(EduCraft.tabEduCraft);
 	}
+	
+	
+//	@SideOnly(Side.CLIENT)
+//	public Icon getIcon(int par1, int par2) {
+//		
+//		return par1 == 1 ? this.calculatorIconTop : (par1 == 0 ? BlockWorkbench.planks.getBlockTextureFromSide(par1) : (par1 !=2 && par1 != 4 ? this.blockIcon : this.calculatorIconFront));
+//	}
+//	
+//	@SideOnly(Side.CLIENT)
+//	public void registerIcon(IconRegister par1IconRegister){
+//		this.blockIcon = par1IconRegister.registerIcon("educraft:calculator_side");
+//		this.calculatorIconTop = par1IconRegister.registerIcon("educraft:calculator_top");
+//		this.calculatorIconFront = par1IconRegister.registerIcon("educraft:calculator_front");
+//	}
 	
 	@Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
@@ -25,5 +48,4 @@ public class Calculator extends BlockWorkbench {
 			return false;
 		}
 	}
-
 }

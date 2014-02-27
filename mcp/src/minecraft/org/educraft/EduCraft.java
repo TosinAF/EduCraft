@@ -28,6 +28,7 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -59,6 +60,10 @@ public class EduCraft {
 	// The instance of your mod that Forge uses.
 	@Instance(value = "EduCraft")
 	public static EduCraft instance;
+	
+	
+	//GUIHandler for calculator
+//	private GuiHandlerCalculator guiHandlerCalculator = new GuiHandlerCalculator();
 
 	// Says where the client and server 'proxy' code is loaded.
 	@SidedProxy(clientSide = "org.educraft.client.ClientProxy", serverSide = "org.educraft.CommonProxy")
@@ -91,6 +96,8 @@ public class EduCraft {
 		LanguageRegistry.addName(SUB_OPR, "Subtraction sign");
 		LanguageRegistry.addName(MUL_OPR, "Multiplication sign");
 		LanguageRegistry.addName(DIV_OPR, "Division sign");
+		
+		LanguageRegistry.addName(CALCULATOR, "Calculator");
 
 		// crafting recipes for mathematical operators
 		ItemStack sticks = new ItemStack(Item.stick);
@@ -150,6 +157,10 @@ public class EduCraft {
 				EnumCreatureType.monster, BiomeGenBase.plains);
 		// register the attack handler
 		MinecraftForge.EVENT_BUS.register(new DummyAttackHandler());
+		
+		
+		//Important
+//		NetworkRegistry.instance().registerGuiHandler(this, guiHandlerCalculator);
 
 		proxy.registerRenderers();
 	}
