@@ -4,12 +4,13 @@ import org.educraft.EduCraft;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 public class BaseNumber extends Item {
-	public static final String[] NAMES = new String[100];
+	public static final String[] NAMES = new String[EduCraft.MAX_NUMBER];
 	static {
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < EduCraft.MAX_NUMBER; i++) {
 			NAMES[i] = String.format("number%d", i+1);
 		}
 	}
@@ -19,12 +20,12 @@ public class BaseNumber extends Item {
 		setHasSubtypes(true);
 		setMaxDamage(0);
 		setTextureName("diamond");
-		setMaxStackSize(16); // Change this later perhaps
+		setMaxStackSize(1); // Change this later perhaps
 		setCreativeTab(EduCraft.tabEduCraft);
 	}
-
+	
 	@Override
 	public String getUnlocalizedName(ItemStack is) {
-		return NAMES[is.getItemDamage() - 1];
+		return getUnlocalizedName() + "." + NAMES[is.getItemDamage()];
 	}
 }
