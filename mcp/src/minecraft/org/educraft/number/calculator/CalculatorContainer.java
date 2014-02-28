@@ -5,13 +5,13 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import org.educraft.number.calculator.Calculator;
 import org.educraft.EduCraft;
 
 public class CalculatorContainer extends ContainerWorkbench {
-	
+
 	private World worldObj;
 	private int posX;
 	private int posY;
@@ -29,13 +29,25 @@ public class CalculatorContainer extends ContainerWorkbench {
 
 	@Override
 	public void onCraftMatrixChanged(IInventory inventory) {
-		this.craftResult
-				.setInventorySlotContents(
-						0,
-						CalculatorCraftingManager.getInstance()
-								.findMatchingRecipe(this.craftMatrix,
-										this.worldObj));
+		this.craftResult.setInventorySlotContents(
+				0,
+				CalculatorCraftingManager.getInstance().findMatchingRecipe(
+						this.craftMatrix, this.worldObj));
 
+	}
+
+	@Override
+	public void onContainerClosed(EntityPlayer player) {
+		if (!this.worldObj.isRemote) {
+			// check if there are any items in the crafting area,
+			// and drop them if there are
+			for (int i = 0; i < craftMatrix.getSizeInventory(); i++) {
+				ItemStack is = this.craftMatrix.getStackInSlot(i);
+				if (is != null) {
+					player.dropPlayerItem(is);
+				}
+			}
+		}
 	}
 
 	@Override

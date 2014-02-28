@@ -1,6 +1,7 @@
 package org.educraft.number.calculator;
 
 import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
@@ -18,17 +19,23 @@ public class CalculatorRecipe implements IRecipe {
 		this.OPERATOR = operator;
 		this.output = new ItemStack(EduCraft.NUMBER);
 	}
-	
+
 	public OperatorType getOperator() {
 		return this.OPERATOR;
 	}
 
 	@Override
 	public boolean matches(InventoryCrafting inventory, World world) {
-		// TODO Auto-generated method stub
-		return (inventory.getStackInSlot(0).getItem() instanceof BaseNumber)
-				&& (inventory.getStackInSlot(1).getItem() instanceof MathematicalOperator)
-				&& (inventory.getStackInSlot(2).getItem() instanceof BaseNumber);
+		Item items[] = { null, null, null };
+		int j = 0;
+		for (int i = 0; i < inventory.getSizeInventory(); i++) {
+			if ((inventory.getStackInSlot(i) != null) && (j < items.length)) {
+				items[j++] = inventory.getStackInSlot(i).getItem();
+			}
+		}
+		return (items[0] != null && items[0] instanceof BaseNumber)
+				&& (items[1] != null && items[1] instanceof MathematicalOperator)
+				&& (items[2] != null && items[2] instanceof BaseNumber);
 	}
 
 	@Override
@@ -39,7 +46,7 @@ public class CalculatorRecipe implements IRecipe {
 		int opr1 = inventory.getStackInSlot(0).getItemDamage();
 		int opr2 = inventory.getStackInSlot(2).getItemDamage();
 		int eval = 1;
-		
+
 		// compute the result
 		// if we go negative, or get a decimal, return 1
 		switch (OPERATOR) {
@@ -56,11 +63,12 @@ public class CalculatorRecipe implements IRecipe {
 			eval = (opr1 > opr2) ? opr1 / opr2 : 1;
 			break;
 		}
-		if (eval > 100) eval = 1;
-		
+		if (eval > 100)
+			eval = 1;
+
 		// set metadata on the returned item stack, and return
 		result.setItemDamage(eval);
-		return result;		
+		return result;
 	}
 
 	@Override
