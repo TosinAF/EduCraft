@@ -14,6 +14,8 @@ import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.world.World;
 
+import org.educraft.number.OperatorType;
+
 /**
  * This class is essentially identical to
  * {@link net.minecraft.item.crafting.CraftingManager}, but because that class
@@ -28,7 +30,7 @@ public class CalculatorCraftingManager {
 	private static final CalculatorCraftingManager INSTANCE = new CalculatorCraftingManager();
 
 	/** A list of all the recipes added */
-	private List recipes = new ArrayList();
+	private List<IRecipe> recipes = new ArrayList<IRecipe>();
 
 	/**
 	 * Returns the static instance of this class
@@ -38,98 +40,33 @@ public class CalculatorCraftingManager {
 	}
 
 	private CalculatorCraftingManager() {
-		this.addRecipe(new ItemStack(Item.paper, 3), "###", '#', Item.reed);
+		this.addRecipe(OperatorType.PLUS);
+		this.addRecipe(OperatorType.MINUS);
+		this.addRecipe(OperatorType.TIMES);
+		this.addRecipe(OperatorType.DIVIDE);
 		Collections.sort(this.recipes, new CalculatorRecipeSorter(this));
 	}
 
-	public ShapedRecipes addRecipe(ItemStack par1ItemStack,
-			Object... par2ArrayOfObj) {
-		String s = "";
-		int i = 0;
-		int j = 0;
-		int k = 0;
-
-		if (par2ArrayOfObj[i] instanceof String[]) {
-			String[] astring = (String[]) ((String[]) par2ArrayOfObj[i++]);
-
-			for (int l = 0; l < astring.length; ++l) {
-				String s1 = astring[l];
-				++k;
-				j = s1.length();
-				s = s + s1;
-			}
-		} else {
-			while (par2ArrayOfObj[i] instanceof String) {
-				String s2 = (String) par2ArrayOfObj[i++];
-				++k;
-				j = s2.length();
-				s = s + s2;
-			}
-		}
-
-		HashMap hashmap;
-
-		for (hashmap = new HashMap(); i < par2ArrayOfObj.length; i += 2) {
-			Character character = (Character) par2ArrayOfObj[i];
-			ItemStack itemstack1 = null;
-
-			if (par2ArrayOfObj[i + 1] instanceof Item) {
-				itemstack1 = new ItemStack((Item) par2ArrayOfObj[i + 1]);
-			} else if (par2ArrayOfObj[i + 1] instanceof Block) {
-				itemstack1 = new ItemStack((Block) par2ArrayOfObj[i + 1], 1,
-						32767);
-			} else if (par2ArrayOfObj[i + 1] instanceof ItemStack) {
-				itemstack1 = (ItemStack) par2ArrayOfObj[i + 1];
-			}
-
-			hashmap.put(character, itemstack1);
-		}
-
-		ItemStack[] aitemstack = new ItemStack[j * k];
-
-		for (int i1 = 0; i1 < j * k; ++i1) {
-			char c0 = s.charAt(i1);
-
-			if (hashmap.containsKey(Character.valueOf(c0))) {
-				aitemstack[i1] = ((ItemStack) hashmap
-						.get(Character.valueOf(c0))).copy();
-			} else {
-				aitemstack[i1] = null;
-			}
-		}
-
-		ShapedRecipes shapedrecipes = new ShapedRecipes(j, k, aitemstack,
-				par1ItemStack);
-		this.recipes.add(shapedrecipes);
-		return shapedrecipes;
+	public CalculatorRecipe addRecipe(OperatorType opr) {
+		CalculatorRecipe recipe = new CalculatorRecipe(opr);
+		this.recipes.add(recipe);
+		return recipe;
 	}
 
-	public void addShapelessRecipe(ItemStack par1ItemStack,
-			Object... par2ArrayOfObj) {
-		ArrayList arraylist = new ArrayList();
-		Object[] aobject = par2ArrayOfObj;
-		int i = par2ArrayOfObj.length;
-
-		for (int j = 0; j < i; ++j) {
-			Object object1 = aobject[j];
-
-			if (object1 instanceof ItemStack) {
-				arraylist.add(((ItemStack) object1).copy());
-			} else if (object1 instanceof Item) {
-				arraylist.add(new ItemStack((Item) object1));
-			} else {
-				if (!(object1 instanceof Block)) {
-					throw new RuntimeException("Invalid shapeless recipy!");
-				}
-
-				arraylist.add(new ItemStack((Block) object1));
+	public ItemStack findMatchingRecipe(InventoryCrafting inventory, World world) {
+		// check each recipe in turn for a match
+		IRecipe r;
+		for (int i = 0; i < this.recipes.size(); i++) {
+			r = (IRecipe) this.recipes.get(i);
+			if (r.matches(inventory, world)) {
+				return r.getCraftingResult(inventory);
 			}
 		}
-
-		this.recipes.add(new ShapelessRecipes(par1ItemStack, arraylist));
+		// return null if we find no matches
+		return null;
 	}
 
-	public ItemStack findMatchingRecipe(
+	public ItemStack findMatchingRecipe2(
 			InventoryCrafting par1InventoryCrafting, World par2World) {
 		int i = 0;
 		ItemStack itemstack = null;

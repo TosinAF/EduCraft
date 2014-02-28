@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.world.World;
 
 import org.educraft.EduCraft;
@@ -17,6 +18,7 @@ public class CalculatorContainer extends ContainerWorkbench {
 	public CalculatorContainer(InventoryPlayer par1InventoryPlayer,
 			World par2World, int par3, int par4, int par5) {
 		super(par1InventoryPlayer, par2World, par3, par4, par5);
+		craftMatrix = new InventoryCrafting(this, 3, 1);
 		worldObj = par2World;
 		posX = par3;
 		posY = par4;
