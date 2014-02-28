@@ -23,18 +23,26 @@ class CalculatorRecipeSorter implements Comparator {
 		this.MANAGER = manager;
 	}
 
-	public int compareRecipes(IRecipe par1IRecipe, IRecipe par2IRecipe) {
-		return par1IRecipe instanceof ShapelessRecipes
-				&& par2IRecipe instanceof ShapedRecipes ? 1
-				: (par2IRecipe instanceof ShapelessRecipes
-						&& par1IRecipe instanceof ShapedRecipes ? -1
-						: (par2IRecipe.getRecipeSize() < par1IRecipe
-								.getRecipeSize() ? -1
-								: (par2IRecipe.getRecipeSize() > par1IRecipe
-										.getRecipeSize() ? 1 : 0)));
-	}
-
 	public int compare(Object par1Obj, Object par2Obj) {
 		return this.compareRecipes((IRecipe) par1Obj, (IRecipe) par2Obj);
 	}
+	
+	public int compareRecipes(IRecipe r1, IRecipe r2) {
+		if (r1.getClass() == r2.getClass()) {
+			// both recipes are of the same type
+			if (r1 instanceof CalculatorRecipe) {
+				// both recipes are calculator recipes, compare operators
+				CalculatorRecipe cr1 = (CalculatorRecipe) r1;
+				CalculatorRecipe cr2 = (CalculatorRecipe) r2;
+				return cr1.getOperator().compareTo(cr2.getOperator());
+			} else {
+				// neither recipe is a calculator recipe
+				return 1;
+			}
+		} else {
+			// one recipe is a calculator recipe, the other isn't
+			return -1;
+		}
+	}
+	
 }

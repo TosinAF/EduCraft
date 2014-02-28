@@ -18,6 +18,10 @@ public class CalculatorRecipe implements IRecipe {
 		this.OPERATOR = operator;
 		this.output = new ItemStack(EduCraft.NUMBER);
 	}
+	
+	public OperatorType getOperator() {
+		return this.OPERATOR;
+	}
 
 	@Override
 	public boolean matches(InventoryCrafting inventory, World world) {
