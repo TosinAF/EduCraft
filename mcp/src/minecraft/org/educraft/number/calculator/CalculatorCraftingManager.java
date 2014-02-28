@@ -11,8 +11,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
-import net.minecraft.item.crafting.ShapelessRecipes;
+//import net.minecraft.item.crafting.ShapedRecipes;
+//import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.world.World;
+
+import org.educraft.number.calculator.CalculatorRecipe;
+import org.educraft.EduCraft;
 
 /**
  * This class is essentially identical to
@@ -29,6 +33,8 @@ public class CalculatorCraftingManager {
 
 	/** A list of all the recipes added */
 	private List recipes = new ArrayList();
+	
+	
 
 	/**
 	 * Returns the static instance of this class
@@ -38,11 +44,16 @@ public class CalculatorCraftingManager {
 	}
 
 	private CalculatorCraftingManager() {
-		this.addRecipe(new ItemStack(Item.paper, 3), "###", '#', Item.reed);
-		Collections.sort(this.recipes, new CalculatorRecipeSorter(this));
+		
+		this.addRecipe(new ItemStack(EduCraft.NUMBER), "xyx", 'x', EduCraft.NUMBER, 'y', EduCraft.ADD_OPR);
+		this.addRecipe(new ItemStack(EduCraft.NUMBER), "xyx", 'x', EduCraft.NUMBER, 'y', EduCraft.SUB_OPR);
+		this.addRecipe(new ItemStack(EduCraft.NUMBER), "xyx", 'x', EduCraft.NUMBER, 'y', EduCraft.MUL_OPR);
+		this.addRecipe(new ItemStack(EduCraft.NUMBER), "xyx", 'x', EduCraft.NUMBER, 'y', EduCraft.DIV_OPR);
+		
+//		Collections.sort(this.recipes, new CalculatorRecipeSorter(this));
 	}
 
-	public ShapedRecipes addRecipe(ItemStack par1ItemStack,
+	public CalculatorRecipe addRecipe(ItemStack par1ItemStack,
 			Object... par2ArrayOfObj) {
 		String s = "";
 		int i = 0;
@@ -98,37 +109,12 @@ public class CalculatorCraftingManager {
 			}
 		}
 
-		ShapedRecipes shapedrecipes = new ShapedRecipes(j, k, aitemstack,
+		CalculatorRecipe shapedrecipe = new CalculatorRecipe(j, k, aitemstack,
 				par1ItemStack);
-		this.recipes.add(shapedrecipes);
-		return shapedrecipes;
-	}
-
-	public void addShapelessRecipe(ItemStack par1ItemStack,
-			Object... par2ArrayOfObj) {
-		ArrayList arraylist = new ArrayList();
-		Object[] aobject = par2ArrayOfObj;
-		int i = par2ArrayOfObj.length;
-
-		for (int j = 0; j < i; ++j) {
-			Object object1 = aobject[j];
-
-			if (object1 instanceof ItemStack) {
-				arraylist.add(((ItemStack) object1).copy());
-			} else if (object1 instanceof Item) {
-				arraylist.add(new ItemStack((Item) object1));
-			} else {
-				if (!(object1 instanceof Block)) {
-					throw new RuntimeException("Invalid shapeless recipy!");
-				}
-
-				arraylist.add(new ItemStack((Block) object1));
-			}
-		}
-
-		this.recipes.add(new ShapelessRecipes(par1ItemStack, arraylist));
-	}
-
+		this.recipes.add(shapedrecipe);
+		return shapedrecipe;
+	}	
+		
 	public ItemStack findMatchingRecipe(
 			InventoryCrafting par1InventoryCrafting, World par2World) {
 		int i = 0;
@@ -167,11 +153,13 @@ public class CalculatorCraftingManager {
 
 			return new ItemStack(itemstack.itemID, 1, j1);
 		} else {
+			
+			
 			for (j = 0; j < this.recipes.size(); ++j) {
-				IRecipe irecipe = (IRecipe) this.recipes.get(j);
-
-				if (irecipe.matches(par1InventoryCrafting, par2World)) {
-					return irecipe.getCraftingResult(par1InventoryCrafting);
+				IRecipe calRecipe = (IRecipe) this.recipes.get(j);
+				
+				if (calRecipe.matches(par1InventoryCrafting, par2World)) {
+					return calRecipe.getCraftingResult(par1InventoryCrafting);
 				}
 			}
 
