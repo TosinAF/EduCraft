@@ -38,12 +38,12 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @Mod(modid = "EduCraft", name = "EduCraft", version = "0.1.0")
 @NetworkMod(clientSideRequired = true)
 public class EduCraft {
-	
-	/*ONLY NEEDED FOR CHRISTMAS DEMONSTRATION*/
+
+	/* ONLY NEEDED FOR CHRISTMAS DEMONSTRATION */
 	public static final Item NUMBER30 = new Number30(6006);
 	public static final Item NUMBER2 = new Number2(6007);
-	/*ONLY NEEDED FOR CHRISTMAS DEMONSTRATION ENDS*/
-	
+	/* ONLY NEEDED FOR CHRISTMAS DEMONSTRATION ENDS */
+
 	// EduCraft creative tab
 	public static CreativeTabs tabEduCraft = new CreativeTabs("tabEduCraft") {
 		public ItemStack getIconItemStack() {
@@ -53,15 +53,7 @@ public class EduCraft {
 
 	// max number that we will work with
 	public static final int MAX_NUMBER = 100;
-	
-	//create an array of names for numbers
-	public static final String[] NAMES = new String[MAX_NUMBER];
-	static {
-		for (int i = 0; i < 100; i++) {
-			NAMES[i] = String.format("number%d", i+1);
-		}
-	}
-	
+
 	// instance of the maths wand
 	public static final Item MATHS_WAND = new MathsWand(6000);
 	// instances of the mathematical operators
@@ -70,15 +62,15 @@ public class EduCraft {
 	public static final Item MUL_OPR = new MultiplicationOperator();
 	public static final Item DIV_OPR = new DivisionOperator();
 	public static final Item NUMBER = new BaseNumber(6005);
-	
+
 	// instance of the calculator
 	public static final Block CALCULATOR = new Calculator(500);
 
 	// The instance of your mod that Forge uses.
 	@Instance(value = "EduCraft")
 	public static EduCraft instance;
-	
-	//GUIHandler for calculator
+
+	// GUIHandler for calculator
 	private CalculatorGuiHandler guiHandlerCalculator = new CalculatorGuiHandler();
 
 	// Says where the client and server 'proxy' code is loaded.
@@ -95,41 +87,33 @@ public class EduCraft {
 		GameRegistry.registerBlock(CALCULATOR, "calculatorTable");
 		MinecraftForge.setBlockHarvestLevel(CALCULATOR, "axe", 0);
 		LanguageRegistry.addName(CALCULATOR, "Calculator Table");
-		
-//		GameRegistry.registerItem(NUMBER, BaseNumber.class);
-				
+
+		// GameRegistry.registerItem(NUMBER, BaseNumber.class);
+
 		/* MATHS WAND */
 		// localised name for maths wand
 		LanguageRegistry.addName(MATHS_WAND, "Maths Wand");
 
 		/* NUMBERS */
-	
-		/* COULD BE DELETED??? */
-//		localised names for numbers and mathematical operators
-//		for (int i = 0; i < BaseNumber.NAMES.length; i++) {
-//			ItemStack number = new ItemStack(NUMBER, 1, i);
-//			LanguageRegistry.addName(new ItemStack(NUMBER, 1, i + 1),
-//					String.valueOf(i + 1));
-//		}
-		
-		for (int i = 0; i < BaseNumber.NAMES.length; i++) {
-			
-			ItemStack itemBlock = new ItemStack(NUMBER, 1, i);
-			
-			LanguageRegistry.addName(itemBlock, NAMES[itemBlock.getItemDamage()]);
+		// register names for each possible metadata value in turn
+		ItemStack numStack;
+		for (int i = 1; i < MAX_NUMBER; i++) {
+			numStack = new ItemStack(NUMBER, 1, i);
+			LanguageRegistry.addName(numStack,
+					String.format("Number %d", numStack.getItemDamage()));
 		}
-		
-		/*ONLY NEEDED FOR CHRISTMAS DEMONSTRATION*/
+
+		/* ONLY NEEDED FOR CHRISTMAS DEMONSTRATION */
 		LanguageRegistry.addName(NUMBER30, "30");
 		LanguageRegistry.addName(NUMBER2, "2");
-		/*ONLY NEEDED FOR CHRISTMAS DEMONSTRATION ENDS*/
-		
+		/* ONLY NEEDED FOR CHRISTMAS DEMONSTRATION ENDS */
+
 		/* MATHEMATICAL OPERATORS */
 		LanguageRegistry.addName(ADD_OPR, "Addition sign");
 		LanguageRegistry.addName(SUB_OPR, "Subtraction sign");
 		LanguageRegistry.addName(MUL_OPR, "Multiplication sign");
 		LanguageRegistry.addName(DIV_OPR, "Division sign");
-		
+
 		/* CUSTOM CRAFTING TABLE */
 		LanguageRegistry.addName(CALCULATOR, "Calculator");
 
@@ -152,7 +136,7 @@ public class EduCraft {
 				's', sticks);
 		GameRegistry.addRecipe(new ItemStack(DIV_OPR), "  s", " s ", "s  ",
 				's', sticks);
-		
+
 		// recipes to break operators down into sticks
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.stick, 4),
 				new ItemStack(ADD_OPR));
@@ -172,8 +156,8 @@ public class EduCraft {
 				EntityRegistry.findGlobalUniqueEntityId(), this, 60, 3, true);
 		EntityRegistry.addSpawn(Number2Zombie.class, 10, 1, 2,
 				EnumCreatureType.monster, BiomeGenBase.plains);
-		
-		/*ONLY NEEDED FOR CHRISTMAS DEMONSTRATION*/
+
+		/* ONLY NEEDED FOR CHRISTMAS DEMONSTRATION */
 		// register the number 2 zombie
 		EntityRegistry.registerGlobalEntityID(Number2Zombie.class,
 				"Number 2 Zombie", EntityRegistry.findGlobalUniqueEntityId(),
@@ -192,14 +176,14 @@ public class EduCraft {
 				this, 60, 3, true);
 		EntityRegistry.addSpawn(Number15Zombie.class, 10, 1, 2,
 				EnumCreatureType.monster, BiomeGenBase.plains);
-		/*ONLY NEEDED FOR CHRISTMAS DEMONSTRATION ENDS*/
-		
-		
+		/* ONLY NEEDED FOR CHRISTMAS DEMONSTRATION ENDS */
+
 		// register the attack handler
 		MinecraftForge.EVENT_BUS.register(new DummyAttackHandler());
-		
+
 		// Important keep it
-		NetworkRegistry.instance().registerGuiHandler(this, guiHandlerCalculator);
+		NetworkRegistry.instance().registerGuiHandler(this,
+				guiHandlerCalculator);
 
 		proxy.registerRenderers();
 	}

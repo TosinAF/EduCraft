@@ -8,12 +8,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 public class BaseNumber extends Item {
-	public static final String[] NAMES = new String[EduCraft.MAX_NUMBER];
-	static {
-		for (int i = 0; i < EduCraft.MAX_NUMBER; i++) {
-			NAMES[i] = String.format("number%d", i+1);
-		}
-	}
 
 	public BaseNumber(int itemID) {
 		super(itemID);
@@ -22,10 +16,11 @@ public class BaseNumber extends Item {
 		setTextureName("diamond");
 		setMaxStackSize(1); // Change this later perhaps
 		setCreativeTab(EduCraft.tabEduCraft);
+		setUnlocalizedName("number");
 	}
-	
+
 	@Override
 	public String getUnlocalizedName(ItemStack is) {
-		return getUnlocalizedName() + "." + NAMES[is.getItemDamage()];
+		return getUnlocalizedName() + "." + String.valueOf(is.getItemDamage());
 	}
 }
