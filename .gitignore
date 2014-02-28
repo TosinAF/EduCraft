@@ -14,7 +14,6 @@
 *.bbl
 *.blg
 *.lof
-*.png
 
 # By default, ignore everything
 /*
@@ -45,4 +44,7 @@
 /mcp/src/minecraft/assets/educraft/*
 !/mcp/src/minecraft/assets/educraft/textures/
 /mcp/src/minecraft/assets/educraft/textures/*
+!/mcp/src/minecraft/assets/educraft/textures/blocks/
+!/mcp/src/minecraft/assets/educraft/textures/gui/
 !/mcp/src/minecraft/assets/educraft/textures/items/
+
