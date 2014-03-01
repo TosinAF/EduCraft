@@ -35,7 +35,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "EduCraft", name = "EduCraft", version = "0.1.0")
+@Mod(modid = "EduCraft", name = "EduCraft", version = "0.2.0")
 @NetworkMod(clientSideRequired = true)
 public class EduCraft {
 
@@ -97,7 +97,7 @@ public class EduCraft {
 		/* NUMBERS */
 		// register names for each possible metadata value in turn
 		ItemStack numStack;
-		for (int i = 1; i < MAX_NUMBER; i++) {
+		for (int i = 1; i <= MAX_NUMBER; i++) {
 			numStack = new ItemStack(NUMBER, 1, i);
 			LanguageRegistry.addName(numStack,
 					String.format("Number %d", numStack.getItemDamage()));
