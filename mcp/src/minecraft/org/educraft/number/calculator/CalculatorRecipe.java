@@ -59,8 +59,8 @@ public class CalculatorRecipe implements IRecipe {
 		ItemStack result = this.getRecipeOutput().copy();
 
 		// get the two operands
-		int opr1 = inventory.getStackInSlot(0).getItemDamage() + 1;
-		int opr2 = inventory.getStackInSlot(2).getItemDamage() + 1;
+		int opr1 = inventory.getStackInSlot(0).getItemDamage();
+		int opr2 = inventory.getStackInSlot(2).getItemDamage();
 		// get the operator
 		MathematicalOperator operator = (MathematicalOperator) inventory
 				.getStackInSlot(1).getItem();
@@ -87,7 +87,7 @@ public class CalculatorRecipe implements IRecipe {
 			eval = 1;
 
 		// set metadata - 1 on the returned item stack, and return
-		result.setItemDamage(eval - 1);
+		result.setItemDamage(eval);
 		return result;
 	}
 
