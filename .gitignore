@@ -15,6 +15,7 @@
 *.blg
 *.lof
 *.db
+*ssot*
 
 # By default, ignore everything
 /*
