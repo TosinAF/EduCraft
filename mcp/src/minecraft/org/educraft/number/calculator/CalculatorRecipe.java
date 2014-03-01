@@ -49,27 +49,24 @@ public class CalculatorRecipe implements IRecipe {
 		}
 		// check that we have numbers in slots 0,2 and an operator
 		// in slot 1
-		return (inventory.getStackInSlot(0).getItem() instanceof BaseNumber)
+		if(!((inventory.getStackInSlot(0).getItem() instanceof BaseNumber)
 				&& (inventory.getStackInSlot(1).getItem() instanceof MathematicalOperator)
-				&& (inventory.getStackInSlot(2).getItem() instanceof BaseNumber);
+				&& (inventory.getStackInSlot(2).getItem() instanceof BaseNumber))) {
+			
+			return false;
+		}
+		
+		return eval(inventory.getStackInSlot(0), inventory.getStackInSlot(2), (MathematicalOperator) inventory.getStackInSlot(1).getItem()) > 0;  
 	}
 
-	@Override
-	public ItemStack getCraftingResult(InventoryCrafting inventory) {
-		ItemStack result = this.getRecipeOutput().copy();
-
-		// get the two operands
-		int opr1 = inventory.getStackInSlot(0).getItemDamage();
-		int opr2 = inventory.getStackInSlot(2).getItemDamage();
-		// get the operator
-		MathematicalOperator operator = (MathematicalOperator) inventory
-				.getStackInSlot(1).getItem();
-		OperatorType operatorType = operator.getOperator();
-		int eval = 1;
-
-		// compute the result
-		// if we go negative, or get a decimal, return 1
-		switch (operatorType) {
+	private int eval(ItemStack x, ItemStack y, MathematicalOperator operator) {
+		
+		int opr1 = x.getItemDamage();
+		int opr2 = y.getItemDamage();
+		
+		int eval = 0;
+		
+		switch(operator.getOperator()) {
 		case PLUS:
 			eval = opr1 + opr2;
 			break;
@@ -77,14 +74,24 @@ public class CalculatorRecipe implements IRecipe {
 			eval = opr1 * opr2;
 			break;
 		case MINUS:
-			eval = (opr1 > opr2) ? opr1 - opr2 : 1;
+			eval = (opr1 > opr2) ? opr1 - opr2 : 0;
 			break;
 		case DIVIDE:
-			eval = (opr1 > opr2) ? opr1 / opr2 : 1;
+			eval = (opr1 > opr2) ? opr1 / opr2 : 0;
 			break;
 		}
-		if (eval > 100)
-			eval = 1;
+		
+		if (eval > EduCraft.MAX_NUMBER)
+			eval = 0;
+		
+		return eval;
+	}
+	
+	@Override
+	public ItemStack getCraftingResult(InventoryCrafting inventory) {
+		ItemStack result = this.getRecipeOutput().copy();
+
+		int eval = eval(inventory.getStackInSlot(0), inventory.getStackInSlot(2), (MathematicalOperator) inventory.getStackInSlot(1).getItem());
 
 		// set metadata - 1 on the returned item stack, and return
 		result.setItemDamage(eval);
