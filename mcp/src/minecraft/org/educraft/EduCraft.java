@@ -35,7 +35,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "EduCraft", name = "EduCraft", version = "0.1.0")
+@Mod(modid = "EduCraft", name = "EduCraft", version = "0.2.0")
 @NetworkMod(clientSideRequired = true)
 public class EduCraft {
 
@@ -97,7 +97,7 @@ public class EduCraft {
 		/* NUMBERS */
 		// register names for each possible metadata value in turn
 		ItemStack numStack;
-		for (int i = 1; i < MAX_NUMBER; i++) {
+		for (int i = 1; i <= MAX_NUMBER; i++) {
 			numStack = new ItemStack(NUMBER, 1, i);
 			LanguageRegistry.addName(numStack,
 					String.format("Number %d", numStack.getItemDamage()));
@@ -119,14 +119,14 @@ public class EduCraft {
 
 		// crafting recipes for mathematical operators
 		ItemStack sticks = new ItemStack(Item.stick);
-		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ", 'x',
-				NUMBER, 'y', ADD_OPR);
-		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ", 'x',
-				NUMBER, 'y', SUB_OPR);
-		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ", 'x',
-				NUMBER, 'y', MUL_OPR);
-		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ", 'x',
-				NUMBER, 'y', DIV_OPR);
+//		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ", 'x',
+//				NUMBER, 'y', ADD_OPR);
+//		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ", 'x',
+//				NUMBER, 'y', SUB_OPR);
+//		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ", 'x',
+//				NUMBER, 'y', MUL_OPR);
+//		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ", 'x',
+//				NUMBER, 'y', DIV_OPR);
 
 		GameRegistry.addRecipe(new ItemStack(ADD_OPR), " s ", "sss", " s ",
 				's', sticks);
@@ -154,11 +154,12 @@ public class EduCraft {
 				20000, 2500);
 		EntityRegistry.registerModEntity(NumberZombie.class, "Number Zombie",
 				EntityRegistry.findGlobalUniqueEntityId(), this, 60, 3, true);
-		EntityRegistry.addSpawn(Number2Zombie.class, 10, 1, 2,
+		EntityRegistry.addSpawn(NumberZombie.class, 10, 1, 2,
 				EnumCreatureType.monster, BiomeGenBase.plains);
 
 		/* ONLY NEEDED FOR CHRISTMAS DEMONSTRATION */
 		// register the number 2 zombie
+
 		EntityRegistry.registerGlobalEntityID(Number2Zombie.class,
 				"Number 2 Zombie", EntityRegistry.findGlobalUniqueEntityId(),
 				32324, 2243);

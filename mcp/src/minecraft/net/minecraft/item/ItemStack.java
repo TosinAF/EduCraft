@@ -218,14 +218,6 @@ public final class ItemStack
             this.stackTagCompound = par1NBTTagCompound.getCompoundTag("tag");
         }
     }
-
-    //OWN CODE
-    public ItemStack setStackSize(int x)
-    {
-    	
-    	this.stackSize = x;
-    	return this;
-    }
     
     /**
      * Returns maximum size of the stack.

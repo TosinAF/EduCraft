@@ -20,7 +20,7 @@ public class Calculator extends Block {
 	
 	public Calculator(int id) {
 		super(id, Material.ground);
-//		setUnlocalizedName("calculator");
+		setUnlocalizedName("Calculator Table");
 		setCreativeTab(EduCraft.tabEduCraft);
 	}
 	

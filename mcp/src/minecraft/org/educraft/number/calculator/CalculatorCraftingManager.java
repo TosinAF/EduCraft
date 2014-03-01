@@ -1,7 +1,6 @@
 package org.educraft.number.calculator;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,11 +9,9 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.ShapedRecipes;
-import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.world.World;
 
-import org.educraft.number.OperatorType;
+import org.educraft.EduCraft;
 
 /**
  * This class is essentially identical to
@@ -40,33 +37,79 @@ public class CalculatorCraftingManager {
 	}
 
 	private CalculatorCraftingManager() {
-		this.addRecipe(OperatorType.PLUS);
-		this.addRecipe(OperatorType.MINUS);
-		this.addRecipe(OperatorType.TIMES);
-		this.addRecipe(OperatorType.DIVIDE);
-		Collections.sort(this.recipes, new CalculatorRecipeSorter(this));
+		this.addRecipe(new ItemStack(EduCraft.NUMBER), "xyx", 'x',
+				EduCraft.NUMBER, 'y', EduCraft.ADD_OPR);
+		this.addRecipe(new ItemStack(EduCraft.NUMBER), "xyx", 'x',
+				EduCraft.NUMBER, 'y', EduCraft.SUB_OPR);
+		this.addRecipe(new ItemStack(EduCraft.NUMBER), "xyx", 'x',
+				EduCraft.NUMBER, 'y', EduCraft.MUL_OPR);
+		this.addRecipe(new ItemStack(EduCraft.NUMBER), "xyx", 'x',
+				EduCraft.NUMBER, 'y', EduCraft.DIV_OPR);
 	}
 
-	public CalculatorRecipe addRecipe(OperatorType opr) {
-		CalculatorRecipe recipe = new CalculatorRecipe(opr);
-		this.recipes.add(recipe);
-		return recipe;
-	}
+	public CalculatorRecipe addRecipe(ItemStack par1ItemStack,
+			Object... par2ArrayOfObj) {
+		String s = "";
+		int i = 0;
+		int j = 0;
+		int k = 0;
 
-	public ItemStack findMatchingRecipe(InventoryCrafting inventory, World world) {
-		// check each recipe in turn for a match
-		IRecipe r;
-		for (int i = 0; i < this.recipes.size(); i++) {
-			r = (IRecipe) this.recipes.get(i);
-			if (r.matches(inventory, world)) {
-				return r.getCraftingResult(inventory);
+		if (par2ArrayOfObj[i] instanceof String[]) {
+			String[] astring = (String[]) ((String[]) par2ArrayOfObj[i++]);
+
+			for (int l = 0; l < astring.length; ++l) {
+				String s1 = astring[l];
+				++k;
+				j = s1.length();
+				s = s + s1;
+			}
+		} else {
+			while (par2ArrayOfObj[i] instanceof String) {
+				String s2 = (String) par2ArrayOfObj[i++];
+				++k;
+				j = s2.length();
+				s = s + s2;
 			}
 		}
-		// return null if we find no matches
-		return null;
+
+		HashMap hashmap;
+
+		for (hashmap = new HashMap(); i < par2ArrayOfObj.length; i += 2) {
+			Character character = (Character) par2ArrayOfObj[i];
+			ItemStack itemstack1 = null;
+
+			if (par2ArrayOfObj[i + 1] instanceof Item) {
+				itemstack1 = new ItemStack((Item) par2ArrayOfObj[i + 1]);
+			} else if (par2ArrayOfObj[i + 1] instanceof Block) {
+				itemstack1 = new ItemStack((Block) par2ArrayOfObj[i + 1], 1,
+						32767);
+			} else if (par2ArrayOfObj[i + 1] instanceof ItemStack) {
+				itemstack1 = (ItemStack) par2ArrayOfObj[i + 1];
+			}
+
+			hashmap.put(character, itemstack1);
+		}
+
+		ItemStack[] aitemstack = new ItemStack[j * k];
+
+		for (int i1 = 0; i1 < j * k; ++i1) {
+			char c0 = s.charAt(i1);
+
+			if (hashmap.containsKey(Character.valueOf(c0))) {
+				aitemstack[i1] = ((ItemStack) hashmap
+						.get(Character.valueOf(c0))).copy();
+			} else {
+				aitemstack[i1] = null;
+			}
+		}
+
+		CalculatorRecipe shapedrecipe = new CalculatorRecipe(j, k, aitemstack,
+				par1ItemStack);
+		this.recipes.add(shapedrecipe);
+		return shapedrecipe;
 	}
 
-	public ItemStack findMatchingRecipe2(
+	public ItemStack findMatchingRecipe(
 			InventoryCrafting par1InventoryCrafting, World par2World) {
 		int i = 0;
 		ItemStack itemstack = null;
@@ -104,11 +147,12 @@ public class CalculatorCraftingManager {
 
 			return new ItemStack(itemstack.itemID, 1, j1);
 		} else {
-			for (j = 0; j < this.recipes.size(); ++j) {
-				IRecipe irecipe = (IRecipe) this.recipes.get(j);
 
-				if (irecipe.matches(par1InventoryCrafting, par2World)) {
-					return irecipe.getCraftingResult(par1InventoryCrafting);
+			for (j = 0; j < this.recipes.size(); ++j) {
+				IRecipe calRecipe = (IRecipe) this.recipes.get(j);
+
+				if (calRecipe.matches(par1InventoryCrafting, par2World)) {
+					return calRecipe.getCraftingResult(par1InventoryCrafting);
 				}
 			}
 

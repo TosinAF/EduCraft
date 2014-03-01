@@ -114,7 +114,7 @@ public class ShapedRecipes implements IRecipe {
 	 * Returns an Item that is the result of this recipe
 	 */
 	public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting) {
-		System.out.println("Entering ShapedRecipes#getCraftingResult");
+
 		ItemStack output = this.getRecipeOutput().copy();
 
 		if (this.field_92101_f) {
@@ -126,69 +126,6 @@ public class ShapedRecipes implements IRecipe {
 							.copy());
 				}
 			}
-		}
-
-		/* CUSTOM CODE FOR HANDLING NUMBER CALCULATIONS */
-		if (output.getItem() instanceof BaseNumber) {
-			System.out.println("Processing a number recipe");
-
-			int opd1 = -1, opd2 = -1, res;
-			OperatorType opr = null;
-			ItemStack tempStack;
-
-			// get first operand
-			for (int i : new int[] { 0, 3, 6 }) {
-				tempStack = par1InventoryCrafting.getStackInSlot(i);
-				if ((tempStack != null)
-						&& (tempStack.getItem() instanceof BaseNumber)) {
-					opd1 = tempStack.getItemDamage();
-					break;
-				}
-			}
-			// get second operand
-			for (int i : new int[] { 2, 5, 8 }) {
-				tempStack = par1InventoryCrafting.getStackInSlot(i);
-				if ((tempStack != null)
-						&& (tempStack.getItem() instanceof BaseNumber)) {
-					opd2 = tempStack.getItemDamage();
-					break;
-				}
-			}
-			// get operator
-			for (int i : new int[] { 1, 4, 7 }) {
-				tempStack = par1InventoryCrafting.getStackInSlot(i);
-				if ((tempStack != null)
-						&& (tempStack.getItem() instanceof MathematicalOperator)) {
-					MathematicalOperator oprItem = (MathematicalOperator) tempStack
-							.getItem();
-					opr = oprItem.getOperator();
-					break;
-				}
-			}
-
-			// create new item
-			if ((opd1 == -1) || (opd2 == -1) || (opr == null)) {
-				res = 1;
-			} else
-				switch (opr) {
-				case PLUS:
-					res = opd1 + opd2;
-					break;
-				case MINUS:
-					res = opd1 - opd2;
-					break;
-				case TIMES:
-					res = opd1 * opd2;
-					break;
-				case DIVIDE:
-					res = opd1 / opd2;
-					break;
-				default:
-					res = 1;
-					break;
-				}
-
-			output.setItemDamage(res);
 		}
 
 		return output;

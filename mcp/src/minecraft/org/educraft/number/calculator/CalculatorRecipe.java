@@ -7,49 +7,67 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 
 import org.educraft.EduCraft;
+import org.educraft.number.AdditionOperator;
 import org.educraft.number.BaseNumber;
 import org.educraft.number.MathematicalOperator;
 import org.educraft.number.OperatorType;
+import org.educraft.number.SubtractionOperator;
 
 public class CalculatorRecipe implements IRecipe {
-	private final OperatorType OPERATOR;
-	private ItemStack output;
 
-	public CalculatorRecipe(OperatorType operator) {
-		this.OPERATOR = operator;
-		this.output = new ItemStack(EduCraft.NUMBER);
+	/** How many horizontal slots this recipe is wide. */
+	public final int recipeWidth;
+
+	/** How many vertical slots this recipe uses. */
+	public final int recipeHeight;
+
+	/** Is a array of ItemStack that composes the recipe. */
+	public final ItemStack[] recipeItems;
+
+	/** Is the ItemStack that you get when craft the recipe. */
+	private ItemStack recipeOutput;
+
+	/** Is the itemID of the output item that you get when craft the recipe. */
+	public final int recipeOutputItemID;
+	private boolean field_92101_f;
+
+	public CalculatorRecipe(int par1, int par2,
+			ItemStack[] par3ArrayOfItemStack, ItemStack par4ItemStack) {
+		this.recipeOutputItemID = par4ItemStack.itemID;
+		this.recipeWidth = par1;
+		this.recipeHeight = par2;
+		this.recipeItems = par3ArrayOfItemStack;
+		this.recipeOutput = par4ItemStack;
 	}
 
-	public OperatorType getOperator() {
-		return this.OPERATOR;
-	}
-
-	@Override
 	public boolean matches(InventoryCrafting inventory, World world) {
-		Item items[] = { null, null, null };
-		int j = 0;
+		// check if any slot is empty
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {
-			if ((inventory.getStackInSlot(i) != null) && (j < items.length)) {
-				items[j++] = inventory.getStackInSlot(i).getItem();
+			if (inventory.getStackInSlot(i) == null) {
+				return false;
 			}
 		}
-		return (items[0] != null && items[0] instanceof BaseNumber)
-				&& (items[1] != null && items[1] instanceof MathematicalOperator)
-				&& (items[2] != null && items[2] instanceof BaseNumber);
+		// check that we have numbers in slots 0,2 and an operator
+		// in slot 1
+		if (!((inventory.getStackInSlot(0).getItem() instanceof BaseNumber)
+				&& (inventory.getStackInSlot(1).getItem() instanceof MathematicalOperator) && (inventory
+				.getStackInSlot(2).getItem() instanceof BaseNumber))) {
+
+			return false;
+		}
+
+		return eval(inventory.getStackInSlot(0), inventory.getStackInSlot(2),
+				(MathematicalOperator) inventory.getStackInSlot(1).getItem()) > 0;
 	}
 
-	@Override
-	public ItemStack getCraftingResult(InventoryCrafting inventory) {
-		ItemStack result = this.getRecipeOutput().copy();
+	private int eval(ItemStack x, ItemStack y, MathematicalOperator operator) {
 
-		// get the two operands
-		int opr1 = inventory.getStackInSlot(0).getItemDamage();
-		int opr2 = inventory.getStackInSlot(2).getItemDamage();
-		int eval = 1;
+		int opr1 = x.getItemDamage();
+		int opr2 = y.getItemDamage();
 
-		// compute the result
-		// if we go negative, or get a decimal, return 1
-		switch (OPERATOR) {
+		int eval = 0;
+
+		switch (operator.getOperator()) {
 		case PLUS:
 			eval = opr1 + opr2;
 			break;
@@ -57,16 +75,27 @@ public class CalculatorRecipe implements IRecipe {
 			eval = opr1 * opr2;
 			break;
 		case MINUS:
-			eval = (opr1 > opr2) ? opr1 - opr2 : 1;
+			eval = (opr1 > opr2) ? opr1 - opr2 : 0;
 			break;
 		case DIVIDE:
-			eval = (opr1 > opr2) ? opr1 / opr2 : 1;
+			eval = (opr1 > opr2) ? opr1 / opr2 : 0;
 			break;
 		}
-		if (eval > 100)
-			eval = 1;
+		if (eval > EduCraft.MAX_NUMBER)
+			eval = 0;
 
-		// set metadata on the returned item stack, and return
+		return eval;
+	}
+
+	@Override
+	public ItemStack getCraftingResult(InventoryCrafting inventory) {
+		ItemStack result = this.getRecipeOutput().copy();
+
+		int eval = eval(inventory.getStackInSlot(0),
+				inventory.getStackInSlot(2), (MathematicalOperator) inventory
+						.getStackInSlot(1).getItem());
+
+		// set metadata - 1 on the returned item stack, and return
 		result.setItemDamage(eval);
 		return result;
 	}
@@ -78,7 +107,7 @@ public class CalculatorRecipe implements IRecipe {
 
 	@Override
 	public ItemStack getRecipeOutput() {
-		return this.output;
+		return this.recipeOutput;
 	}
 
 }

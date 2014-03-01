@@ -14,6 +14,10 @@
 *.bbl
 *.blg
 *.lof
+<<<<<<< HEAD
+=======
+*.db
+>>>>>>> calc_1X3
 *ssot*
 
 # By default, ignore everything
