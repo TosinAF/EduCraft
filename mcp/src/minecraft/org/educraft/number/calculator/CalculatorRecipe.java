@@ -56,12 +56,53 @@ public class CalculatorRecipe implements IRecipe {
 			return false;
 		}
 
-		return eval(inventory.getStackInSlot(0), inventory.getStackInSlot(2),
-				(MathematicalOperator) inventory.getStackInSlot(1).getItem()) > 0;
+		return evaluate(inventory.getStackInSlot(0),
+				inventory.getStackInSlot(2), (MathematicalOperator) inventory
+						.getStackInSlot(1).getItem()) > 0;
 	}
 
-	private int eval(ItemStack x, ItemStack y, MathematicalOperator operator) {
+	@Override
+	public ItemStack getCraftingResult(InventoryCrafting inventory) {
+		ItemStack result = this.getRecipeOutput().copy();
 
+		int eval = evaluate(inventory.getStackInSlot(0),
+				inventory.getStackInSlot(2), (MathematicalOperator) inventory
+						.getStackInSlot(1).getItem());
+
+		// set metadata - 1 on the returned item stack, and return
+		result.setItemDamage(eval);
+		return result;
+	}
+
+	@Override
+	public int getRecipeSize() {
+		return 3;
+	}
+
+	@Override
+	public ItemStack getRecipeOutput() {
+		return this.recipeOutput;
+	}
+
+	/**
+	 * Evaluates the result of applying the given operator to the two given
+	 * operands.
+	 * <p/>
+	 * Note that the method takes two {@link net.minecraft.item.ItemStack}s, not
+	 * {@link org.educraft.number.BaseNumber}s. This is because the value of a
+	 * number item is determined by the damage of the stack it is in - if we
+	 * pass the actual number, we can't do the evaluation.
+	 * 
+	 * @param x
+	 *            an ItemStack containing the left-hand operand
+	 * @param y
+	 *            an ItemStack containing the right-hand operand
+	 * @param operator
+	 * @return the result of the evaluation, or 0 if the result would be
+	 *         negative or fractional
+	 */
+	private int evaluate(ItemStack x, ItemStack y, MathematicalOperator operator) {
+		// get the values of the two operands
 		int opr1 = x.getItemDamage();
 		int opr2 = y.getItemDamage();
 
@@ -85,29 +126,6 @@ public class CalculatorRecipe implements IRecipe {
 			eval = 0;
 
 		return eval;
-	}
-
-	@Override
-	public ItemStack getCraftingResult(InventoryCrafting inventory) {
-		ItemStack result = this.getRecipeOutput().copy();
-
-		int eval = eval(inventory.getStackInSlot(0),
-				inventory.getStackInSlot(2), (MathematicalOperator) inventory
-						.getStackInSlot(1).getItem());
-
-		// set metadata - 1 on the returned item stack, and return
-		result.setItemDamage(eval);
-		return result;
-	}
-
-	@Override
-	public int getRecipeSize() {
-		return 3;
-	}
-
-	@Override
-	public ItemStack getRecipeOutput() {
-		return this.recipeOutput;
 	}
 
 }
