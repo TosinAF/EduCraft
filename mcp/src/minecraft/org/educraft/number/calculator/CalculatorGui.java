@@ -18,9 +18,6 @@ public class CalculatorGui extends GuiContainer
 	public static String GuiTexturePrefix = "educraft" + ":" + "textures/gui/";
 	private ResourceLocation calculator = new ResourceLocation(GuiTexturePrefix + "crafting_table.png"); 
 	
-	
-//    private static final ResourceLocation calculator = new ResourceLocation("educraft", "textures/gui/table_front");
-
     public CalculatorGui(InventoryPlayer par1InventoryPlayer, World par2World, int par3, int par4, int par5)
     {
         super(new CalculatorContainer(par1InventoryPlayer, par2World, par3, par4, par5));

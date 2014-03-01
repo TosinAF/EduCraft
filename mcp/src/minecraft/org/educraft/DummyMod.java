@@ -31,15 +31,15 @@ public class DummyMod {
 	/**
 	 * Adds an instance of DummySword into the mod.
 	 */
-	public static final Item MATHS_WAND = new MathsWand(5000);
+//	public static final Item MATHS_WAND = new MathsWand(5000);
 	/**
 	 * Adds an instance of DummyCoin into the mod.
 	 */
-	public static final Item DUMMY_COIN = new DummyCoin(5001);
+//	public static final Item DUMMY_COIN = new DummyCoin(5001);
 	/**
 	 * Adds an instance of DummyCoinPile into the mod.
 	 */
-	public static final Item DUMMY_COIN_PILE = new DummyCoinPile(5002);
+//	public static final Item DUMMY_COIN_PILE = new DummyCoinPile(5002);
 
 	// The instance of your mod that Forge uses.
 	@Instance(value = "DummyModID")
@@ -55,10 +55,10 @@ public class DummyMod {
 		MinecraftForge.EVENT_BUS.register(new DummyAttackHandler());
 		
 		// register recipes for making and breaking DummyCoinPiles
-		GameRegistry.addRecipe(new ItemStack(DUMMY_COIN_PILE), "ccc", "ccc",
-				"ccc", 'c', new ItemStack(DUMMY_COIN));
-		GameRegistry.addShapelessRecipe(new ItemStack(DUMMY_COIN, 9),
-				new ItemStack(DUMMY_COIN_PILE));
+//		GameRegistry.addRecipe(new ItemStack(DUMMY_COIN_PILE), "ccc", "ccc",
+//				"ccc", 'c', new ItemStack(DUMMY_COIN));
+//		GameRegistry.addShapelessRecipe(new ItemStack(DUMMY_COIN, 9),
+//				new ItemStack(DUMMY_COIN_PILE));
 
 		// register the DummyZombie as an entity that can spawn
 		EntityRegistry.registerGlobalEntityID(DummyZombie.class,
@@ -70,11 +70,11 @@ public class DummyMod {
 				EnumCreatureType.monster, BiomeGenBase.plains);
 
 		// add localised names to language registry
-		LanguageRegistry.addName(MATHS_WAND, "Maths Wand");
-		LanguageRegistry.addName(DUMMY_COIN, "Dummy Coin");
-		LanguageRegistry.addName(DUMMY_COIN_PILE, "Pile of Dummy Coins");
-		LanguageRegistry.instance().addStringLocalization(
-				"entity.Dummy Zombie.name", "en_US", "Dummy Zombie");
+//		LanguageRegistry.addName(MATHS_WAND, "Maths Wand");
+//		LanguageRegistry.addName(DUMMY_COIN, "Dummy Coin");
+//		LanguageRegistry.addName(DUMMY_COIN_PILE, "Pile of Dummy Coins");
+//		LanguageRegistry.instance().addStringLocalization(
+//				"entity.Dummy Zombie.name", "en_US", "Dummy Zombie");
 
 		proxy.registerRenderers();
 	}
