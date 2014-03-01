@@ -41,7 +41,7 @@ public class CalculatorRecipe implements IRecipe {
 	}
 
 	public boolean matches(InventoryCrafting inventory, World world) {
-		// check if any slot is empty
+		// reject instantly if any stack is empty
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {
 			if (inventory.getStackInSlot(i) == null) {
 				return false;
@@ -49,27 +49,36 @@ public class CalculatorRecipe implements IRecipe {
 		}
 		// check that we have numbers in slots 0,2 and an operator
 		// in slot 1
-		if (!((inventory.getStackInSlot(0).getItem() instanceof BaseNumber)
-				&& (inventory.getStackInSlot(1).getItem() instanceof MathematicalOperator) && (inventory
-				.getStackInSlot(2).getItem() instanceof BaseNumber))) {
-
+		ItemStack stack0 = inventory.getStackInSlot(0), stack1 = inventory
+				.getStackInSlot(1), stack2 = inventory.getStackInSlot(2);
+		
+		if ((stack0.getItem() instanceof BaseNumber)
+				&& (stack1.getItem() instanceof MathematicalOperator)
+				&& (stack2.getItem() instanceof BaseNumber)) {
+			// inventory contents are correct, accept if the result would be
+			// a whole number greater than zero
+			return evaluate(stack0, stack2,
+					(MathematicalOperator) stack1.getItem()) > 0;
+		} else {
+			// one or more stacks have the wrong type, reject
 			return false;
 		}
-
-		return evaluate(inventory.getStackInSlot(0),
-				inventory.getStackInSlot(2), (MathematicalOperator) inventory
-						.getStackInSlot(1).getItem()) > 0;
 	}
 
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting inventory) {
 		ItemStack result = this.getRecipeOutput().copy();
 
+		// get the result of the calculation
+		//
+		// note that this method only gets called once inventory has
+		// been checked for correctness, so we don't need to check the
+		// types of the item stacks again
 		int eval = evaluate(inventory.getStackInSlot(0),
 				inventory.getStackInSlot(2), (MathematicalOperator) inventory
 						.getStackInSlot(1).getItem());
 
-		// set metadata - 1 on the returned item stack, and return
+		// set metadata on the returned item stack, and return
 		result.setItemDamage(eval);
 		return result;
 	}
@@ -99,15 +108,18 @@ public class CalculatorRecipe implements IRecipe {
 	 *            an ItemStack containing the right-hand operand
 	 * @param operator
 	 * @return the result of the evaluation, or 0 if the result would be
-	 *         negative or fractional
+	 *         negative, fractional, or too large
 	 */
 	private int evaluate(ItemStack x, ItemStack y, MathematicalOperator operator) {
+		// result is initially zero, since zero is our 'error code'
+		int eval = 0;
+		
 		// get the values of the two operands
 		int opr1 = x.getItemDamage();
 		int opr2 = y.getItemDamage();
 
-		int eval = 0;
-
+		// do the appropriate calculation depending on which
+		// operator was given
 		switch (operator.getOperator()) {
 		case PLUS:
 			eval = opr1 + opr2;
@@ -119,12 +131,16 @@ public class CalculatorRecipe implements IRecipe {
 			eval = (opr1 > opr2) ? opr1 - opr2 : 0;
 			break;
 		case DIVIDE:
+			// need to cast to double so that we can check for remainders
 			double tempEval = (double) opr1 / opr2;
 			eval = (tempEval % 1 == 0) ? (int) tempEval : 0;
 			break;
 		}
-		if (eval > EduCraft.MAX_NUMBER)
+
+		// if the result would be too large, reject
+		if (eval > EduCraft.MAX_NUMBER) {
 			eval = 0;
+		}
 
 		return eval;
 	}
