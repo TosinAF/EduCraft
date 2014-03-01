@@ -52,7 +52,7 @@ public class EduCraft {
 	};
 
 	// max number that we will work with
-	public static final int MAX_NUMBER = 100;
+	public static final int MAX_NUMBER = 1000;
 
 	// instance of the maths wand
 	public static final Item MATHS_WAND = new MathsWand(6000);
