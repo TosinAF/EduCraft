@@ -14,7 +14,7 @@ import org.educraft.number.OperatorType;
 import org.educraft.number.SubtractionOperator;
 
 public class CalculatorRecipe implements IRecipe {
-	
+
 	/** How many horizontal slots this recipe is wide. */
 	public final int recipeWidth;
 
@@ -31,31 +31,27 @@ public class CalculatorRecipe implements IRecipe {
 	public final int recipeOutputItemID;
 	private boolean field_92101_f;
 
-	public CalculatorRecipe(int par1, int par2, ItemStack[] par3ArrayOfItemStack,
-			ItemStack par4ItemStack) {
+	public CalculatorRecipe(int par1, int par2,
+			ItemStack[] par3ArrayOfItemStack, ItemStack par4ItemStack) {
 		this.recipeOutputItemID = par4ItemStack.itemID;
 		this.recipeWidth = par1;
 		this.recipeHeight = par2;
 		this.recipeItems = par3ArrayOfItemStack;
 		this.recipeOutput = par4ItemStack;
 	}
-	
-	public boolean matches(InventoryCrafting par1InventoryCrafting,
-			World par2World) {
-		
-		if(par1InventoryCrafting.getStackInSlot(0) == null) {
-			return false;
+
+	public boolean matches(InventoryCrafting inventory, World world) {
+		// check if any slot is empty
+		for (int i = 0; i < inventory.getSizeInventory(); i++) {
+			if (inventory.getStackInSlot(i) == null) {
+				return false;
+			}
 		}
-		
-		if(par1InventoryCrafting.getStackInSlot(1) == null) {
-			return false;
-		}
-		
-		if(par1InventoryCrafting.getStackInSlot(2) == null) {
-			return false;
-		}
-		
-		return true;	
+		// check that we have numbers in slots 0,2 and an operator
+		// in slot 1
+		return (inventory.getStackInSlot(0).getItem() instanceof BaseNumber)
+				&& (inventory.getStackInSlot(1).getItem() instanceof MathematicalOperator)
+				&& (inventory.getStackInSlot(2).getItem() instanceof BaseNumber);
 	}
 
 	@Override
@@ -66,10 +62,11 @@ public class CalculatorRecipe implements IRecipe {
 		int opr1 = inventory.getStackInSlot(0).getItemDamage() + 1;
 		int opr2 = inventory.getStackInSlot(2).getItemDamage() + 1;
 		// get the operator
-		MathematicalOperator operator = (MathematicalOperator) inventory.getStackInSlot(1).getItem();
+		MathematicalOperator operator = (MathematicalOperator) inventory
+				.getStackInSlot(1).getItem();
 		OperatorType operatorType = operator.getOperator();
 		int eval = 1;
-		
+
 		// compute the result
 		// if we go negative, or get a decimal, return 1
 		switch (operatorType) {
@@ -86,11 +83,12 @@ public class CalculatorRecipe implements IRecipe {
 			eval = (opr1 > opr2) ? opr1 / opr2 : 1;
 			break;
 		}
-		if (eval > 100) eval = 1;
-		
+		if (eval > 100)
+			eval = 1;
+
 		// set metadata - 1 on the returned item stack, and return
 		result.setItemDamage(eval - 1);
-		return result;		
+		return result;
 	}
 
 	@Override
