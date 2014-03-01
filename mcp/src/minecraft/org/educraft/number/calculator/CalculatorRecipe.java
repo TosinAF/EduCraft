@@ -119,7 +119,8 @@ public class CalculatorRecipe implements IRecipe {
 			eval = (opr1 > opr2) ? opr1 - opr2 : 0;
 			break;
 		case DIVIDE:
-			eval = (opr1 > opr2) ? opr1 / opr2 : 0;
+			double tempEval = (double) opr1 / opr2;
+			eval = (tempEval % 1 == 0) ? (int) tempEval : 0;
 			break;
 		}
 		if (eval > EduCraft.MAX_NUMBER)
