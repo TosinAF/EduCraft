@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.MinecraftForge;
@@ -19,6 +18,7 @@ import org.educraft.number.Number15Zombie;
 import org.educraft.number.Number2;
 import org.educraft.number.Number2Zombie;
 import org.educraft.number.Number30;
+import org.educraft.number.NumberSkeleton;
 import org.educraft.number.NumberZombie;
 import org.educraft.number.SubtractionOperator;
 import org.educraft.number.calculator.Calculator;
@@ -155,6 +155,16 @@ public class EduCraft {
 		EntityRegistry.registerModEntity(NumberZombie.class, "Number Zombie",
 				EntityRegistry.findGlobalUniqueEntityId(), this, 60, 3, true);
 		EntityRegistry.addSpawn(NumberZombie.class, 10, 1, 2,
+				EnumCreatureType.monster, BiomeGenBase.plains);
+		
+		/* NUMBER SKELETONS */
+		// register the generic number skeleton
+		EntityRegistry.registerGlobalEntityID(NumberSkeleton.class,
+				"Number Skeleton", EntityRegistry.findGlobalUniqueEntityId(),
+				32324, 2243);
+		EntityRegistry.registerModEntity(NumberZombie.class, "Number Skeleton",
+				EntityRegistry.findGlobalUniqueEntityId(), this, 60, 3, true);
+		EntityRegistry.addSpawn(NumberSkeleton.class, 10, 1, 2,
 				EnumCreatureType.monster, BiomeGenBase.plains);
 
 		/* ONLY NEEDED FOR CHRISTMAS DEMONSTRATION */
