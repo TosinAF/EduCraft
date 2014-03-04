@@ -23,6 +23,7 @@ import org.educraft.number.NumberZombie;
 import org.educraft.number.SubtractionOperator;
 import org.educraft.number.calculator.Calculator;
 import org.educraft.number.calculator.CalculatorGuiHandler;
+import org.educraft.number.operators.OperatorBench;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -65,6 +66,8 @@ public class EduCraft {
 
 	// instance of the calculator
 	public static final Block CALCULATOR = new Calculator(500);
+	// instance of the operator bench
+	public static final Block OPERATOR_BENCH = new OperatorBench(501);
 
 	// The instance of your mod that Forge uses.
 	@Instance(value = "EduCraft")
@@ -83,10 +86,15 @@ public class EduCraft {
 		LanguageRegistry.instance().addStringLocalization(
 				"itemgroup.tabEduCraft", "en_us", "EduCraft");
 
-		// localised name for the calculator table
+		// register the calculator table
 		GameRegistry.registerBlock(CALCULATOR, "calculatorTable");
 		MinecraftForge.setBlockHarvestLevel(CALCULATOR, "axe", 0);
 		LanguageRegistry.addName(CALCULATOR, "Calculator Table");
+		
+		// register the operator bench
+		GameRegistry.registerBlock(OPERATOR_BENCH, "operatorBench");
+		MinecraftForge.setBlockHarvestLevel(OPERATOR_BENCH, "axe", 0);
+		LanguageRegistry.addName(OPERATOR_BENCH, "Operator Bench");
 
 		// GameRegistry.registerItem(NUMBER, BaseNumber.class);
 
@@ -128,14 +136,14 @@ public class EduCraft {
 //		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ", 'x',
 //				NUMBER, 'y', DIV_OPR);
 
-		GameRegistry.addRecipe(new ItemStack(ADD_OPR), " s ", "sss", " s ",
-				's', sticks);
-		GameRegistry.addRecipe(new ItemStack(SUB_OPR), "   ", "sss", "   ",
-				's', sticks);
-		GameRegistry.addRecipe(new ItemStack(MUL_OPR), "s s", " s ", "s s",
-				's', sticks);
-		GameRegistry.addRecipe(new ItemStack(DIV_OPR), "  s", " s ", "s  ",
-				's', sticks);
+//		GameRegistry.addRecipe(new ItemStack(ADD_OPR), " s ", "sss", " s ",
+//				's', sticks);
+//		GameRegistry.addRecipe(new ItemStack(SUB_OPR), "   ", "sss", "   ",
+//				's', sticks);
+//		GameRegistry.addRecipe(new ItemStack(MUL_OPR), "s s", " s ", "s s",
+//				's', sticks);
+//		GameRegistry.addRecipe(new ItemStack(DIV_OPR), "  s", " s ", "s  ",
+//				's', sticks);
 
 		// recipes to break operators down into sticks
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.stick, 4),
