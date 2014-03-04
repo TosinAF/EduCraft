@@ -26,7 +26,7 @@ public class OperatorContainer extends Container {
 	public OperatorContainer(InventoryPlayer par1InventoryPlayer,
 			World par2World, int par3, int par4, int par5) {
 
-		craftMatrix = new InventoryCrafting(this, 1, 3);
+		craftMatrix = new InventoryCrafting(this, 3, 3);
 		craftResult = new InventoryCraftResult();
 		worldObj = par2World;
 		posX = par3;
