@@ -1,5 +1,8 @@
 package org.educraft.number.block.operators;
 
+import org.educraft.EduCraft;
+
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -11,13 +14,10 @@ import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import org.educraft.EduCraft;
-
 public class OperatorContainer extends Container {
-
 	/** The crafting matrix inventory (3x3). */
-	public InventoryCrafting craftMatrix;
-	public IInventory craftResult;
+	public InventoryCrafting craftMatrix = new InventoryCrafting(this, 3, 3);
+	public IInventory craftResult = new InventoryCraftResult();
 	private World worldObj;
 	private int posX;
 	private int posY;
@@ -25,53 +25,55 @@ public class OperatorContainer extends Container {
 
 	public OperatorContainer(InventoryPlayer par1InventoryPlayer,
 			World par2World, int par3, int par4, int par5) {
-
-		craftMatrix = new InventoryCrafting(this, 3, 3);
-		craftResult = new InventoryCraftResult();
-		worldObj = par2World;
-		posX = par3;
-		posY = par4;
-		posZ = par5;
-
+		this.worldObj = par2World;
+		this.posX = par3;
+		this.posY = par4;
+		this.posZ = par5;
 		this.addSlotToContainer(new SlotCrafting(par1InventoryPlayer.player,
 				this.craftMatrix, this.craftResult, 0, 124, 35));
+		int l;
 		int i1;
 
-		for (i1 = 0; i1 < 3; ++i1) {
-			this.addSlotToContainer(new Slot(this.craftMatrix, i1,
-					30 + i1 * 18, 35));
-
+		for (l = 0; l < 3; ++l) {
+			for (i1 = 0; i1 < 3; ++i1) {
+				this.addSlotToContainer(new Slot(this.craftMatrix, i1 + l * 3,
+						30 + i1 * 18, 17 + l * 18));
+			}
 		}
 
-		for (int l = 0; l < 3; ++l) {
+		for (l = 0; l < 3; ++l) {
 			for (i1 = 0; i1 < 9; ++i1) {
 				this.addSlotToContainer(new Slot(par1InventoryPlayer, i1 + l
 						* 9 + 9, 8 + i1 * 18, 84 + l * 18));
 			}
 		}
 
-		for (int l = 0; l < 9; ++l) {
+		for (l = 0; l < 9; ++l) {
 			this.addSlotToContainer(new Slot(par1InventoryPlayer, l,
 					8 + l * 18, 142));
 		}
 
 		this.onCraftMatrixChanged(this.craftMatrix);
-
 	}
 
-	public void onCraftMatrixChanged(IInventory inventory) {
+	/**
+	 * Callback for when the crafting matrix is changed.
+	 */
+	public void onCraftMatrixChanged(IInventory par1IInventory) {
 		this.craftResult.setInventorySlotContents(
 				0,
 				OperatorCraftingManager.getInstance().findMatchingRecipe(
 						this.craftMatrix, this.worldObj));
-
 	}
 
+	/**
+	 * Called when the container is closed.
+	 */
 	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
 		super.onContainerClosed(par1EntityPlayer);
 
 		if (!this.worldObj.isRemote) {
-			for (int i = 0; i < 3; ++i) {
+			for (int i = 0; i < 9; ++i) {
 				ItemStack itemstack = this.craftMatrix
 						.getStackInSlotOnClosing(i);
 
@@ -82,12 +84,16 @@ public class OperatorContainer extends Container {
 		}
 	}
 
-	public boolean canInteractWith(EntityPlayer player) {
+	public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
 		return this.worldObj.getBlockId(this.posX, this.posY, this.posZ) != EduCraft.OPERATOR_BENCH.blockID ? false
-				: player.getDistanceSq((double) this.posX + 0.5D,
+				: par1EntityPlayer.getDistanceSq((double) this.posX + 0.5D,
 						(double) this.posY + 0.5D, (double) this.posZ + 0.5D) <= 64.0D;
 	}
 
+	/**
+	 * Called when a player shift-clicks on a slot. You must override this or
+	 * you will crash when someone does that.
+	 */
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(par2);
@@ -128,5 +134,10 @@ public class OperatorContainer extends Container {
 		}
 
 		return itemstack;
+	}
+
+	public boolean func_94530_a(ItemStack par1ItemStack, Slot par2Slot) {
+		return par2Slot.inventory != this.craftResult
+				&& super.func_94530_a(par1ItemStack, par2Slot);
 	}
 }
