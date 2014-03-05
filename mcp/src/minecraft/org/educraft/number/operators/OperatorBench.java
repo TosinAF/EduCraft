@@ -19,7 +19,8 @@ public class OperatorBench extends BlockWorkbench {
 			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
 			float par8, float par9) {
 		if (!par5EntityPlayer.isSneaking()) {
-			par5EntityPlayer.displayGUIWorkbench(par2, par3, par4);
+			par5EntityPlayer.openGui(EduCraft.instance, 1, par1World, par2,
+					par3, par4);
 			return true;
 		} else {
 			return false;

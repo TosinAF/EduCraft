@@ -22,7 +22,6 @@ import org.educraft.number.NumberSkeleton;
 import org.educraft.number.NumberZombie;
 import org.educraft.number.SubtractionOperator;
 import org.educraft.number.calculator.Calculator;
-import org.educraft.number.calculator.CalculatorGuiHandler;
 import org.educraft.number.operators.OperatorBench;
 
 import cpw.mods.fml.common.Mod;
@@ -73,8 +72,8 @@ public class EduCraft {
 	@Instance(value = "EduCraft")
 	public static EduCraft instance;
 
-	// GUIHandler for calculator
-	private CalculatorGuiHandler guiHandlerCalculator = new CalculatorGuiHandler();
+	// GUIHandler for EduCraft blocks
+	private EduCraftGuiHandler eduCraftGuiHandler = new EduCraftGuiHandler();
 
 	// Says where the client and server 'proxy' code is loaded.
 	@SidedProxy(clientSide = "org.educraft.client.ClientProxy", serverSide = "org.educraft.CommonProxy")
@@ -90,7 +89,7 @@ public class EduCraft {
 		GameRegistry.registerBlock(CALCULATOR, "calculatorTable");
 		MinecraftForge.setBlockHarvestLevel(CALCULATOR, "axe", 0);
 		LanguageRegistry.addName(CALCULATOR, "Calculator Table");
-		
+
 		// register the operator bench
 		GameRegistry.registerBlock(OPERATOR_BENCH, "operatorBench");
 		MinecraftForge.setBlockHarvestLevel(OPERATOR_BENCH, "axe", 0);
@@ -127,23 +126,27 @@ public class EduCraft {
 
 		// crafting recipes for mathematical operators
 		ItemStack sticks = new ItemStack(Item.stick);
-//		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ", 'x',
-//				NUMBER, 'y', ADD_OPR);
-//		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ", 'x',
-//				NUMBER, 'y', SUB_OPR);
-//		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ", 'x',
-//				NUMBER, 'y', MUL_OPR);
-//		GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ", 'x',
-//				NUMBER, 'y', DIV_OPR);
+		// GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ",
+		// 'x',
+		// NUMBER, 'y', ADD_OPR);
+		// GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ",
+		// 'x',
+		// NUMBER, 'y', SUB_OPR);
+		// GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ",
+		// 'x',
+		// NUMBER, 'y', MUL_OPR);
+		// GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ",
+		// 'x',
+		// NUMBER, 'y', DIV_OPR);
 
-//		GameRegistry.addRecipe(new ItemStack(ADD_OPR), " s ", "sss", " s ",
-//				's', sticks);
-//		GameRegistry.addRecipe(new ItemStack(SUB_OPR), "   ", "sss", "   ",
-//				's', sticks);
-//		GameRegistry.addRecipe(new ItemStack(MUL_OPR), "s s", " s ", "s s",
-//				's', sticks);
-//		GameRegistry.addRecipe(new ItemStack(DIV_OPR), "  s", " s ", "s  ",
-//				's', sticks);
+		// GameRegistry.addRecipe(new ItemStack(ADD_OPR), " s ", "sss", " s ",
+		// 's', sticks);
+		// GameRegistry.addRecipe(new ItemStack(SUB_OPR), "   ", "sss", "   ",
+		// 's', sticks);
+		// GameRegistry.addRecipe(new ItemStack(MUL_OPR), "s s", " s ", "s s",
+		// 's', sticks);
+		// GameRegistry.addRecipe(new ItemStack(DIV_OPR), "  s", " s ", "s  ",
+		// 's', sticks);
 
 		// recipes to break operators down into sticks
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.stick, 4),
@@ -164,7 +167,7 @@ public class EduCraft {
 				EntityRegistry.findGlobalUniqueEntityId(), this, 60, 3, true);
 		EntityRegistry.addSpawn(NumberZombie.class, 10, 1, 2,
 				EnumCreatureType.monster, BiomeGenBase.plains);
-		
+
 		/* NUMBER SKELETONS */
 		// register the generic number skeleton
 		EntityRegistry.registerGlobalEntityID(NumberSkeleton.class,
@@ -201,8 +204,7 @@ public class EduCraft {
 		MinecraftForge.EVENT_BUS.register(new DummyAttackHandler());
 
 		// Important keep it
-		NetworkRegistry.instance().registerGuiHandler(this,
-				guiHandlerCalculator);
+		NetworkRegistry.instance().registerGuiHandler(this, eduCraftGuiHandler);
 
 		proxy.registerRenderers();
 	}

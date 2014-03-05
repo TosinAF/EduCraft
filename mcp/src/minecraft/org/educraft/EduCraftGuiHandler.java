@@ -1,14 +1,16 @@
-package org.educraft.number.calculator;
+package org.educraft;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import org.educraft.EduCraft;
+import org.educraft.number.calculator.CalculatorContainer;
+import org.educraft.number.calculator.CalculatorGui;
+import org.educraft.number.operators.OperatorContainer;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 
-public class CalculatorGuiHandler implements IGuiHandler {
+public class EduCraftGuiHandler implements IGuiHandler {
 
 	@Override
 	public Object getServerGuiElement(int id, EntityPlayer player, World world,
@@ -16,8 +18,10 @@ public class CalculatorGuiHandler implements IGuiHandler {
 		TileEntity tile_entity = world.getBlockTileEntity(x, y, z);
 		switch (id) {
 		case 0:
-			return id == 0
-					&& world.getBlockId(x, y, z) == EduCraft.CALCULATOR.blockID ? new CalculatorContainer(
+			return world.getBlockId(x, y, z) == EduCraft.CALCULATOR.blockID ? new CalculatorContainer(
+					player.inventory, world, x, y, z) : null;
+		case 1:
+			return world.getBlockId(x, y, z) == EduCraft.OPERATOR_BENCH.blockID ? new OperatorContainer(
 					player.inventory, world, x, y, z) : null;
 		}
 		return null;
