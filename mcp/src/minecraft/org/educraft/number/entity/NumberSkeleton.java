@@ -55,15 +55,14 @@ public class NumberSkeleton extends EntitySkeleton {
 	@Override
 	protected void dropRareDrop(int par1)
     {
-		//this.dropItem(Item.rottenFlesh.itemID, 1);
-		//this.droppedItemId = this.droppedItemId; // This statement is useless on purpose. It stops the mob dropping rare items so we don't get junk
+		//Do not fill this method with a drop, if you do the mob will dropped two numbers ocassionally
     }
 	
 	@Override
 	protected void dropFewItems(boolean par1, int par2)
     {
 		this.dropItem(EduCraft.NUMBER.itemID, 1);
-		//Purposely wasted method
+		//Skeletons only drop multiple items, so they will always drop items through this method.
     }
 
 }

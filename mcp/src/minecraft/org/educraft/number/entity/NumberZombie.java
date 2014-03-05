@@ -55,7 +55,7 @@ public class NumberZombie extends EntityZombie {
 	@Override
 	protected void dropRareDrop(int par1)
     {
-		//this.droppedItemId = this.droppedItemId; // This statement is useless on purpose. It stops the mob dropping rare items so we don't get junk
+		// This statement is useless on purpose. It stops the mob dropping rare items so we don't get junk
     }
 	
 	@Override
