@@ -17,6 +17,7 @@ import org.educraft.number.Number30;
 import org.educraft.number.block.EduCraftGuiHandler;
 import org.educraft.number.block.calculator.Calculator;
 import org.educraft.number.block.operators.OperatorBench;
+import org.educraft.number.entity.NumberMobDropsEvent;
 import org.educraft.number.entity.NumberSkeleton;
 import org.educraft.number.entity.NumberZombie;
 import org.educraft.number.item.AdditionOperator;
@@ -203,6 +204,7 @@ public class EduCraft {
 
 		// register the attack handler
 		MinecraftForge.EVENT_BUS.register(new DummyAttackHandler());
+		MinecraftForge.EVENT_BUS.register(new NumberMobDropsEvent());
 
 		// Important keep it
 		NetworkRegistry.instance().registerGuiHandler(this, eduCraftGuiHandler);
