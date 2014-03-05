@@ -1,18 +1,9 @@
 package net.minecraft.item.crafting;
 
-//OWN CODE
 import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-
-import org.educraft.number.BaseNumber;
-import org.educraft.number.DivisionOperator;
-import org.educraft.number.MathematicalOperator;
-import org.educraft.number.MultiplicationOperator;
-import org.educraft.number.OperatorType;
-import org.educraft.number.SubtractionOperator;
 
 public class ShapedRecipes implements IRecipe {
 	/** How many horizontal slots this recipe is wide. */
