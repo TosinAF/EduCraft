@@ -9,7 +9,7 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 public class NumberMobDropsEvent {
 	private static Random rnd = new Random();
 	@ForgeSubscribe
-
+	//Handles dropping
 	public void onEntityDrop(LivingDropsEvent event){
 		if(event.source.getDamageType().equals("dummy")){
 			if (event.entityLiving instanceof NumberZombie) {

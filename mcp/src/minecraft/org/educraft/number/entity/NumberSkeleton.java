@@ -55,7 +55,7 @@ public class NumberSkeleton extends EntitySkeleton {
 	@Override
 	protected void dropRareDrop(int par1)
     {
-		//Do not fill this method with a drop, if you do the mob will dropped two numbers ocassionally
+		//Do not fill this method with a drop, if you do the mob will dropped two numbers ocassionally.
     }
 	
 	@Override
