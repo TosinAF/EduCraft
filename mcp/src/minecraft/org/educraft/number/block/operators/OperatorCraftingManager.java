@@ -152,10 +152,10 @@ public class OperatorCraftingManager {
 		} else {
 
 			for (j = 0; j < this.recipes.size(); ++j) {
-				IRecipe calRecipe = (IRecipe) this.recipes.get(j);
+				IRecipe recipe = (IRecipe) this.recipes.get(j);
 
-				if (calRecipe.matches(par1InventoryCrafting, par2World)) {
-					return calRecipe.getCraftingResult(par1InventoryCrafting);
+				if (recipe.matches(par1InventoryCrafting, par2World)) {
+					return recipe.getCraftingResult(par1InventoryCrafting);
 				}
 			}
 
