@@ -9,7 +9,7 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import org.educraft.EduCraft;
 import org.educraft.number.Number15Zombie;
 import org.educraft.number.Number2Zombie;
-import org.educraft.number.NumberZombie;
+import org.educraft.number.entity.NumberZombie;
 
 /**
  * This class is used to handle AttackEntityEvents, which arise when a player

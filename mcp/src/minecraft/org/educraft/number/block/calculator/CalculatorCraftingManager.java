@@ -1,4 +1,4 @@
-package org.educraft.number.calculator;
+package org.educraft.number.block.calculator;
 
 import java.util.ArrayList;
 import java.util.HashMap;

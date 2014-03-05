@@ -1,4 +1,4 @@
-package org.educraft.number.operators;
+package org.educraft.number.block.operators;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +13,7 @@ import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.world.World;
 
 import org.educraft.EduCraft;
-import org.educraft.number.calculator.CalculatorRecipe;
+import org.educraft.number.block.calculator.CalculatorRecipe;
 
 /**
  * This class is essentially identical to

@@ -1,4 +1,4 @@
-package org.educraft.number.operators;
+package org.educraft.number.block.operators;
 
 import org.educraft.EduCraft;
 

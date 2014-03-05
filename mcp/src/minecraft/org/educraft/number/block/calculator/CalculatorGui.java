@@ -1,4 +1,4 @@
-package org.educraft.number.calculator;
+package org.educraft.number.block.calculator;
 
 import org.lwjgl.opengl.GL11;
 

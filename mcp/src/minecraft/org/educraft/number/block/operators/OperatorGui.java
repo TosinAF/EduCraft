@@ -1,4 +1,4 @@
-package org.educraft.number.operators;
+package org.educraft.number.block.operators;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;

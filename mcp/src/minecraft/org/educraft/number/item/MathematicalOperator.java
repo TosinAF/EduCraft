@@ -1,4 +1,4 @@
-package org.educraft.number;
+package org.educraft.number.item;
 
 public interface MathematicalOperator {
 	

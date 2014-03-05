@@ -1,4 +1,4 @@
-package org.educraft.number.calculator;
+package org.educraft.number.block.calculator;
 
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -7,11 +7,11 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 
 import org.educraft.EduCraft;
-import org.educraft.number.AdditionOperator;
-import org.educraft.number.BaseNumber;
-import org.educraft.number.MathematicalOperator;
-import org.educraft.number.OperatorType;
-import org.educraft.number.SubtractionOperator;
+import org.educraft.number.item.AdditionOperator;
+import org.educraft.number.item.BaseNumber;
+import org.educraft.number.item.MathematicalOperator;
+import org.educraft.number.item.OperatorType;
+import org.educraft.number.item.SubtractionOperator;
 
 public class CalculatorRecipe implements IRecipe {
 
@@ -98,7 +98,7 @@ public class CalculatorRecipe implements IRecipe {
 	 * operands.
 	 * <p/>
 	 * Note that the method takes two {@link net.minecraft.item.ItemStack}s, not
-	 * {@link org.educraft.number.BaseNumber}s. This is because the value of a
+	 * {@link org.educraft.number.item.BaseNumber}s. This is because the value of a
 	 * number item is determined by the damage of the stack it is in - if we
 	 * pass the actual number, we can't do the evaluation.
 	 * 

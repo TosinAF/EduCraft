@@ -1,12 +1,13 @@
-package org.educraft;
+package org.educraft.number.block;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import org.educraft.number.calculator.CalculatorContainer;
-import org.educraft.number.calculator.CalculatorGui;
-import org.educraft.number.operators.OperatorContainer;
+import org.educraft.EduCraft;
+import org.educraft.number.block.calculator.CalculatorContainer;
+import org.educraft.number.block.calculator.CalculatorGui;
+import org.educraft.number.block.operators.OperatorContainer;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 
