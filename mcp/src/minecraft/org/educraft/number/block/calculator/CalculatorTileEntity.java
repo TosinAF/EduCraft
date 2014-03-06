@@ -10,10 +10,19 @@ import net.minecraft.tileentity.TileEntity;
 public class CalculatorTileEntity extends TileEntity {
 	private InventoryCrafting craftMatrix;
 	private IInventory craftResult;
+	
+	public CalculatorTileEntity() {
+		this.craftMatrix = null;
+		this.craftResult = null;
+	}
 
 	public CalculatorTileEntity initialise(Container container) {
-		this.craftMatrix = new InventoryCrafting(container, 1, 3);
-		this.craftResult = new InventoryCraftResult();
+		if (craftMatrix == null) {
+			craftMatrix = new InventoryCrafting(container, 1, 3);
+		}
+		if (craftResult == null) {
+			craftResult = new InventoryCraftResult();
+		}
 		return this;
 	}
 
