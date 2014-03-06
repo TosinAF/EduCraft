@@ -43,7 +43,6 @@ public class CalculatorContainer extends Container {
 		for (i1 = 0; i1 < 3; ++i1) {
 			this.addSlotToContainer(new Slot(this.craftMatrix, i1,
 					30 + i1 * 18, 35));
-
 		}
 
 		for (int l = 0; l < 3; ++l) {
@@ -58,17 +57,17 @@ public class CalculatorContainer extends Container {
 		}
 
 		this.onCraftMatrixChanged(this.craftMatrix);
-
 	}
 
+	@Override
 	public void onCraftMatrixChanged(IInventory inventory) {
 		this.craftResult.setInventorySlotContents(
 				0,
 				CalculatorCraftingManager.getInstance().findMatchingRecipe(
 						this.craftMatrix, this.worldObj));
-
 	}
 
+	@Override
 	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
 		super.onContainerClosed(par1EntityPlayer);
 
@@ -84,10 +83,12 @@ public class CalculatorContainer extends Container {
 		}
 	}
 
+	@Override
 	public boolean canInteractWith(EntityPlayer player) {
 		return this.tileEntity.isUseableByPlayer(player);
 	}
 
+	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(par2);
