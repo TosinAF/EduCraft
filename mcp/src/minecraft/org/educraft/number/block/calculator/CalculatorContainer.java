@@ -27,7 +27,7 @@ public class CalculatorContainer extends Container {
 			World par2World, int par3, int par4, int par5) {
 
 		craftMatrix = new CalculatorCraftMatrix(this);
-		craftResult = new InventoryCraftResult();
+		craftResult = new CalculatorCraftResult();
 		worldObj = par2World;
 		posX = par3;
 		posY = par4;
