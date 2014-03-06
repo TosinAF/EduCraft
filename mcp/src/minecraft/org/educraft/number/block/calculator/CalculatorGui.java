@@ -18,10 +18,9 @@ public class CalculatorGui extends GuiContainer {
 	private ResourceLocation calculator = new ResourceLocation(GuiTexturePrefix
 			+ "crafting_table.png");
 
-	public CalculatorGui(InventoryPlayer par1InventoryPlayer, World par2World,
-			int par3, int par4, int par5) {
-		super(new CalculatorContainer(par1InventoryPlayer, par2World, par3,
-				par4, par5));
+	public CalculatorGui(InventoryPlayer inventory, World world,
+			CalculatorTileEntity tileEntity, int x, int y, int z) {
+		super(new CalculatorContainer(inventory, tileEntity, world, x, y, z));
 	}
 
 	/**
