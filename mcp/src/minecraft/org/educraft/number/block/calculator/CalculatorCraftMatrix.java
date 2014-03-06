@@ -4,39 +4,46 @@ import org.educraft.number.item.BaseNumber;
 import org.educraft.number.item.MathematicalOperator;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
-public class CalculatorTileEntity extends TileEntity implements IInventory {
-	private ItemStack[] contents = new ItemStack[4];
+public class CalculatorCraftMatrix extends TileEntity implements IInventory {
+	private ItemStack[] contents = new ItemStack[3];
+	private Container eventHandler;
+
+	public CalculatorCraftMatrix(Container container) {
+		this.eventHandler = container;
+	}
 
 	@Override
 	public int getSizeInventory() {
-		return 4;
+		return 3;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int i) {
-		return this.contents[i];
+		return i < getSizeInventory() ? contents[i] : null;
 	}
 
 	@Override
 	public ItemStack decrStackSize(int i, int j) {
-		if (this.contents[i] != null) {
+		if (contents[i] != null) {
 			ItemStack tempStack;
-
-			if (this.contents[i].stackSize <= j) {
-				tempStack = this.contents[i];
-				this.contents[i] = null;
-				this.onInventoryChanged();
+			if (contents[i].stackSize <= j) {
+				// tried to remove more elements than there are, remove all
+				tempStack = contents[i];
+				contents[i] = null;
+				this.eventHandler.onCraftMatrixChanged(this);
 				return tempStack;
 			} else {
-				tempStack = this.contents[i].splitStack(j);
-				if (this.contents[i].stackSize == 0) {
-					this.contents[i] = null;
+				// remove the specified number of items
+				tempStack = contents[i].splitStack(j);
+				if (contents[i].stackSize == 0) {
+					contents[i] = null;
 				}
-				this.onInventoryChanged();
+				this.eventHandler.onCraftMatrixChanged(this);
 				return tempStack;
 			}
 		} else {
@@ -46,30 +53,26 @@ public class CalculatorTileEntity extends TileEntity implements IInventory {
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int i) {
-		if (this.contents[i] != null) {
-			ItemStack itemstack = this.contents[i];
-			this.contents[i] = null;
-			return itemstack;
+		if (contents[i] != null) {
+			// item in the slot, return it
+			ItemStack tempStack = contents[i];
+			contents[i] = null;
+			return tempStack;
 		} else {
+			// no item
 			return null;
 		}
 	}
 
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack) {
-		this.contents[i] = itemstack;
-
-		if (itemstack != null
-				&& itemstack.stackSize > this.getInventoryStackLimit()) {
-			itemstack.stackSize = this.getInventoryStackLimit();
-		}
-
-		this.onInventoryChanged();
+		contents[i] = itemstack;
+		eventHandler.onCraftMatrixChanged(this);
 	}
 
 	@Override
 	public String getInvName() {
-		return "Calculator";
+		return "calculator.crafting";
 	}
 
 	@Override
@@ -84,23 +87,15 @@ public class CalculatorTileEntity extends TileEntity implements IInventory {
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord,
-				this.zCoord) != this ? false : entityplayer.getDistanceSq(
-				(double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D,
-				(double) this.zCoord + 0.5D) <= 64.0D;
-
+		return true;
 	}
 
 	@Override
 	public void openChest() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void closeChest() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
