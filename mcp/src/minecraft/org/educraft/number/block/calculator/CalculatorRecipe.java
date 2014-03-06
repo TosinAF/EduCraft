@@ -1,17 +1,13 @@
 package org.educraft.number.block.calculator;
 
 import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 
 import org.educraft.EduCraft;
-import org.educraft.number.item.AdditionOperator;
 import org.educraft.number.item.BaseNumber;
 import org.educraft.number.item.MathematicalOperator;
-import org.educraft.number.item.OperatorType;
-import org.educraft.number.item.SubtractionOperator;
 
 public class CalculatorRecipe implements IRecipe {
 
@@ -40,7 +36,13 @@ public class CalculatorRecipe implements IRecipe {
 		this.recipeOutput = par4ItemStack;
 	}
 
-	public boolean matches(InventoryCrafting inventory, World world) {
+	@Override
+	public boolean matches(InventoryCrafting inv, World w) {
+		// empty method, to satisfy the interface
+		return false;
+	}
+	
+	public boolean matches(CalculatorCraftMatrix inventory, World world) {
 		// reject instantly if any stack is empty
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {
 			if (inventory.getStackInSlot(i) == null) {
@@ -66,7 +68,12 @@ public class CalculatorRecipe implements IRecipe {
 	}
 
 	@Override
-	public ItemStack getCraftingResult(InventoryCrafting inventory) {
+	public ItemStack getCraftingResult(InventoryCrafting inv) {
+		// empty method, to satisfy the interface
+		return null;
+	}
+	
+	public ItemStack getCraftingResult(CalculatorCraftMatrix inventory) {
 		ItemStack result = this.getRecipeOutput().copy();
 
 		// get the result of the calculation

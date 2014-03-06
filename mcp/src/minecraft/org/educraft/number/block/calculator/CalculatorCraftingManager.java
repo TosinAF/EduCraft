@@ -27,7 +27,7 @@ public class CalculatorCraftingManager {
 	private static final CalculatorCraftingManager INSTANCE = new CalculatorCraftingManager();
 
 	/** A list of all the recipes added */
-	private List<IRecipe> recipes = new ArrayList<IRecipe>();
+	private List<CalculatorRecipe> recipes = new ArrayList<CalculatorRecipe>();
 
 	/**
 	 * Returns the static instance of this class
@@ -110,14 +110,14 @@ public class CalculatorCraftingManager {
 	}
 
 	public ItemStack findMatchingRecipe(
-			InventoryCrafting par1InventoryCrafting, World par2World) {
+			CalculatorCraftMatrix matrix, World world) {
 		int i = 0;
 		ItemStack itemstack = null;
 		ItemStack itemstack1 = null;
 		int j;
 
-		for (j = 0; j < par1InventoryCrafting.getSizeInventory(); ++j) {
-			ItemStack itemstack2 = par1InventoryCrafting.getStackInSlot(j);
+		for (j = 0; j < matrix.getSizeInventory(); ++j) {
+			ItemStack itemstack2 = matrix.getStackInSlot(j);
 
 			if (itemstack2 != null) {
 				if (i == 0) {
@@ -149,10 +149,10 @@ public class CalculatorCraftingManager {
 		} else {
 
 			for (j = 0; j < this.recipes.size(); ++j) {
-				IRecipe calRecipe = (IRecipe) this.recipes.get(j);
+				CalculatorRecipe calRecipe = this.recipes.get(j);
 
-				if (calRecipe.matches(par1InventoryCrafting, par2World)) {
-					return calRecipe.getCraftingResult(par1InventoryCrafting);
+				if (calRecipe.matches(matrix, world)) {
+					return calRecipe.getCraftingResult(matrix);
 				}
 			}
 
