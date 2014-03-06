@@ -16,24 +16,27 @@ import org.educraft.EduCraft;
 public class CalculatorContainer extends Container {
 
 	/** The crafting matrix inventory (3x3). */
-	public CalculatorCraftMatrix craftMatrix;
-	public IInventory craftResult;
+	private CalculatorTileEntity tileEntity;
+	private InventoryCrafting craftMatrix;
+	private IInventory craftResult;
 	private World worldObj;
 	private int posX;
 	private int posY;
 	private int posZ;
 
-	public CalculatorContainer(InventoryPlayer par1InventoryPlayer,
-			World par2World, int par3, int par4, int par5) {
+	public CalculatorContainer(InventoryPlayer inventory,
+			CalculatorTileEntity tileEntity, World world, int x, int y, int z) {
+		// set inventory
+		this.tileEntity = tileEntity.initialise(this);
+		this.craftMatrix = tileEntity.getCraftMatrix();
+		this.craftResult = tileEntity.getCraftResult();
+		// set position
+		worldObj = world;
+		posX = x;
+		posY = y;
+		posZ = z;
 
-		craftMatrix = new CalculatorCraftMatrix(this);
-		craftResult = new CalculatorCraftResult();
-		worldObj = par2World;
-		posX = par3;
-		posY = par4;
-		posZ = par5;
-
-		this.addSlotToContainer(new SlotCrafting(par1InventoryPlayer.player,
+		this.addSlotToContainer(new SlotCrafting(inventory.player,
 				this.craftMatrix, this.craftResult, 0, 124, 35));
 		int i1;
 
@@ -45,14 +48,13 @@ public class CalculatorContainer extends Container {
 
 		for (int l = 0; l < 3; ++l) {
 			for (i1 = 0; i1 < 9; ++i1) {
-				this.addSlotToContainer(new Slot(par1InventoryPlayer, i1 + l
-						* 9 + 9, 8 + i1 * 18, 84 + l * 18));
+				this.addSlotToContainer(new Slot(inventory, i1 + l * 9 + 9,
+						8 + i1 * 18, 84 + l * 18));
 			}
 		}
 
 		for (int l = 0; l < 9; ++l) {
-			this.addSlotToContainer(new Slot(par1InventoryPlayer, l,
-					8 + l * 18, 142));
+			this.addSlotToContainer(new Slot(inventory, l, 8 + l * 18, 142));
 		}
 
 		this.onCraftMatrixChanged(this.craftMatrix);

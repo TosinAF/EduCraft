@@ -35,14 +35,9 @@ public class CalculatorRecipe implements IRecipe {
 		this.recipeItems = par3ArrayOfItemStack;
 		this.recipeOutput = par4ItemStack;
 	}
-
-	@Override
-	public boolean matches(InventoryCrafting inv, World w) {
-		// empty method, to satisfy the interface
-		return false;
-	}
 	
-	public boolean matches(CalculatorCraftMatrix inventory, World world) {
+	@Override
+	public boolean matches(InventoryCrafting inventory, World world) {
 		// reject instantly if any stack is empty
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {
 			if (inventory.getStackInSlot(i) == null) {
@@ -66,14 +61,9 @@ public class CalculatorRecipe implements IRecipe {
 			return false;
 		}
 	}
-
-	@Override
-	public ItemStack getCraftingResult(InventoryCrafting inv) {
-		// empty method, to satisfy the interface
-		return null;
-	}
 	
-	public ItemStack getCraftingResult(CalculatorCraftMatrix inventory) {
+	@Override
+	public ItemStack getCraftingResult(InventoryCrafting inventory) {
 		ItemStack result = this.getRecipeOutput().copy();
 
 		// get the result of the calculation

@@ -109,8 +109,7 @@ public class CalculatorCraftingManager {
 		return shapedrecipe;
 	}
 
-	public ItemStack findMatchingRecipe(
-			CalculatorCraftMatrix matrix, World world) {
+	public ItemStack findMatchingRecipe(InventoryCrafting matrix, World world) {
 		int i = 0;
 		ItemStack itemstack = null;
 		ItemStack itemstack1 = null;

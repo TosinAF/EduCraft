@@ -1,17 +1,20 @@
 package org.educraft.number.block.calculator;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
+import net.minecraft.world.World;
+
 import org.educraft.EduCraft;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
-import net.minecraft.util.Icon;
 
-public class Calculator extends Block {
+public class Calculator extends BlockContainer {
 
 	@SideOnly(Side.CLIENT)
 	private Icon calculatorIconTop;
@@ -56,5 +59,10 @@ public class Calculator extends Block {
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World world) {
+		return new CalculatorTileEntity();
 	}
 }
