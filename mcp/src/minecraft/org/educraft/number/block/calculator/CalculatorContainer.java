@@ -16,7 +16,7 @@ import org.educraft.EduCraft;
 public class CalculatorContainer extends Container {
 
 	/** The crafting matrix inventory (3x3). */
-	public InventoryCrafting craftMatrix;
+	public CalculatorCraftMatrix craftMatrix;
 	public IInventory craftResult;
 	private World worldObj;
 	private int posX;
@@ -26,7 +26,7 @@ public class CalculatorContainer extends Container {
 	public CalculatorContainer(InventoryPlayer par1InventoryPlayer,
 			World par2World, int par3, int par4, int par5) {
 
-		craftMatrix = new InventoryCrafting(this, 1, 3);
+		craftMatrix = new CalculatorCraftMatrix(this);
 		craftResult = new InventoryCraftResult();
 		worldObj = par2World;
 		posX = par3;
