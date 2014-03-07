@@ -17,6 +17,7 @@ import org.educraft.number.Number30;
 import org.educraft.number.block.EduCraftGuiHandler;
 import org.educraft.number.block.calculator.Calculator;
 import org.educraft.number.block.operators.OperatorBench;
+import org.educraft.number.block.ordering.OrderingBench;
 import org.educraft.number.entity.NumberMobDropsEvent;
 import org.educraft.number.entity.NumberSkeleton;
 import org.educraft.number.entity.NumberZombie;
@@ -69,6 +70,8 @@ public class EduCraft {
 	public static final Block CALCULATOR = new Calculator(500);
 	// instance of the operator bench
 	public static final Block OPERATOR_BENCH = new OperatorBench(501);
+	// instance of ordering bench
+	public static final Block ORDERING_BENCH = new OrderingBench(502);
 
 	// The instance of your mod that Forge uses.
 	@Instance(value = "EduCraft")
@@ -96,6 +99,11 @@ public class EduCraft {
 		GameRegistry.registerBlock(OPERATOR_BENCH, "operatorBench");
 		MinecraftForge.setBlockHarvestLevel(OPERATOR_BENCH, "axe", 0);
 		LanguageRegistry.addName(OPERATOR_BENCH, "Operator Bench");
+		
+		// register the ordering bench
+		GameRegistry.registerBlock(ORDERING_BENCH, "orderingBench");
+		MinecraftForge.setBlockHarvestLevel(ORDERING_BENCH, "axe", 0);
+		LanguageRegistry.addName(ORDERING_BENCH, "Ordering Bench");
 
 		// GameRegistry.registerItem(NUMBER, BaseNumber.class);
 
