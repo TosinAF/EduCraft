@@ -51,6 +51,8 @@ public class NumberZombie extends EntityZombie {
 		}
 		return super.entityDropItem(stack, par2);
 	}
+	
+	
 
 	@Override
 	protected void dropRareDrop(int par1)
@@ -61,6 +63,7 @@ public class NumberZombie extends EntityZombie {
 	@Override
 	protected void dropFewItems(boolean par1, int par2)
     {
+		this.dropItem(EduCraft.NUMBER.itemID, 1);
 		//Purposely wasted method
     }
 

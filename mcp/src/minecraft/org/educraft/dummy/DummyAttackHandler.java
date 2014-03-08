@@ -32,12 +32,12 @@ public class DummyAttackHandler {
 		EntityPlayer player = event.entityPlayer;
 		ItemStack weapon = player.inventory.mainInventory[player.inventory.currentItem];
 		Entity target = event.target;
-
+		
 		// handle the attack specially if the target of the attack is a
 		// DummyZombie
 		if (target instanceof NumberZombie || target instanceof NumberSkeleton) {
 			// deal dummy damage if the player is wielding a DummySword
-			if (weapon.itemID == EduCraft.MATHS_WAND.itemID) {
+			if (weapon != null && weapon.itemID == EduCraft.MATHS_WAND.itemID) {
 				target.attackEntityFrom(
 						DummyDamageSource.causeDummyDamage(player), 5F);
 			}
