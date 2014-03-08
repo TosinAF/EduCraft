@@ -42,8 +42,8 @@ public class DummyMod {
 //	public static final Item DUMMY_COIN_PILE = new DummyCoinPile(5002);
 
 	// The instance of your mod that Forge uses.
-	@Instance(value = "DummyModID")
-	public static DummyMod instance;
+	//@Instance(value = "DummyModID")
+	//public static DummyMod instance;
 
 	// Says where the client and server 'proxy' code is loaded.
 	@SidedProxy(clientSide = "org.educraft.client.ClientProxy", serverSide = "org.educraft.CommonProxy")

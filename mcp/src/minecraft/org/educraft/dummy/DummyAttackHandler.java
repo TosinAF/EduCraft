@@ -7,8 +7,7 @@ import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
 import org.educraft.EduCraft;
-import org.educraft.number.Number15Zombie;
-import org.educraft.number.Number2Zombie;
+import org.educraft.number.entity.NumberSkeleton;
 import org.educraft.number.entity.NumberZombie;
 
 /**
@@ -36,7 +35,7 @@ public class DummyAttackHandler {
 
 		// handle the attack specially if the target of the attack is a
 		// DummyZombie
-		if (target instanceof NumberZombie || target instanceof DummyZombie || target instanceof Number2Zombie || target instanceof Number15Zombie) {
+		if (target instanceof NumberZombie || target instanceof NumberSkeleton) {
 			// deal dummy damage if the player is wielding a DummySword
 			if (weapon.itemID == EduCraft.MATHS_WAND.itemID) {
 				target.attackEntityFrom(

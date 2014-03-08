@@ -8,14 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.MinecraftForge;
 
-import org.educraft.dummy.DummyAttackHandler;
 import org.educraft.dummy.MathsWand;
-import org.educraft.number.Number15Zombie;
-import org.educraft.number.Number2;
-import org.educraft.number.Number2Zombie;
-import org.educraft.number.Number30;
 import org.educraft.number.block.EduCraftGuiHandler;
-import org.educraft.number.entity.NumberMobDropsEvent;
 import org.educraft.number.block.calculator.BlockCalculator;
 import org.educraft.number.block.operators.BlockOperatorBench;
 import org.educraft.number.entity.NumberSkeleton;
@@ -40,11 +34,6 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @Mod(modid = "EduCraft", name = "EduCraft", version = "0.2.0")
 @NetworkMod(clientSideRequired = true)
 public class EduCraft {
-
-	/* ONLY NEEDED FOR CHRISTMAS DEMONSTRATION */
-	public static final Item NUMBER30 = new Number30(6006);
-	public static final Item NUMBER2 = new Number2(6007);
-	/* ONLY NEEDED FOR CHRISTMAS DEMONSTRATION ENDS */
 
 	// EduCraft creative tab
 	public static CreativeTabs tabEduCraft = new CreativeTabs("tabEduCraft") {
@@ -97,8 +86,6 @@ public class EduCraft {
 		MinecraftForge.setBlockHarvestLevel(OPERATOR_BENCH, "axe", 0);
 		LanguageRegistry.addName(OPERATOR_BENCH, "Operator Bench");
 
-		// GameRegistry.registerItem(NUMBER, BaseNumber.class);
-
 		/* MATHS WAND */
 		// localised name for maths wand
 		LanguageRegistry.addName(MATHS_WAND, "Maths Wand");
@@ -111,11 +98,6 @@ public class EduCraft {
 			LanguageRegistry.addName(numStack,
 					String.format("Number %d", numStack.getItemDamage()));
 		}
-
-		/* ONLY NEEDED FOR CHRISTMAS DEMONSTRATION */
-		LanguageRegistry.addName(NUMBER30, "30");
-		LanguageRegistry.addName(NUMBER2, "2");
-		/* ONLY NEEDED FOR CHRISTMAS DEMONSTRATION ENDS */
 
 		/* MATHEMATICAL OPERATORS */
 		LanguageRegistry.addName(ADD_OPR, "Addition sign");
@@ -156,32 +138,6 @@ public class EduCraft {
 				EntityRegistry.findGlobalUniqueEntityId(), this, 60, 3, true);
 		EntityRegistry.addSpawn(NumberSkeleton.class, 10, 1, 2,
 				EnumCreatureType.monster, BiomeGenBase.plains);
-
-		/* ONLY NEEDED FOR CHRISTMAS DEMONSTRATION */
-		// register the number 2 zombie
-
-		EntityRegistry.registerGlobalEntityID(Number2Zombie.class,
-				"Number 2 Zombie", EntityRegistry.findGlobalUniqueEntityId(),
-				32324, 2243);
-		EntityRegistry.registerModEntity(Number2Zombie.class,
-				"Number 2 Zombie", EntityRegistry.findGlobalUniqueEntityId(),
-				this, 60, 3, true);
-		EntityRegistry.addSpawn(Number2Zombie.class, 10, 1, 2,
-				EnumCreatureType.monster, BiomeGenBase.plains);
-		// register the number 15 zombie
-		EntityRegistry.registerGlobalEntityID(Number15Zombie.class,
-				"Number 15 Zombie", EntityRegistry.findGlobalUniqueEntityId(),
-				32324, 2243);
-		EntityRegistry.registerModEntity(Number15Zombie.class,
-				"Number 15 Zombie", EntityRegistry.findGlobalUniqueEntityId(),
-				this, 60, 3, true);
-		EntityRegistry.addSpawn(Number15Zombie.class, 10, 1, 2,
-				EnumCreatureType.monster, BiomeGenBase.plains);
-		/* ONLY NEEDED FOR CHRISTMAS DEMONSTRATION ENDS */
-
-		// register the attack handler
-		MinecraftForge.EVENT_BUS.register(new DummyAttackHandler());
-		MinecraftForge.EVENT_BUS.register(new NumberMobDropsEvent());
 
 		// Important keep it
 		NetworkRegistry.instance().registerGuiHandler(this, eduCraftGuiHandler);
