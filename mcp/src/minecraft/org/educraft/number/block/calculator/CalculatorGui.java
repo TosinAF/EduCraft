@@ -1,5 +1,6 @@
 package org.educraft.number.block.calculator;
 
+import org.educraft.EduCraft;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
@@ -14,8 +15,7 @@ import net.minecraft.world.World;
 @SideOnly(Side.CLIENT)
 public class CalculatorGui extends GuiContainer {
 
-	public static String GuiTexturePrefix = "educraft" + ":" + "textures/gui/";
-	private ResourceLocation calculator = new ResourceLocation(GuiTexturePrefix
+	private ResourceLocation calculator = new ResourceLocation(EduCraft.GuiTexturePrefix
 			+ "crafting_table.png");
 
 	public CalculatorGui(InventoryPlayer par1InventoryPlayer, World par2World,

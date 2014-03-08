@@ -42,6 +42,9 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @NetworkMod(clientSideRequired = true)
 public class EduCraft {
 
+	
+	public static final String GuiTexturePrefix = "educraft" + ":" + "textures/gui/";
+	
 	/* ONLY NEEDED FOR CHRISTMAS DEMONSTRATION */
 	public static final Item NUMBER30 = new Number30(6006);
 	public static final Item NUMBER2 = new Number2(6007);

@@ -13,6 +13,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class OperatorGui extends GuiContainer {
+	
 	private static final ResourceLocation craftingTableGuiTextures = new ResourceLocation(
 			"textures/gui/container/crafting_table.png");
 

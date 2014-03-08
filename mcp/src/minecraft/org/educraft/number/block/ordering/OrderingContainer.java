@@ -1,5 +1,8 @@
-package org.educraft.number.block.calculator;
+package org.educraft.number.block.ordering;
 
+import org.educraft.EduCraft;
+
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -9,11 +12,12 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.world.World;
 
 import org.educraft.EduCraft;
 
-public class CalculatorContainer extends Container {
+public class OrderingContainer extends Container{
 
 	public InventoryCrafting craftMatrix;
 	public IInventory craftResult;
@@ -22,7 +26,7 @@ public class CalculatorContainer extends Container {
 	private int posY;
 	private int posZ;
 
-	public CalculatorContainer(InventoryPlayer par1InventoryPlayer,
+	public OrderingContainer(InventoryPlayer par1InventoryPlayer,
 			World par2World, int par3, int par4, int par5) {
 
 		craftMatrix = new InventoryCrafting(this, 1, 3);
@@ -61,7 +65,7 @@ public class CalculatorContainer extends Container {
 	public void onCraftMatrixChanged(IInventory inventory) {
 		this.craftResult.setInventorySlotContents(
 				0,
-				CalculatorCraftingManager.getInstance().findMatchingRecipe(
+				OrderingCraftingManager.getInstance().findMatchingRecipe(
 						this.craftMatrix, this.worldObj));
 
 	}
@@ -82,7 +86,7 @@ public class CalculatorContainer extends Container {
 	}
 
 	public boolean canInteractWith(EntityPlayer player) {
-		return this.worldObj.getBlockId(this.posX, this.posY, this.posZ) != EduCraft.CALCULATOR.blockID ? false
+		return this.worldObj.getBlockId(this.posX, this.posY, this.posZ) != EduCraft.ORDERING_BENCH.blockID ? false
 				: player.getDistanceSq((double) this.posX + 0.5D,
 						(double) this.posY + 0.5D, (double) this.posZ + 0.5D) <= 64.0D;
 	}
