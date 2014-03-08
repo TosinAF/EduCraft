@@ -37,12 +37,12 @@ public class OrderingContainer extends Container{
 		posZ = par5;
 
 		this.addSlotToContainer(new SlotCrafting(par1InventoryPlayer.player,
-				this.craftMatrix, this.craftResult, 0, 124, 35));
+				this.craftMatrix, this.craftResult, 0, 131, 35));
 		int i1;
 
 		for (i1 = 0; i1 < 3; ++i1) {
 			this.addSlotToContainer(new Slot(this.craftMatrix, i1,
-					30 + i1 * 18, 35));
+					10 + i1 * 36, 35));
 
 		}
 
