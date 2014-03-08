@@ -14,14 +14,18 @@ import org.educraft.EduCraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class Calculator extends BlockContainer {
+public class BlockCalculator extends BlockContainer {
+	/**
+	 * The id used to identify this block in the GuiHandler.
+	 */
+	public static final int GUI_ID = 0;
 
 	@SideOnly(Side.CLIENT)
 	private Icon calculatorIconTop;
 	@SideOnly(Side.CLIENT)
 	private Icon calculatorIconFront;
 
-	public Calculator(int id) {
+	public BlockCalculator(int id) {
 		super(id, Material.ground);
 		setUnlocalizedName("Calculator Table");
 		setCreativeTab(EduCraft.tabEduCraft);
