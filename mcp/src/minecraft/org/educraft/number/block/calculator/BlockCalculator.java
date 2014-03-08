@@ -1,24 +1,31 @@
 package org.educraft.number.block.calculator;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
+import net.minecraft.world.World;
+
 import org.educraft.EduCraft;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
-import net.minecraft.util.Icon;
 
-public class Calculator extends Block {
+public class BlockCalculator extends BlockContainer {
+	/**
+	 * The id used to identify this block in the GuiHandler.
+	 */
+	public static final int GUI_ID = 0;
 
 	@SideOnly(Side.CLIENT)
 	private Icon calculatorIconTop;
 	@SideOnly(Side.CLIENT)
 	private Icon calculatorIconFront;
 
-	public Calculator(int id) {
+	public BlockCalculator(int id) {
 		super(id, Material.ground);
 		setUnlocalizedName("Calculator Table");
 		setCreativeTab(EduCraft.tabEduCraft);
@@ -44,17 +51,24 @@ public class Calculator extends Block {
 	}
 
 	@Override
-	public boolean onBlockActivated(World par1World, int par2, int par3,
-			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
-			float par8, float par9) {
-		if (!par5EntityPlayer.isSneaking()) {
-			// only open the GUI if the player isn't sneaking
-			// this allows the player to place buttons, etc. on the surface
-			par5EntityPlayer.openGui(EduCraft.instance, 0, par1World, par2,
-					par3, par4);
-			return true;
-		} else {
+	public void onBlockAdded(World world, int x, int y, int z) {
+		world.setBlockTileEntity(x, y, z, createNewTileEntity(world));
+		super.onBlockAdded(world, x, y, z);
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z,
+			EntityPlayer player, int par6, float par7, float par8, float par9) {
+		if (player.isSneaking() || world.getBlockTileEntity(x, y, z) == null) {
 			return false;
+		} else {
+			player.openGui(EduCraft.instance, 0, world, x, y, z);
+			return true;
 		}
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World world) {
+		return new CalculatorTileEntity();
 	}
 }

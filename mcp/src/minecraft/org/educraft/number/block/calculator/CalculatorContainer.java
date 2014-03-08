@@ -16,57 +16,52 @@ import org.educraft.EduCraft;
 public class CalculatorContainer extends Container {
 
 	/** The crafting matrix inventory (3x3). */
-	public InventoryCrafting craftMatrix;
-	public IInventory craftResult;
+	private CalculatorTileEntity tileEntity;
+	private InventoryCrafting craftMatrix;
+	private IInventory craftResult;
 	private World worldObj;
-	private int posX;
-	private int posY;
-	private int posZ;
 
-	public CalculatorContainer(InventoryPlayer par1InventoryPlayer,
-			World par2World, int par3, int par4, int par5) {
+	public CalculatorContainer(InventoryPlayer inventory,
+			CalculatorTileEntity tileEntity, World world) {
+		// set inventory
+		this.tileEntity = tileEntity.initialise(this);
+		this.craftMatrix = tileEntity.getCraftMatrix();
+		this.craftResult = tileEntity.getCraftResult();
+		// set position
+		worldObj = world;
 
-		craftMatrix = new InventoryCrafting(this, 1, 3);
-		craftResult = new InventoryCraftResult();
-		worldObj = par2World;
-		posX = par3;
-		posY = par4;
-		posZ = par5;
-
-		this.addSlotToContainer(new SlotCrafting(par1InventoryPlayer.player,
+		this.addSlotToContainer(new SlotCrafting(inventory.player,
 				this.craftMatrix, this.craftResult, 0, 124, 35));
 		int i1;
 
 		for (i1 = 0; i1 < 3; ++i1) {
 			this.addSlotToContainer(new Slot(this.craftMatrix, i1,
 					30 + i1 * 18, 35));
-
 		}
 
 		for (int l = 0; l < 3; ++l) {
 			for (i1 = 0; i1 < 9; ++i1) {
-				this.addSlotToContainer(new Slot(par1InventoryPlayer, i1 + l
-						* 9 + 9, 8 + i1 * 18, 84 + l * 18));
+				this.addSlotToContainer(new Slot(inventory, i1 + l * 9 + 9,
+						8 + i1 * 18, 84 + l * 18));
 			}
 		}
 
 		for (int l = 0; l < 9; ++l) {
-			this.addSlotToContainer(new Slot(par1InventoryPlayer, l,
-					8 + l * 18, 142));
+			this.addSlotToContainer(new Slot(inventory, l, 8 + l * 18, 142));
 		}
 
 		this.onCraftMatrixChanged(this.craftMatrix);
-
 	}
 
+	@Override
 	public void onCraftMatrixChanged(IInventory inventory) {
 		this.craftResult.setInventorySlotContents(
 				0,
 				CalculatorCraftingManager.getInstance().findMatchingRecipe(
 						this.craftMatrix, this.worldObj));
-
 	}
 
+	@Override
 	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
 		super.onContainerClosed(par1EntityPlayer);
 
@@ -82,12 +77,12 @@ public class CalculatorContainer extends Container {
 		}
 	}
 
+	@Override
 	public boolean canInteractWith(EntityPlayer player) {
-		return this.worldObj.getBlockId(this.posX, this.posY, this.posZ) != EduCraft.CALCULATOR.blockID ? false
-				: player.getDistanceSq((double) this.posX + 0.5D,
-						(double) this.posY + 0.5D, (double) this.posZ + 0.5D) <= 64.0D;
+		return this.tileEntity.isUseableByPlayer(player);
 	}
 
+	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(par2);
