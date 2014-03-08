@@ -11,13 +11,31 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+/**
+ * This class handles the creation and display of the {@link BlockCalculator}
+ * GUI.
+ */
 @SideOnly(Side.CLIENT)
 public class CalculatorGui extends GuiContainer {
 
+	/**
+	 * Standard prefix for all textures associated with this GUI.
+	 */
 	public static String GuiTexturePrefix = "educraft" + ":" + "textures/gui/";
+
 	private ResourceLocation calculator = new ResourceLocation(GuiTexturePrefix
 			+ "crafting_table.png");
 
+	/**
+	 * Class constructor.
+	 * 
+	 * @param inventory
+	 *            the inventory to display in this GUI
+	 * @param world
+	 *            the world the GUI is in
+	 * @param tileEntity
+	 *            the tile entity containing the crafting inventories
+	 */
 	public CalculatorGui(InventoryPlayer inventory, World world,
 			CalculatorTileEntity tileEntity) {
 		super(new CalculatorContainer(inventory, tileEntity, world));

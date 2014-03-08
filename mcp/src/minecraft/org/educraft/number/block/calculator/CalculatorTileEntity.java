@@ -10,6 +10,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
+/**
+ * This class provides a tile entity for storing a Calculator's inventory in a
+ * place where every player in the world can access it, rather than being
+ * confined to an individual player's view.
+ */
 public class CalculatorTileEntity extends TileEntity {
 	// data members representing the inventory
 	private Container container;

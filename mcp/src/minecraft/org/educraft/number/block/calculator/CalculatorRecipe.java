@@ -9,6 +9,9 @@ import org.educraft.EduCraft;
 import org.educraft.number.item.BaseNumber;
 import org.educraft.number.item.MathematicalOperator;
 
+/**
+ * This class represents a recipe that is known to a CalculatorCraftingManager.
+ */
 public class CalculatorRecipe implements IRecipe {
 
 	/** How many horizontal slots this recipe is wide. */
@@ -35,7 +38,17 @@ public class CalculatorRecipe implements IRecipe {
 		this.recipeItems = par3ArrayOfItemStack;
 		this.recipeOutput = par4ItemStack;
 	}
-	
+
+	/**
+	 * Determines whether the given crafting matrix matches the expected input
+	 * of this recipe.
+	 * 
+	 * @param inventory
+	 *            the crafting matrix to check
+	 * @param world
+	 *            the world this inventory is in
+	 * @return true if the crafting matrix contains a correct pattern
+	 */
 	@Override
 	public boolean matches(InventoryCrafting inventory, World world) {
 		// reject instantly if any stack is empty
@@ -48,7 +61,7 @@ public class CalculatorRecipe implements IRecipe {
 		// in slot 1
 		ItemStack stack0 = inventory.getStackInSlot(0), stack1 = inventory
 				.getStackInSlot(1), stack2 = inventory.getStackInSlot(2);
-		
+
 		if ((stack0.getItem() instanceof BaseNumber)
 				&& (stack1.getItem() instanceof MathematicalOperator)
 				&& (stack2.getItem() instanceof BaseNumber)) {
@@ -61,16 +74,21 @@ public class CalculatorRecipe implements IRecipe {
 			return false;
 		}
 	}
-	
+
+	/**
+	 * Returns an ItemStack containing the output of this recipe. We first
+	 * obtain the values of the two operands, compute the result, and then set
+	 * the metadata of the returned ItemStack accordingly.
+	 * 
+	 * @param inventory
+	 *            the crafting matrix containing the components for this recipe
+	 * @return the crafting result
+	 */
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting inventory) {
 		ItemStack result = this.getRecipeOutput().copy();
 
 		// get the result of the calculation
-		//
-		// note that this method only gets called once inventory has
-		// been checked for correctness, so we don't need to check the
-		// types of the item stacks again
 		int eval = evaluate(inventory.getStackInSlot(0),
 				inventory.getStackInSlot(2), (MathematicalOperator) inventory
 						.getStackInSlot(1).getItem());
@@ -80,11 +98,21 @@ public class CalculatorRecipe implements IRecipe {
 		return result;
 	}
 
+	/**
+	 * Returns the size (number of slots) contained in this recipe.
+	 * 
+	 * @return the recipe size
+	 */
 	@Override
 	public int getRecipeSize() {
 		return 3;
 	}
 
+	/**
+	 * Returns the expected output of this recipe.
+	 * 
+	 * @return the expected output
+	 */
 	@Override
 	public ItemStack getRecipeOutput() {
 		return this.recipeOutput;
@@ -95,9 +123,9 @@ public class CalculatorRecipe implements IRecipe {
 	 * operands.
 	 * <p/>
 	 * Note that the method takes two {@link net.minecraft.item.ItemStack}s, not
-	 * {@link org.educraft.number.item.BaseNumber}s. This is because the value of a
-	 * number item is determined by the damage of the stack it is in - if we
-	 * pass the actual number, we can't do the evaluation.
+	 * {@link org.educraft.number.item.BaseNumber}s. This is because the value
+	 * of a number item is determined by the damage of the stack it is in - if
+	 * we pass the actual number, we can't do the evaluation.
 	 * 
 	 * @param x
 	 *            an ItemStack containing the left-hand operand
@@ -110,7 +138,7 @@ public class CalculatorRecipe implements IRecipe {
 	private int evaluate(ItemStack x, ItemStack y, MathematicalOperator operator) {
 		// result is initially zero, since zero is our 'error code'
 		int eval = 0;
-		
+
 		// get the values of the two operands
 		int opr1 = x.getItemDamage();
 		int opr2 = y.getItemDamage();

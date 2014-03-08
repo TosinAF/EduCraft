@@ -13,6 +13,11 @@ import net.minecraft.world.World;
 
 import org.educraft.EduCraft;
 
+/**
+ * This class is used to keep track of a particular {@link BlockCalculator}'s
+ * inventory. It manages multiple users, allowing several players to use the
+ * same calculator.
+ */
 public class CalculatorContainer extends Container {
 
 	// data members holding the crafting inventory
