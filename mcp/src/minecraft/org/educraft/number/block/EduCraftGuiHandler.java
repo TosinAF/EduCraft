@@ -15,8 +15,27 @@ import org.educraft.number.block.operators.OperatorGui;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 
+/**
+ * This class handles the display of all custom-made GUIs.
+ */
 public class EduCraftGuiHandler implements IGuiHandler {
 
+	/**
+	 * Generates a container, which forms the server side of the GUI.
+	 * 
+	 * @param id
+	 *            number to indicate which GUI we want to open
+	 * @param player
+	 *            the player who is opening the GUI
+	 * @param world
+	 *            the world the player is in
+	 * @param x
+	 *            the x-position of the player
+	 * @param y
+	 *            the y-position of the player
+	 * @param z
+	 *            the z-position of the player
+	 */
 	@Override
 	public Object getServerGuiElement(int id, EntityPlayer player, World world,
 			int x, int y, int z) {
@@ -33,6 +52,22 @@ public class EduCraftGuiHandler implements IGuiHandler {
 		return null;
 	}
 
+	/**
+	 * Generates the GUI itself, which is displayed to the client.
+	 * 
+	 * @param id
+	 *            number to indicate which GUI we want to open
+	 * @param player
+	 *            the player who is opening the GUI
+	 * @param world
+	 *            the world the player is in
+	 * @param x
+	 *            the x-position of the player
+	 * @param y
+	 *            the y-position of the player
+	 * @param z
+	 *            the z-position of the player
+	 */
 	@Override
 	public Object getClientGuiElement(int id, EntityPlayer player, World world,
 			int x, int y, int z) {
