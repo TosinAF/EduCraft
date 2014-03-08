@@ -1,4 +1,4 @@
-<img src="http://gamerfitnation.com/wp-content/uploads/2013/08/Minecraft-logo.png" width="90%" style="margin-left: 80px">
+-><img src="http://gamerfitnation.com/wp-content/uploads/2013/08/Minecraft-logo.png"><-
 
 #Description
 
