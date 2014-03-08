@@ -29,7 +29,7 @@ public class OrderingCraftingManager {
 	}
 
 	private OrderingCraftingManager() {
-		this.addRecipe(new ItemStack(Item.arrow), "xxx", 'x',
+		this.addRecipe(new ItemStack(EduCraft.KEY), "xxx", 'x',
 				EduCraft.NUMBER);
 	}
 

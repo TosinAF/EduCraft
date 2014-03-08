@@ -44,7 +44,7 @@ public class OrderingRecipe implements IRecipe {
 			}
 		}
 		for (int i = 0; i < inventory.getSizeInventory() - 1; i++) {
-			if(inventory.getStackInSlot(i).getItemDamage() > inventory.getStackInSlot(i+1).getItemDamage()){
+			if(inventory.getStackInSlot(i).getItemDamage() >= inventory.getStackInSlot(i+1).getItemDamage()){
 				return false;
 			}
 		}

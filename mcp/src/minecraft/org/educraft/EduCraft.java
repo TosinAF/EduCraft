@@ -24,6 +24,7 @@ import org.educraft.number.entity.NumberZombie;
 import org.educraft.number.item.AdditionOperator;
 import org.educraft.number.item.BaseNumber;
 import org.educraft.number.item.DivisionOperator;
+import org.educraft.number.item.DoorKey;
 import org.educraft.number.item.MultiplicationOperator;
 import org.educraft.number.item.SubtractionOperator;
 
@@ -62,6 +63,8 @@ public class EduCraft {
 
 	// instance of the maths wand
 	public static final Item MATHS_WAND = new MathsWand(6000);
+	// instance of key
+	public static final Item KEY = new DoorKey(6006);
 	// instances of the mathematical operators
 	public static final Item ADD_OPR = new AdditionOperator();
 	public static final Item SUB_OPR = new SubtractionOperator();
@@ -114,6 +117,8 @@ public class EduCraft {
 		/* MATHS WAND */
 		// localised name for maths wand
 		LanguageRegistry.addName(MATHS_WAND, "Maths Wand");
+		
+		LanguageRegistry.addName(KEY, "Door Key");
 
 		/* NUMBERS */
 		// register names for each possible metadata value in turn
