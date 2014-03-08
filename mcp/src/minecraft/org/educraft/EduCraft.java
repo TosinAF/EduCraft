@@ -15,8 +15,8 @@ import org.educraft.number.Number2;
 import org.educraft.number.Number2Zombie;
 import org.educraft.number.Number30;
 import org.educraft.number.block.EduCraftGuiHandler;
-import org.educraft.number.block.calculator.Calculator;
-import org.educraft.number.block.operators.OperatorBench;
+import org.educraft.number.block.calculator.BlockCalculator;
+import org.educraft.number.block.operators.BlockOperatorBench;
 import org.educraft.number.entity.NumberSkeleton;
 import org.educraft.number.entity.NumberZombie;
 import org.educraft.number.item.AdditionOperator;
@@ -65,9 +65,9 @@ public class EduCraft {
 	public static final Item NUMBER = new BaseNumber(6005);
 
 	// instance of the calculator
-	public static final Block CALCULATOR = new Calculator(500);
+	public static final Block CALCULATOR = new BlockCalculator(500);
 	// instance of the operator bench
-	public static final Block OPERATOR_BENCH = new OperatorBench(501);
+	public static final Block OPERATOR_BENCH = new BlockOperatorBench(501);
 
 	// The instance of your mod that Forge uses.
 	@Instance(value = "EduCraft")
