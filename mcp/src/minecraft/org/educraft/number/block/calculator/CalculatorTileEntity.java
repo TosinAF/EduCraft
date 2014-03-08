@@ -11,9 +11,13 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 public class CalculatorTileEntity extends TileEntity {
+	// data members representing the inventory
 	private Container container;
 	private InventoryCrafting craftMatrix;
 	private IInventory craftResult;
+
+	// the number of players using the tile entity
+	private int playersUsing;
 
 	/**
 	 * Default constructor.
@@ -22,6 +26,7 @@ public class CalculatorTileEntity extends TileEntity {
 		this.container = null;
 		this.craftMatrix = null;
 		this.craftResult = null;
+		this.playersUsing = 0;
 	}
 
 	/**
@@ -44,6 +49,7 @@ public class CalculatorTileEntity extends TileEntity {
 			this.craftMatrix = new InventoryCrafting(this.container, 1, 3);
 			this.craftResult = new InventoryCraftResult();
 		}
+		incrUsers();
 		return this;
 	}
 
@@ -63,6 +69,41 @@ public class CalculatorTileEntity extends TileEntity {
 	 */
 	public IInventory getCraftResult() {
 		return craftResult;
+	}
+
+	/**
+	 * Returns the number of players currently interacting with the tile entity.
+	 * 
+	 * @return the number of users
+	 */
+	public synchronized int getNumberOfUsers() {
+		return playersUsing;
+	}
+
+	/**
+	 * Determines whether or not this tile entity is currently being used by
+	 * anyone.
+	 * 
+	 * @return true if the count of players is greater than 0
+	 */
+	public synchronized boolean isBeingUsed() {
+		return playersUsing > 0;
+	}
+
+	/**
+	 * Increases the count of players using this tile entity.
+	 */
+	public synchronized void incrUsers() {
+		playersUsing++;
+	}
+
+	/**
+	 * Decreases the count of players using this tile entity.
+	 */
+	public synchronized void decrUsers() {
+		if (playersUsing > 0) {
+			playersUsing--;
+		}
 	}
 
 	/**

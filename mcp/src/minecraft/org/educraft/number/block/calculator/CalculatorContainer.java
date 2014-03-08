@@ -15,10 +15,12 @@ import org.educraft.EduCraft;
 
 public class CalculatorContainer extends Container {
 
-	/** The crafting matrix inventory (3x3). */
+	// data members holding the crafting inventory
 	private CalculatorTileEntity tileEntity;
 	private InventoryCrafting craftMatrix;
 	private IInventory craftResult;
+
+	// reference to the world this container is in
 	private World worldObj;
 
 	public CalculatorContainer(InventoryPlayer inventory,
@@ -27,9 +29,10 @@ public class CalculatorContainer extends Container {
 		this.tileEntity = tileEntity.initialise(this);
 		this.craftMatrix = tileEntity.getCraftMatrix();
 		this.craftResult = tileEntity.getCraftResult();
-		// set position
-		worldObj = world;
+		// set world
+		this.worldObj = world;
 
+		// add slots to the containers
 		this.addSlotToContainer(new SlotCrafting(inventory.player,
 				this.craftMatrix, this.craftResult, 0, 124, 35));
 		int i1;
@@ -53,6 +56,13 @@ public class CalculatorContainer extends Container {
 		this.onCraftMatrixChanged(this.craftMatrix);
 	}
 
+	/**
+	 * Called whenever someone makes a change to the crafting matrix, to update
+	 * the crafting result.
+	 * 
+	 * @param inventory
+	 *            the crafting matrix that was changed
+	 */
 	@Override
 	public void onCraftMatrixChanged(IInventory inventory) {
 		this.craftResult.setInventorySlotContents(
@@ -61,29 +71,53 @@ public class CalculatorContainer extends Container {
 						this.craftMatrix, this.worldObj));
 	}
 
+	/**
+	 * Called whenever the container is closed. If no one is using the container
+	 * any more, then it should drop everything inside it, like a crafting
+	 * table.
+	 * 
+	 * @param player
+	 *            the player who closed the container
+	 */
 	@Override
-	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
-		super.onContainerClosed(par1EntityPlayer);
+	public void onContainerClosed(EntityPlayer player) {
+		super.onContainerClosed(player);
+		this.tileEntity.decrUsers();
 
-		if (!this.worldObj.isRemote) {
+		if (!this.worldObj.isRemote && !this.tileEntity.isBeingUsed()) {
 			for (int i = 0; i < 3; ++i) {
 				ItemStack itemstack = this.craftMatrix
 						.getStackInSlotOnClosing(i);
 
 				if (itemstack != null) {
-					par1EntityPlayer.dropPlayerItem(itemstack);
+					player.dropPlayerItem(itemstack);
 				}
 			}
 		}
 	}
 
+	/**
+	 * Checks whether or not the player is allowed to see or make changes to
+	 * this tile entity.
+	 * 
+	 * @param player
+	 *            the player attempting to interact
+	 */
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
 		return this.tileEntity.isUseableByPlayer(player);
 	}
 
+	/**
+	 * Used to handle shift-clicking.
+	 * 
+	 * @param player
+	 *            the player interacting
+	 * @param par2
+	 *            unknown
+	 */
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
+	public ItemStack transferStackInSlot(EntityPlayer player, int par2) {
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(par2);
 
@@ -119,7 +153,7 @@ public class CalculatorContainer extends Container {
 				return null;
 			}
 
-			slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
+			slot.onPickupFromSlot(player, itemstack1);
 		}
 
 		return itemstack;
