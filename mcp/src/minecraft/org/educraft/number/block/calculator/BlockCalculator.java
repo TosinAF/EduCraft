@@ -121,7 +121,7 @@ public class BlockCalculator extends BlockContainer {
 		if (player.isSneaking() || world.getBlockTileEntity(x, y, z) == null) {
 			return false;
 		} else {
-			player.openGui(EduCraft.instance, 0, world, x, y, z);
+			player.openGui(EduCraft.instance, GUI_ID, world, x, y, z);
 			return true;
 		}
 	}
