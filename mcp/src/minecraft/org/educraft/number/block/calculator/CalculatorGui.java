@@ -19,8 +19,8 @@ public class CalculatorGui extends GuiContainer {
 			+ "crafting_table.png");
 
 	public CalculatorGui(InventoryPlayer inventory, World world,
-			CalculatorTileEntity tileEntity, int x, int y, int z) {
-		super(new CalculatorContainer(inventory, tileEntity, world, x, y, z));
+			CalculatorTileEntity tileEntity) {
+		super(new CalculatorContainer(inventory, tileEntity, world));
 	}
 
 	/**

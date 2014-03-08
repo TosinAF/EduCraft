@@ -24,8 +24,8 @@ public class EduCraftGuiHandler implements IGuiHandler {
 		case BlockCalculator.GUI_ID:
 			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 			return (tileEntity instanceof CalculatorTileEntity) ? new CalculatorContainer(
-					player.inventory, (CalculatorTileEntity) tileEntity, world,
-					x, y, z) : null;
+					player.inventory, (CalculatorTileEntity) tileEntity, world)
+					: null;
 		case BlockOperatorBench.GUI_ID:
 			return world.getBlockId(x, y, z) == EduCraft.OPERATOR_BENCH.blockID ? new OperatorContainer(
 					player.inventory, world, x, y, z) : null;
@@ -40,8 +40,8 @@ public class EduCraftGuiHandler implements IGuiHandler {
 		case BlockCalculator.GUI_ID:
 			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 			return (tileEntity instanceof CalculatorTileEntity) ? new CalculatorContainer(
-					player.inventory, (CalculatorTileEntity) tileEntity, world,
-					x, y, z) : null;
+					player.inventory, (CalculatorTileEntity) tileEntity, world)
+					: null;
 		case BlockOperatorBench.GUI_ID:
 			return world.getBlockId(x, y, z) == EduCraft.OPERATOR_BENCH.blockID ? new OperatorGui(
 					player.inventory, world, x, y, z) : null;

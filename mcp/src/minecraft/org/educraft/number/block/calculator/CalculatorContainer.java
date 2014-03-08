@@ -20,21 +20,15 @@ public class CalculatorContainer extends Container {
 	private InventoryCrafting craftMatrix;
 	private IInventory craftResult;
 	private World worldObj;
-	private int posX;
-	private int posY;
-	private int posZ;
 
 	public CalculatorContainer(InventoryPlayer inventory,
-			CalculatorTileEntity tileEntity, World world, int x, int y, int z) {
+			CalculatorTileEntity tileEntity, World world) {
 		// set inventory
 		this.tileEntity = tileEntity.initialise(this);
 		this.craftMatrix = tileEntity.getCraftMatrix();
 		this.craftResult = tileEntity.getCraftResult();
 		// set position
 		worldObj = world;
-		posX = x;
-		posY = y;
-		posZ = z;
 
 		this.addSlotToContainer(new SlotCrafting(inventory.player,
 				this.craftMatrix, this.craftResult, 0, 124, 35));
