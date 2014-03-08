@@ -6,9 +6,13 @@ import net.minecraft.block.BlockWorkbench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-public class OperatorBench extends BlockWorkbench {
+public class BlockOperatorBench extends BlockWorkbench {
+	/**
+	 * The id used to identify this block in the GuiHandler.
+	 */
+	public static final int GUI_ID = 1;
 
-	public OperatorBench(int id) {
+	public BlockOperatorBench(int id) {
 		super(id);
 		setUnlocalizedName("operatorBench");
 		setCreativeTab(EduCraft.tabEduCraft);

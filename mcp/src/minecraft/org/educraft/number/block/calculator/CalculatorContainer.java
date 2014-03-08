@@ -13,81 +13,116 @@ import net.minecraft.world.World;
 
 import org.educraft.EduCraft;
 
+/**
+ * This class is used to keep track of a particular {@link BlockCalculator}'s
+ * inventory. It manages multiple users, allowing several players to use the
+ * same calculator.
+ */
 public class CalculatorContainer extends Container {
+		
+	// data members holding the crafting inventory
+	private CalculatorTileEntity tileEntity;
+	private InventoryCrafting craftMatrix;
+	private IInventory craftResult;
 
-	public InventoryCrafting craftMatrix;
-	public IInventory craftResult;
+	// reference to the world this container is in
 	private World worldObj;
-	private int posX;
-	private int posY;
-	private int posZ;
+	
+	public CalculatorContainer(InventoryPlayer inventory,
+			CalculatorTileEntity tileEntity, World world) {
+		// set inventory
+		this.tileEntity = tileEntity.initialise(this);
+		this.craftMatrix = tileEntity.getCraftMatrix();
+		this.craftResult = tileEntity.getCraftResult();
+		// set world
+		this.worldObj = world;
 
-	public CalculatorContainer(InventoryPlayer par1InventoryPlayer,
-			World par2World, int par3, int par4, int par5) {
-
-		craftMatrix = new InventoryCrafting(this, 1, 3);
-		craftResult = new InventoryCraftResult();
-		worldObj = par2World;
-		posX = par3;
-		posY = par4;
-		posZ = par5;
-
-		this.addSlotToContainer(new SlotCrafting(par1InventoryPlayer.player,
+		// add slots to the containers
+		this.addSlotToContainer(new SlotCrafting(inventory.player,
 				this.craftMatrix, this.craftResult, 0, 124, 35));
 		int i1;
 
 		for (i1 = 0; i1 < 3; ++i1) {
 			this.addSlotToContainer(new Slot(this.craftMatrix, i1,
 					30 + i1 * 18, 35));
-
 		}
 
 		for (int l = 0; l < 3; ++l) {
 			for (i1 = 0; i1 < 9; ++i1) {
-				this.addSlotToContainer(new Slot(par1InventoryPlayer, i1 + l
-						* 9 + 9, 8 + i1 * 18, 84 + l * 18));
+				this.addSlotToContainer(new Slot(inventory, i1 + l * 9 + 9,
+						8 + i1 * 18, 84 + l * 18));
 			}
 		}
 
 		for (int l = 0; l < 9; ++l) {
-			this.addSlotToContainer(new Slot(par1InventoryPlayer, l,
-					8 + l * 18, 142));
+			this.addSlotToContainer(new Slot(inventory, l, 8 + l * 18, 142));
 		}
 
 		this.onCraftMatrixChanged(this.craftMatrix);
-
 	}
 
+	/**
+	 * Called whenever someone makes a change to the crafting matrix, to update
+	 * the crafting result.
+	 * 
+	 * @param inventory
+	 *            the crafting matrix that was changed
+	 */
+	@Override
 	public void onCraftMatrixChanged(IInventory inventory) {
 		this.craftResult.setInventorySlotContents(
 				0,
 				CalculatorCraftingManager.getInstance().findMatchingRecipe(
 						this.craftMatrix, this.worldObj));
-
 	}
 
-	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
-		super.onContainerClosed(par1EntityPlayer);
+	/**
+	 * Called whenever the container is closed. If no one is using the container
+	 * any more, then it should drop everything inside it, like a crafting
+	 * table.
+	 * 
+	 * @param player
+	 *            the player who closed the container
+	 */
+	@Override
+	public void onContainerClosed(EntityPlayer player) {
+		super.onContainerClosed(player);
+		this.tileEntity.decrUsers();
 
-		if (!this.worldObj.isRemote) {
+		if (!this.worldObj.isRemote && !this.tileEntity.isBeingUsed()) {
 			for (int i = 0; i < 3; ++i) {
 				ItemStack itemstack = this.craftMatrix
 						.getStackInSlotOnClosing(i);
 
 				if (itemstack != null) {
-					par1EntityPlayer.dropPlayerItem(itemstack);
+					player.dropPlayerItem(itemstack);
 				}
 			}
 		}
 	}
 
+	/**
+	 * Checks whether or not the player is allowed to see or make changes to
+	 * this tile entity.
+	 * 
+	 * @param player
+	 *            the player attempting to interact
+	 */
+	@Override
 	public boolean canInteractWith(EntityPlayer player) {
-		return this.worldObj.getBlockId(this.posX, this.posY, this.posZ) != EduCraft.CALCULATOR.blockID ? false
-				: player.getDistanceSq((double) this.posX + 0.5D,
-						(double) this.posY + 0.5D, (double) this.posZ + 0.5D) <= 64.0D;
+		return this.tileEntity.isUseableByPlayer(player);
 	}
 
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
+	/**
+	 * Used to handle shift-clicking.
+	 * 
+	 * @param player
+	 *            the player interacting
+	 * @param par2
+	 *            unknown
+	 */
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer player, int par2) {
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(par2);
 
@@ -123,7 +158,7 @@ public class CalculatorContainer extends Container {
 				return null;
 			}
 
-			slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
+			slot.onPickupFromSlot(player, itemstack1);
 		}
 
 		return itemstack;
