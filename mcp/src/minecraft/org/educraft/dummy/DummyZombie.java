@@ -1,13 +1,9 @@
 package org.educraft.dummy;
 
-import java.util.Random;
-
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-
-import org.educraft.DummyMod;
 
 /**
  * The DummyZombie exists as a source of DummyCoins. If he is killed by a dummy
