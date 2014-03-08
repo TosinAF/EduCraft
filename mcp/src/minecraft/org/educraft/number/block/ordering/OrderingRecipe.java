@@ -38,13 +38,23 @@ public class OrderingRecipe implements IRecipe {
 
 	/*logic goes here*/
 	public boolean matches(InventoryCrafting inventory, World world) {
-		return false; 
+		for (int i = 0; i < inventory.getSizeInventory(); i++) {
+			if ((inventory.getStackInSlot(i) == null) || !(inventory.getStackInSlot(i).getItem() instanceof BaseNumber)) {
+				return false;
+			}
+		}
+		for (int i = 0; i < inventory.getSizeInventory() - 1; i++) {
+			if(inventory.getStackInSlot(i).getItemDamage() > inventory.getStackInSlot(i+1).getItemDamage()){
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/*logic goes here*/
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting inventory) {
-		return null;
+		return this.recipeOutput.copy();
 	}
 
 	@Override
