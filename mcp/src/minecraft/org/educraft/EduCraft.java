@@ -125,32 +125,9 @@ public class EduCraft {
 
 		/* CUSTOM CRAFTING TABLE */
 		LanguageRegistry.addName(CALCULATOR, "Calculator");
-
-		// crafting recipes for mathematical operators
-		ItemStack sticks = new ItemStack(Item.stick);
-		// GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ",
-		// 'x',
-		// NUMBER, 'y', ADD_OPR);
-		// GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ",
-		// 'x',
-		// NUMBER, 'y', SUB_OPR);
-		// GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ",
-		// 'x',
-		// NUMBER, 'y', MUL_OPR);
-		// GameRegistry.addRecipe(new ItemStack(NUMBER), "   ", "xyx", "   ",
-		// 'x',
-		// NUMBER, 'y', DIV_OPR);
-
-		// GameRegistry.addRecipe(new ItemStack(ADD_OPR), " s ", "sss", " s ",
-		// 's', sticks);
-		// GameRegistry.addRecipe(new ItemStack(SUB_OPR), "   ", "sss", "   ",
-		// 's', sticks);
-		// GameRegistry.addRecipe(new ItemStack(MUL_OPR), "s s", " s ", "s s",
-		// 's', sticks);
-		// GameRegistry.addRecipe(new ItemStack(DIV_OPR), "  s", " s ", "s  ",
-		// 's', sticks);
-
+		
 		// recipes to break operators down into sticks
+		ItemStack sticks = new ItemStack(Item.stick);
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.stick, 4),
 				new ItemStack(ADD_OPR));
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.stick, 2),
