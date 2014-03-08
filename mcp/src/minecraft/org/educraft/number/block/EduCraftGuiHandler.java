@@ -39,8 +39,8 @@ public class EduCraftGuiHandler implements IGuiHandler {
 		switch (id) {
 		case BlockCalculator.GUI_ID:
 			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-			return (tileEntity instanceof CalculatorTileEntity) ? new CalculatorContainer(
-					player.inventory, (CalculatorTileEntity) tileEntity, world)
+			return (tileEntity instanceof CalculatorTileEntity) ? new CalculatorGui(
+					player.inventory, world, (CalculatorTileEntity) tileEntity)
 					: null;
 		case BlockOperatorBench.GUI_ID:
 			return world.getBlockId(x, y, z) == EduCraft.OPERATOR_BENCH.blockID ? new OperatorGui(
