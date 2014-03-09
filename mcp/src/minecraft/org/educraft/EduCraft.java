@@ -12,11 +12,14 @@ import org.educraft.dummy.MathsWand;
 import org.educraft.number.block.EduCraftGuiHandler;
 import org.educraft.number.block.calculator.BlockCalculator;
 import org.educraft.number.block.operators.BlockOperatorBench;
+import org.educraft.number.block.ordering.BlockOrderingBench;
+import org.educraft.number.entity.NumberMobDropsEvent;
 import org.educraft.number.entity.NumberSkeleton;
 import org.educraft.number.entity.NumberZombie;
 import org.educraft.number.item.AdditionOperator;
 import org.educraft.number.item.BaseNumber;
 import org.educraft.number.item.DivisionOperator;
+import org.educraft.number.item.DoorKey;
 import org.educraft.number.item.MultiplicationOperator;
 import org.educraft.number.item.SubtractionOperator;
 
@@ -34,6 +37,8 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @Mod(modid = "EduCraft", name = "EduCraft", version = "0.2.0")
 @NetworkMod(clientSideRequired = true)
 public class EduCraft {
+	
+	public static final String GuiTexturePrefix = "educraft" + ":" + "textures/gui/";
 
 	// EduCraft creative tab
 	public static CreativeTabs tabEduCraft = new CreativeTabs("tabEduCraft") {
@@ -47,6 +52,8 @@ public class EduCraft {
 
 	// instance of the maths wand
 	public static final Item MATHS_WAND = new MathsWand(6000);
+	// instance of key
+	public static final Item KEY = new DoorKey(6006);
 	// instances of the mathematical operators
 	public static final Item ADD_OPR = new AdditionOperator();
 	public static final Item SUB_OPR = new SubtractionOperator();
@@ -58,6 +65,9 @@ public class EduCraft {
 	public static final Block CALCULATOR = new BlockCalculator(500);
 	// instance of the operator bench
 	public static final Block OPERATOR_BENCH = new BlockOperatorBench(501);
+	// instance of ordering bench
+	public static final Block ORDERING_BENCH = new BlockOrderingBench(502);
+
 
 	// The instance of your mod that Forge uses.
 	@Instance(value = "EduCraft")
@@ -85,10 +95,17 @@ public class EduCraft {
 		GameRegistry.registerBlock(OPERATOR_BENCH, "operatorBench");
 		MinecraftForge.setBlockHarvestLevel(OPERATOR_BENCH, "axe", 0);
 		LanguageRegistry.addName(OPERATOR_BENCH, "Operator Bench");
+		
+		// register the ordering bench
+		GameRegistry.registerBlock(ORDERING_BENCH, "orderingBench");
+		MinecraftForge.setBlockHarvestLevel(ORDERING_BENCH, "axe", 0);
+		LanguageRegistry.addName(ORDERING_BENCH, "Ordering Bench");
 
 		/* MATHS WAND */
 		// localised name for maths wand
 		LanguageRegistry.addName(MATHS_WAND, "Maths Wand");
+		
+		LanguageRegistry.addName(KEY, "Door Key");
 
 		/* NUMBERS */
 		// register names for each possible metadata value in turn

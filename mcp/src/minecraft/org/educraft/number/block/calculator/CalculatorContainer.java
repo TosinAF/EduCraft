@@ -19,7 +19,7 @@ import org.educraft.EduCraft;
  * same calculator.
  */
 public class CalculatorContainer extends Container {
-
+		
 	// data members holding the crafting inventory
 	private CalculatorTileEntity tileEntity;
 	private InventoryCrafting craftMatrix;
@@ -27,7 +27,7 @@ public class CalculatorContainer extends Container {
 
 	// reference to the world this container is in
 	private World worldObj;
-
+	
 	public CalculatorContainer(InventoryPlayer inventory,
 			CalculatorTileEntity tileEntity, World world) {
 		// set inventory

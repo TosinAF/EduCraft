@@ -1,5 +1,6 @@
 package org.educraft.number.block.calculator;
 
+import org.educraft.EduCraft;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
@@ -21,11 +22,11 @@ public class CalculatorGui extends GuiContainer {
 	/**
 	 * Standard prefix for all textures associated with this GUI.
 	 */
+	
 	public static String GuiTexturePrefix = "educraft" + ":" + "textures/gui/";
-
 	private ResourceLocation calculator = new ResourceLocation(GuiTexturePrefix
 			+ "crafting_table.png");
-
+	
 	/**
 	 * Class constructor.
 	 * 

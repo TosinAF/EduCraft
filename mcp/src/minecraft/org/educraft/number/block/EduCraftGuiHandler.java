@@ -12,6 +12,9 @@ import org.educraft.number.block.calculator.CalculatorTileEntity;
 import org.educraft.number.block.operators.BlockOperatorBench;
 import org.educraft.number.block.operators.OperatorContainer;
 import org.educraft.number.block.operators.OperatorGui;
+import org.educraft.number.block.ordering.BlockOrderingBench;
+import org.educraft.number.block.ordering.OrderingContainer;
+import org.educraft.number.block.ordering.OrderingGui;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 
@@ -39,6 +42,7 @@ public class EduCraftGuiHandler implements IGuiHandler {
 	@Override
 	public Object getServerGuiElement(int id, EntityPlayer player, World world,
 			int x, int y, int z) {
+		
 		switch (id) {
 		case BlockCalculator.GUI_ID:
 			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
@@ -48,7 +52,11 @@ public class EduCraftGuiHandler implements IGuiHandler {
 		case BlockOperatorBench.GUI_ID:
 			return world.getBlockId(x, y, z) == EduCraft.OPERATOR_BENCH.blockID ? new OperatorContainer(
 					player.inventory, world, x, y, z) : null;
+		case BlockOrderingBench.GUI_ID:
+			return world.getBlockId(x, y, z) == EduCraft.ORDERING_BENCH.blockID ? new OrderingContainer(
+					player.inventory, world, x, y, z) : null;
 		}
+		
 		return null;
 	}
 
@@ -71,6 +79,7 @@ public class EduCraftGuiHandler implements IGuiHandler {
 	@Override
 	public Object getClientGuiElement(int id, EntityPlayer player, World world,
 			int x, int y, int z) {
+
 		switch (id) {
 		case BlockCalculator.GUI_ID:
 			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
@@ -80,7 +89,11 @@ public class EduCraftGuiHandler implements IGuiHandler {
 		case BlockOperatorBench.GUI_ID:
 			return world.getBlockId(x, y, z) == EduCraft.OPERATOR_BENCH.blockID ? new OperatorGui(
 					player.inventory, world, x, y, z) : null;
+		case BlockOrderingBench.GUI_ID:
+			return world.getBlockId(x, y, z) == EduCraft.ORDERING_BENCH.blockID ? new OrderingGui(
+					player.inventory, world, x, y, z) : null;
 		}
+		
 		return null;
 	}
 }
