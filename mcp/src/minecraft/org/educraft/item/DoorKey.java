@@ -9,7 +9,7 @@ public class DoorKey extends Item {
 		public DoorKey (int itemId) {
 			super(itemId);
 			setUnlocalizedName("doorKey");
-			setMaxStackSize(1);
+			setMaxStackSize(4);
 			setCreativeTab(EduCraft.tabEduCraft);
 			setTextureName("educraft:doorkey");
 		}	
