@@ -7,8 +7,8 @@ import net.minecraft.item.Item;
 
 public class AdditionOperator extends Item implements MathematicalOperator {
 	
-	public AdditionOperator() {
-		super(5000);
+	public AdditionOperator(int id) {
+		super(id);
 		setUnlocalizedName("addOperator");
 		setMaxStackSize(4);
 		setCreativeTab(EduCraft.tabEduCraft);

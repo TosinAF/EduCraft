@@ -8,8 +8,8 @@ import net.minecraft.item.Item;
 
 public class SubtractionOperator extends Item implements MathematicalOperator {
 	
-	public SubtractionOperator() {
-		super(5001);
+	public SubtractionOperator(int id) {
+		super(id);
 		setUnlocalizedName("subOperator");
 		setMaxStackSize(4);
 		setCreativeTab(EduCraft.tabEduCraft);

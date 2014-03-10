@@ -8,8 +8,8 @@ import net.minecraft.item.Item;
 public class MultiplicationOperator extends Item implements
 		MathematicalOperator {
 	
-	public MultiplicationOperator() {
-		super(5002);
+	public MultiplicationOperator(int id) {
+		super(id);
 		setUnlocalizedName("multOperator");
 		setMaxStackSize(4);
 		setCreativeTab(EduCraft.tabEduCraft);
