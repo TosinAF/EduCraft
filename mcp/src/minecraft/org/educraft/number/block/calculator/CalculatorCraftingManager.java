@@ -12,6 +12,8 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 
 import org.educraft.EduCraft;
+import org.educraft.number.item.BaseNumber;
+import org.educraft.number.item.MathematicalOperator;
 
 /**
  * This class is essentially identical to
@@ -26,9 +28,6 @@ public class CalculatorCraftingManager {
 	// static instance of this class
 	private static final CalculatorCraftingManager INSTANCE = new CalculatorCraftingManager();
 
-	// list of recipes know to this crafting manager
-	private List<CalculatorRecipe> recipes = new ArrayList<CalculatorRecipe>();
-
 	/**
 	 * Returns the singleton instance of this class
 	 */
@@ -37,152 +36,82 @@ public class CalculatorCraftingManager {
 	}
 
 	/**
-	 * Default constructor.
-	 */
-	private CalculatorCraftingManager() {
-		this.addRecipe(new ItemStack(EduCraft.NUMBER), "xyx", 'x',
-				EduCraft.NUMBER, 'y', EduCraft.ADD_OPR);
-		this.addRecipe(new ItemStack(EduCraft.NUMBER), "xyx", 'x',
-				EduCraft.NUMBER, 'y', EduCraft.SUB_OPR);
-		this.addRecipe(new ItemStack(EduCraft.NUMBER), "xyx", 'x',
-				EduCraft.NUMBER, 'y', EduCraft.MUL_OPR);
-		this.addRecipe(new ItemStack(EduCraft.NUMBER), "xyx", 'x',
-				EduCraft.NUMBER, 'y', EduCraft.DIV_OPR);
-	}
-
-	/**
-	 * Adds a new recipe to this crafting manager.
-	 * 
-	 * @param result
-	 *            item stack containing the result of this recipe
-	 * @param components
-	 *            array describing the components of this recipe
-	 * @return the newly created recipe object
-	 */
-	public CalculatorRecipe addRecipe(ItemStack result, Object... components) {
-		String s = "";
-		int i = 0;
-		int j = 0;
-		int k = 0;
-
-		if (components[i] instanceof String[]) {
-			String[] astring = (String[]) ((String[]) components[i++]);
-
-			for (int l = 0; l < astring.length; ++l) {
-				String s1 = astring[l];
-				++k;
-				j = s1.length();
-				s = s + s1;
-			}
-		} else {
-			while (components[i] instanceof String) {
-				String s2 = (String) components[i++];
-				++k;
-				j = s2.length();
-				s = s + s2;
-			}
-		}
-
-		HashMap hashmap;
-
-		for (hashmap = new HashMap(); i < components.length; i += 2) {
-			Character character = (Character) components[i];
-			ItemStack itemstack1 = null;
-
-			if (components[i + 1] instanceof Item) {
-				itemstack1 = new ItemStack((Item) components[i + 1]);
-			} else if (components[i + 1] instanceof Block) {
-				itemstack1 = new ItemStack((Block) components[i + 1], 1, 32767);
-			} else if (components[i + 1] instanceof ItemStack) {
-				itemstack1 = (ItemStack) components[i + 1];
-			}
-
-			hashmap.put(character, itemstack1);
-		}
-
-		ItemStack[] aitemstack = new ItemStack[j * k];
-
-		for (int i1 = 0; i1 < j * k; ++i1) {
-			char c0 = s.charAt(i1);
-
-			if (hashmap.containsKey(Character.valueOf(c0))) {
-				aitemstack[i1] = ((ItemStack) hashmap
-						.get(Character.valueOf(c0))).copy();
-			} else {
-				aitemstack[i1] = null;
-			}
-		}
-
-		CalculatorRecipe shapedrecipe = new CalculatorRecipe(j, k, aitemstack,
-				result);
-		this.recipes.add(shapedrecipe);
-		return shapedrecipe;
-	}
-
-	/**
 	 * Checks whether the given crafting matrix contains the right components
 	 * for any recipe known to this crafting manager.
 	 * 
 	 * @param matrix
 	 *            the crafting matrix to check
-	 * @param world
-	 *            the world associated with this crafting manager
 	 * @return the result of the recipe, or null if the patten is not recognised
 	 */
-	public ItemStack findMatchingRecipe(InventoryCrafting matrix, World world) {
-		int i = 0;
-		ItemStack itemstack = null;
-		ItemStack itemstack1 = null;
-		int j;
+	public ItemStack findMatchingRecipe(InventoryCrafting matrix) {
 
-		for (j = 0; j < matrix.getSizeInventory(); ++j) {
-			ItemStack itemstack2 = matrix.getStackInSlot(j);
-
-			if (itemstack2 != null) {
-				if (i == 0) {
-					itemstack = itemstack2;
-				}
-
-				if (i == 1) {
-					itemstack1 = itemstack2;
-				}
-
-				++i;
+		// reject instantly if any stack is empty
+		for (int i = 0; i < matrix.getSizeInventory(); i++) {
+			if (matrix.getStackInSlot(i) == null) {
+				return null;
 			}
 		}
+		// check that we have numbers in slots 0,2 and an operator
+		// in slot 1
+		ItemStack stack0 = matrix.getStackInSlot(0), stack1 = matrix
+				.getStackInSlot(1), stack2 = matrix.getStackInSlot(2);
 
-		if (i == 2 && itemstack.itemID == itemstack1.itemID
-				&& itemstack.stackSize == 1 && itemstack1.stackSize == 1
-				&& Item.itemsList[itemstack.itemID].isRepairable()) {
-			Item item = Item.itemsList[itemstack.itemID];
-			int k = item.getMaxDamage() - itemstack.getItemDamageForDisplay();
-			int l = item.getMaxDamage() - itemstack1.getItemDamageForDisplay();
-			int i1 = k + l + item.getMaxDamage() * 5 / 100;
-			int j1 = item.getMaxDamage() - i1;
-
-			if (j1 < 0) {
-				j1 = 0;
+		if ((stack0.getItem() instanceof BaseNumber)
+				&& (stack1.getItem() instanceof MathematicalOperator)
+				&& (stack2.getItem() instanceof BaseNumber)) {
+			// inventory contents are correct, accept if the result would be
+			// a whole number greater than zero
+			int eval = evaluate(stack0, stack2,
+					(MathematicalOperator) stack1.getItem());
+			
+			if(eval > 0) {
+				ItemStack result = new ItemStack(EduCraft.NUMBER);
+				result.setItemDamage(eval);
+				return result;
 			}
-
-			return new ItemStack(itemstack.itemID, 1, j1);
+			
+			return null;
+			
 		} else {
-
-			for (j = 0; j < this.recipes.size(); ++j) {
-				CalculatorRecipe calRecipe = this.recipes.get(j);
-
-				if (calRecipe.matches(matrix, world)) {
-					return calRecipe.getCraftingResult(matrix);
-				}
-			}
-
+			// one or more stacks have the wrong type, reject
 			return null;
 		}
+
 	}
 
-	/**
-	 * Returns the List of all recipes known to this crafting manager.
-	 */
-	public List getRecipeList() {
-		return this.recipes;
+	private int evaluate(ItemStack x, ItemStack y, MathematicalOperator operator) {
+		// result is initially zero, since zero is our 'error code'
+		int eval = 0;
+
+		// get the values of the two operands
+		int opr1 = x.getItemDamage();
+		int opr2 = y.getItemDamage();
+
+		// do the appropriate calculation depending on which
+		// operator was given
+		switch (operator.getOperator()) {
+		case PLUS:
+			eval = opr1 + opr2;
+			break;
+		case TIMES:
+			eval = opr1 * opr2;
+			break;
+		case MINUS:
+			eval = (opr1 > opr2) ? opr1 - opr2 : 0;
+			break;
+		case DIVIDE:
+			// need to cast to double so that we can check for remainders
+			double tempEval = (double) opr1 / opr2;
+			eval = (tempEval % 1 == 0) ? (int) tempEval : 0;
+			break;
+		}
+
+		// if the result would be too large, reject
+		if (eval > EduCraft.MAX_NUMBER) {
+			eval = 0;
+		}
+
+		return eval;
 	}
+
 }

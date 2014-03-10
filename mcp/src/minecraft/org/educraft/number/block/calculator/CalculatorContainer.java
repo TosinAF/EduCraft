@@ -73,7 +73,7 @@ public class CalculatorContainer extends Container {
 		this.craftResult.setInventorySlotContents(
 				0,
 				CalculatorCraftingManager.getInstance().findMatchingRecipe(
-						this.craftMatrix, this.worldObj));
+						this.craftMatrix));
 	}
 
 	/**
