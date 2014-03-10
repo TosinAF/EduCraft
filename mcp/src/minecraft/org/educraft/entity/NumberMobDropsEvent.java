@@ -28,9 +28,9 @@ public class NumberMobDropsEvent {
 	public void onEntityDrop(LivingDropsEvent event) {
 		if (event.source.getDamageType().equals("dummy")) {
 			EntityLivingBase entity = event.entityLiving;
-			if (entity instanceof NumberMob) {
+			if (entity instanceof INumberMob) {
 				ItemStack droppedItem = new ItemStack(EduCraft.NUMBER, 1,
-						((NumberMob) entity).getValue());
+						((INumberMob) entity).getValue());
 				entity.entityDropItem(droppedItem, 1.0f);
 			}
 		}

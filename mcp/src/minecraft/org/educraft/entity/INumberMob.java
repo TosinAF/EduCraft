@@ -1,6 +1,9 @@
 package org.educraft.entity;
 
-public interface NumberMob {
+/**
+ * Interface defining anything that can drop a number.
+ */
+public interface INumberMob {
 
 	/**
 	 * Returns the number that this mob should drop when killed.
