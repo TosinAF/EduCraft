@@ -10,7 +10,6 @@ import net.minecraftforge.common.MinecraftForge;
 
 import org.educraft.block.EduCraftGuiHandler;
 import org.educraft.block.calculator.BlockCalculator;
-import org.educraft.block.calculator.CalculatorTileEntity;
 import org.educraft.block.operators.BlockOperatorBench;
 import org.educraft.block.ordering.BlockOrderingBench;
 import org.educraft.dummy.MathsWand;
@@ -22,6 +21,7 @@ import org.educraft.item.DivisionOperator;
 import org.educraft.item.DoorKey;
 import org.educraft.item.MultiplicationOperator;
 import org.educraft.item.SubtractionOperator;
+import org.educraft.number.block.BlockTileEntity;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -93,7 +93,7 @@ public class EduCraft {
 		LanguageRegistry.addName(CALCULATOR, "Calculator Table");
 
 		// register TileEntity for Calculator
-		GameRegistry.registerTileEntity(CalculatorTileEntity.class, "EduCraft");
+		GameRegistry.registerTileEntity(BlockTileEntity.class, "EduCraft");
 
 		// register the operator bench
 		GameRegistry.registerBlock(OPERATOR_BENCH, "operatorBench");

@@ -13,7 +13,6 @@ import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.world.World;
 
 import org.educraft.EduCraft;
-import org.educraft.block.calculator.CalculatorRecipe;
 
 /**
  * This class is essentially identical to

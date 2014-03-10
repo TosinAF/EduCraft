@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import org.educraft.EduCraft;
+import org.educraft.number.block.BlockTileEntity;
 
 /**
  * This class is used to keep track of a particular {@link BlockCalculator}'s
@@ -21,7 +22,7 @@ import org.educraft.EduCraft;
 public class CalculatorContainer extends Container {
 		
 	// data members holding the crafting inventory
-	private CalculatorTileEntity tileEntity;
+	private BlockTileEntity tileEntity;
 	private InventoryCrafting craftMatrix;
 	private IInventory craftResult;
 
@@ -29,7 +30,7 @@ public class CalculatorContainer extends Container {
 	private World worldObj;
 	
 	public CalculatorContainer(InventoryPlayer inventory,
-			CalculatorTileEntity tileEntity, World world) {
+			BlockTileEntity tileEntity, World world) {
 		// set inventory
 		this.tileEntity = tileEntity.initialise(this);
 		this.craftMatrix = tileEntity.getCraftMatrix();
@@ -73,7 +74,7 @@ public class CalculatorContainer extends Container {
 		this.craftResult.setInventorySlotContents(
 				0,
 				CalculatorCraftingManager.getInstance().findMatchingRecipe(
-						this.craftMatrix, this.worldObj));
+						this.craftMatrix));
 	}
 
 	/**

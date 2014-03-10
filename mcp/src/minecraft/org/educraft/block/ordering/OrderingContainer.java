@@ -16,27 +16,26 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.world.World;
 
 import org.educraft.EduCraft;
+import org.educraft.number.block.BlockTileEntity;
 
 public class OrderingContainer extends Container{
 
-	public InventoryCrafting craftMatrix;
-	public IInventory craftResult;
+	private BlockTileEntity tileEntity;
+	private InventoryCrafting craftMatrix;
+	private IInventory craftResult;
+	
 	private World worldObj;
-	private int posX;
-	private int posY;
-	private int posZ;
 
-	public OrderingContainer(InventoryPlayer par1InventoryPlayer,
-			World par2World, int par3, int par4, int par5) {
+	public OrderingContainer(InventoryPlayer inventory,
+			BlockTileEntity tileEntity, World world) {
 
-		craftMatrix = new InventoryCrafting(this, 1, 3);
-		craftResult = new InventoryCraftResult();
-		worldObj = par2World;
-		posX = par3;
-		posY = par4;
-		posZ = par5;
+		this.tileEntity = tileEntity.initialise(this);
+		this.craftMatrix = tileEntity.getCraftMatrix();
+		this.craftResult = tileEntity.getCraftResult();
+		
+		this.worldObj = world;
 
-		this.addSlotToContainer(new SlotCrafting(par1InventoryPlayer.player,
+		this.addSlotToContainer(new SlotCrafting(inventory.player,
 				this.craftMatrix, this.craftResult, 0, 142, 35));
 		int i1;
 
@@ -48,13 +47,13 @@ public class OrderingContainer extends Container{
 
 		for (int l = 0; l < 3; ++l) {
 			for (i1 = 0; i1 < 9; ++i1) {
-				this.addSlotToContainer(new Slot(par1InventoryPlayer, i1 + l
+				this.addSlotToContainer(new Slot(inventory, i1 + l
 						* 9 + 9, 8 + i1 * 18, 84 + l * 18));
 			}
 		}
 
 		for (int l = 0; l < 9; ++l) {
-			this.addSlotToContainer(new Slot(par1InventoryPlayer, l,
+			this.addSlotToContainer(new Slot(inventory, l,
 					8 + l * 18, 142));
 		}
 
@@ -66,12 +65,12 @@ public class OrderingContainer extends Container{
 		this.craftResult.setInventorySlotContents(
 				0,
 				OrderingCraftingManager.getInstance().findMatchingRecipe(
-						this.craftMatrix, this.worldObj));
+						this.craftMatrix));
 
 	}
 
-	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
-		super.onContainerClosed(par1EntityPlayer);
+	public void onContainerClosed(EntityPlayer player) {
+		super.onContainerClosed(player);
 
 		if (!this.worldObj.isRemote) {
 			for (int i = 0; i < 3; ++i) {
@@ -79,19 +78,17 @@ public class OrderingContainer extends Container{
 						.getStackInSlotOnClosing(i);
 
 				if (itemstack != null) {
-					par1EntityPlayer.dropPlayerItem(itemstack);
+					player.dropPlayerItem(itemstack);
 				}
 			}
 		}
 	}
 
 	public boolean canInteractWith(EntityPlayer player) {
-		return this.worldObj.getBlockId(this.posX, this.posY, this.posZ) != EduCraft.ORDERING_BENCH.blockID ? false
-				: player.getDistanceSq((double) this.posX + 0.5D,
-						(double) this.posY + 0.5D, (double) this.posZ + 0.5D) <= 64.0D;
+		return this.tileEntity.isUseableByPlayer(player);
 	}
 
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
+	public ItemStack transferStackInSlot(EntityPlayer player, int par2) {
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(par2);
 
@@ -127,7 +124,7 @@ public class OrderingContainer extends Container{
 				return null;
 			}
 
-			slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
+			slot.onPickupFromSlot(player, itemstack1);
 		}
 
 		return itemstack;
