@@ -1,5 +1,7 @@
 package org.educraft.item;
 
+import java.util.List;
+
 import org.educraft.EduCraft;
 
 import cpw.mods.fml.relauncher.Side;
@@ -44,6 +46,14 @@ public class BaseNumber extends Item {
 		for(int i = 0; i < EduCraft.MAX_NUMBER; i++) {
 			
 			icons[i] = icon.registerIcon("educraft:" + i);
+		}
+	}
+	
+	@Override
+	public void getSubItems(int id, CreativeTabs tab, List list) {
+		for(int i = 0; i < EduCraft.MAX_NUMBER; i++) {
+			ItemStack itemstack = new ItemStack(id, 1, i);
+			list.add(itemstack);
 		}
 	}
 }

@@ -21,6 +21,7 @@ public class NumberSkeleton extends EntitySkeleton {
 		setCustomNameTag("Number Skeleton");
 		this.droppedItemId = Item.arrow.itemID;
 		this.value = ((rnd.nextInt(10)) + 1) * 10;
+		setCustomNameTag(String.valueOf("Number " + this.value));
 	}
 	
 	@Override

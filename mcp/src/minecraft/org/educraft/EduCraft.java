@@ -10,10 +10,10 @@ import net.minecraftforge.common.MinecraftForge;
 
 import org.educraft.block.EduCraftGuiHandler;
 import org.educraft.block.calculator.BlockCalculator;
+import org.educraft.block.calculator.CalculatorTileEntity;
 import org.educraft.block.operators.BlockOperatorBench;
 import org.educraft.block.ordering.BlockOrderingBench;
 import org.educraft.dummy.MathsWand;
-import org.educraft.entity.NumberMobDropsEvent;
 import org.educraft.entity.NumberSkeleton;
 import org.educraft.entity.NumberZombie;
 import org.educraft.item.AdditionOperator;
@@ -82,6 +82,7 @@ public class EduCraft {
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
+		
 		// localised name for the EduCraft tab
 		LanguageRegistry.instance().addStringLocalization(
 				"itemgroup.tabEduCraft", "en_us", "EduCraft");
@@ -90,6 +91,9 @@ public class EduCraft {
 		GameRegistry.registerBlock(CALCULATOR, "calculatorTable");
 		MinecraftForge.setBlockHarvestLevel(CALCULATOR, "axe", 0);
 		LanguageRegistry.addName(CALCULATOR, "Calculator Table");
+		
+		// register TileEntity for Calculator
+		GameRegistry.registerTileEntity(CalculatorTileEntity.class, "EduCraft");
 
 		// register the operator bench
 		GameRegistry.registerBlock(OPERATOR_BENCH, "operatorBench");
@@ -110,7 +114,7 @@ public class EduCraft {
 		/* NUMBERS */
 		// register names for each possible metadata value in turn
 		ItemStack numStack;
-		for (int i = 1; i <= MAX_NUMBER; i++) {
+		for (int i = 0; i <= MAX_NUMBER; i++) {
 			numStack = new ItemStack(NUMBER, 1, i);
 			LanguageRegistry.addName(numStack,
 					String.format("Number %d", numStack.getItemDamage()));

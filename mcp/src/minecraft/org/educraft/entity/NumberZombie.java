@@ -18,9 +18,9 @@ public class NumberZombie extends EntityZombie {
 
 	public NumberZombie(World world) {
 		super(world);
-		setCustomNameTag("Number Zombie");
 		this.droppedItemId = Item.rottenFlesh.itemID;
 		this.value = (rnd.nextInt(10)) + 1;
+		setCustomNameTag(String.valueOf("Number " + this.value));
 	}
 	
 	@Override
