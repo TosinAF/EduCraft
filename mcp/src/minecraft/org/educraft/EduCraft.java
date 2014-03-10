@@ -5,12 +5,14 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.src.ModLoader;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.MinecraftForge;
 
 import org.educraft.dummy.MathsWand;
 import org.educraft.number.block.EduCraftGuiHandler;
 import org.educraft.number.block.calculator.BlockCalculator;
+import org.educraft.number.block.calculator.CalculatorTileEntity;
 import org.educraft.number.block.operators.BlockOperatorBench;
 import org.educraft.number.block.ordering.BlockOrderingBench;
 import org.educraft.number.entity.NumberMobDropsEvent;
@@ -82,6 +84,7 @@ public class EduCraft {
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
+		
 		// localised name for the EduCraft tab
 		LanguageRegistry.instance().addStringLocalization(
 				"itemgroup.tabEduCraft", "en_us", "EduCraft");
@@ -90,6 +93,9 @@ public class EduCraft {
 		GameRegistry.registerBlock(CALCULATOR, "calculatorTable");
 		MinecraftForge.setBlockHarvestLevel(CALCULATOR, "axe", 0);
 		LanguageRegistry.addName(CALCULATOR, "Calculator Table");
+		
+		// register TileEntity for Calculator
+		GameRegistry.registerTileEntity(CalculatorTileEntity.class, "EduCraft");
 
 		// register the operator bench
 		GameRegistry.registerBlock(OPERATOR_BENCH, "operatorBench");
