@@ -85,7 +85,7 @@ public class EduCraft {
 
 		// localised name for the EduCraft tab
 		LanguageRegistry.instance().addStringLocalization(
-				"itemgroup.tabEduCraft", "en_US", "EduCraft");
+				"itemGroup.tabEduCraft", "en_US", "EduCraft");
 
 		// register the calculator table
 		GameRegistry.registerBlock(CALCULATOR, "calculatorTable");
