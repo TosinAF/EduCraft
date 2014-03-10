@@ -7,8 +7,8 @@ import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
 import org.educraft.EduCraft;
-import org.educraft.number.entity.NumberSkeleton;
-import org.educraft.number.entity.NumberZombie;
+import org.educraft.entity.NumberSkeleton;
+import org.educraft.entity.NumberZombie;
 
 /**
  * This class is used to handle AttackEntityEvents, which arise when a player
