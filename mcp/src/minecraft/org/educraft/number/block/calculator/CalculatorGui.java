@@ -1,6 +1,7 @@
 package org.educraft.number.block.calculator;
 
 import org.educraft.EduCraft;
+import org.educraft.number.block.BlockTileEntity;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
@@ -38,7 +39,7 @@ public class CalculatorGui extends GuiContainer {
 	 *            the tile entity containing the crafting inventories
 	 */
 	public CalculatorGui(InventoryPlayer inventory, World world,
-			CalculatorTileEntity tileEntity) {
+			BlockTileEntity tileEntity) {
 		super(new CalculatorContainer(inventory, tileEntity, world));
 	}
 

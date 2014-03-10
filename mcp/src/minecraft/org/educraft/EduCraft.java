@@ -10,9 +10,9 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.MinecraftForge;
 
 import org.educraft.dummy.MathsWand;
+import org.educraft.number.block.BlockTileEntity;
 import org.educraft.number.block.EduCraftGuiHandler;
 import org.educraft.number.block.calculator.BlockCalculator;
-import org.educraft.number.block.calculator.CalculatorTileEntity;
 import org.educraft.number.block.operators.BlockOperatorBench;
 import org.educraft.number.block.ordering.BlockOrderingBench;
 import org.educraft.number.entity.NumberMobDropsEvent;
@@ -95,7 +95,7 @@ public class EduCraft {
 		LanguageRegistry.addName(CALCULATOR, "Calculator Table");
 		
 		// register TileEntity for Calculator
-		GameRegistry.registerTileEntity(CalculatorTileEntity.class, "EduCraft");
+		GameRegistry.registerTileEntity(BlockTileEntity.class, "EduCraft");
 
 		// register the operator bench
 		GameRegistry.registerBlock(OPERATOR_BENCH, "operatorBench");

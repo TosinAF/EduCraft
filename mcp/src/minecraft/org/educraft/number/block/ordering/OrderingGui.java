@@ -3,10 +3,12 @@ package org.educraft.number.block.ordering;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import org.educraft.EduCraft;
+import org.educraft.number.block.BlockTileEntity;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
@@ -18,10 +20,9 @@ public class OrderingGui extends GuiContainer {
 	private ResourceLocation orderingBench = new ResourceLocation(EduCraft.GuiTexturePrefix
 			+ "ordering_table.png");
 
-	public OrderingGui(InventoryPlayer par1InventoryPlayer, World par2World,
-			int par3, int par4, int par5) {
-		super(new OrderingContainer(par1InventoryPlayer, par2World, par3, par4,
-				par5));
+	public OrderingGui(InventoryPlayer inventory, World world,
+			BlockTileEntity tileEntity) {
+		super(new OrderingContainer(inventory, tileEntity, world));
 	}
 
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {

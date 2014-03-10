@@ -1,21 +1,13 @@
-package org.educraft.number.block.calculator;
+package org.educraft.number.block;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
-/**
- * This class provides a tile entity for storing a Calculator's inventory in a
- * place where every player in the world can access it, rather than being
- * confined to an individual player's view.
- */
-public class CalculatorTileEntity extends TileEntity {
+public class BlockTileEntity extends TileEntity {
 	// data members representing the inventory
 	private Container container;
 	private InventoryCrafting craftMatrix;
@@ -27,7 +19,7 @@ public class CalculatorTileEntity extends TileEntity {
 	/**
 	 * Default constructor.
 	 */
-	public CalculatorTileEntity() {
+	public BlockTileEntity() {
 		this.container = null;
 		this.craftMatrix = null;
 		this.craftResult = null;
@@ -48,7 +40,7 @@ public class CalculatorTileEntity extends TileEntity {
 	 *            the container to link the crafting inventory to
 	 * @return the initialised tile entity
 	 */
-	public synchronized CalculatorTileEntity initialise(Container container) {
+	public synchronized BlockTileEntity initialise(Container container) {
 		if (this.container == null) {
 			this.container = container;
 			this.craftMatrix = new InventoryCrafting(this.container, 1, 3);
@@ -124,5 +116,4 @@ public class CalculatorTileEntity extends TileEntity {
 				&& player.getDistanceSq(xCoord + 0.5, yCoord + 0.5,
 						zCoord + 0.5) < 64;
 	}
-
 }

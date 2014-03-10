@@ -1,18 +1,22 @@
 package org.educraft.number.block.ordering;
 
 import org.educraft.EduCraft;
+import org.educraft.number.block.BlockTileEntity;
 
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockWorkbench;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockOrderingBench extends BlockWorkbench {
+public class BlockOrderingBench extends BlockContainer {
 
 	public static final int GUI_ID = 2;
 	
 	public BlockOrderingBench(int id) {
-		super(id);
-		setUnlocalizedName("orderingBench");
+		super(id, Material.ground);
+		setUnlocalizedName("Ordering Bench");
 		setCreativeTab(EduCraft.tabEduCraft);
 	}
 	
@@ -27,5 +31,16 @@ public class BlockOrderingBench extends BlockWorkbench {
 		} else {
 			return false;
 		}
+	}
+	
+	@Override
+	public void onBlockAdded(World world, int x, int y, int z) {
+		world.setBlockTileEntity(x, y, z, createNewTileEntity(world));
+		super.onBlockAdded(world, x, y, z);
+	}
+	
+	@Override
+	public TileEntity createNewTileEntity(World world) {
+		return new BlockTileEntity();
 	}
 }

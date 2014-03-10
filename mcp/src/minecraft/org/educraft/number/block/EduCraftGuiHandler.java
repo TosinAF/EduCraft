@@ -8,7 +8,6 @@ import org.educraft.EduCraft;
 import org.educraft.number.block.calculator.BlockCalculator;
 import org.educraft.number.block.calculator.CalculatorContainer;
 import org.educraft.number.block.calculator.CalculatorGui;
-import org.educraft.number.block.calculator.CalculatorTileEntity;
 import org.educraft.number.block.operators.BlockOperatorBench;
 import org.educraft.number.block.operators.OperatorContainer;
 import org.educraft.number.block.operators.OperatorGui;
@@ -46,15 +45,17 @@ public class EduCraftGuiHandler implements IGuiHandler {
 		switch (id) {
 		case BlockCalculator.GUI_ID:
 			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-			return (tileEntity instanceof CalculatorTileEntity) ? new CalculatorContainer(
-					player.inventory, (CalculatorTileEntity) tileEntity, world)
+			return (tileEntity instanceof BlockTileEntity) ? new CalculatorContainer(
+					player.inventory, (BlockTileEntity) tileEntity, world)
 					: null;
 		case BlockOperatorBench.GUI_ID:
 			return world.getBlockId(x, y, z) == EduCraft.OPERATOR_BENCH.blockID ? new OperatorContainer(
 					player.inventory, world, x, y, z) : null;
 		case BlockOrderingBench.GUI_ID:
-			return world.getBlockId(x, y, z) == EduCraft.ORDERING_BENCH.blockID ? new OrderingContainer(
-					player.inventory, world, x, y, z) : null;
+			tileEntity = world.getBlockTileEntity(x, y, z);
+			return (tileEntity instanceof BlockTileEntity) ? new OrderingContainer(
+					player.inventory, (BlockTileEntity) tileEntity, world)
+					: null;
 		}
 		
 		return null;
@@ -83,15 +84,17 @@ public class EduCraftGuiHandler implements IGuiHandler {
 		switch (id) {
 		case BlockCalculator.GUI_ID:
 			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-			return (tileEntity instanceof CalculatorTileEntity) ? new CalculatorGui(
-					player.inventory, world, (CalculatorTileEntity) tileEntity)
+			return (tileEntity instanceof BlockTileEntity) ? new CalculatorGui(
+					player.inventory, world, (BlockTileEntity) tileEntity)
 					: null;
 		case BlockOperatorBench.GUI_ID:
 			return world.getBlockId(x, y, z) == EduCraft.OPERATOR_BENCH.blockID ? new OperatorGui(
 					player.inventory, world, x, y, z) : null;
 		case BlockOrderingBench.GUI_ID:
-			return world.getBlockId(x, y, z) == EduCraft.ORDERING_BENCH.blockID ? new OrderingGui(
-					player.inventory, world, x, y, z) : null;
+			tileEntity = world.getBlockTileEntity(x, y, z);
+			return (tileEntity instanceof BlockTileEntity) ? new OrderingGui(
+					player.inventory, world, (BlockTileEntity) tileEntity)
+					: null;
 		}
 		
 		return null;
