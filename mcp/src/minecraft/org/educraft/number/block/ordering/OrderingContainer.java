@@ -66,7 +66,7 @@ public class OrderingContainer extends Container{
 		this.craftResult.setInventorySlotContents(
 				0,
 				OrderingCraftingManager.getInstance().findMatchingRecipe(
-						this.craftMatrix, this.worldObj));
+						this.craftMatrix));
 
 	}
 
