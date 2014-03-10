@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import org.educraft.EduCraft;
 import org.educraft.item.BaseNumber;
 
-public class NumberZombie extends EntityZombie {
+public class NumberZombie extends EntityZombie implements NumberMob {
 	private static Random rnd = new Random();
 	private int droppedItemId, value;
 
@@ -21,6 +21,11 @@ public class NumberZombie extends EntityZombie {
 		this.droppedItemId = Item.rottenFlesh.itemID;
 		this.value = (rnd.nextInt(10)) + 1;
 		setCustomNameTag(String.valueOf("Number " + this.value));
+	}
+	
+	@Override
+	public int getValue() {
+		return this.value;
 	}
 	
 	@Override

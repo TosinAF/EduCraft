@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class NumberSkeleton extends EntitySkeleton {
+public class NumberSkeleton extends EntitySkeleton implements NumberMob {
 	private static Random rnd = new Random();
 	private int droppedItemId, value;
 
@@ -22,6 +22,11 @@ public class NumberSkeleton extends EntitySkeleton {
 		this.droppedItemId = Item.arrow.itemID;
 		this.value = ((rnd.nextInt(10)) + 1) * 10;
 		setCustomNameTag(String.valueOf("Number " + this.value));
+	}
+	
+	@Override
+	public int getValue() {
+		return this.value;
 	}
 	
 	@Override

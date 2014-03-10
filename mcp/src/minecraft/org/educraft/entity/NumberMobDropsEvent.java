@@ -1,28 +1,37 @@
 package org.educraft.entity;
-import org.educraft.EduCraft;
+
 import java.util.Random;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+
+import org.educraft.EduCraft;
+
+/**
+ * Event handler class providing a single method to control the dropping of
+ * items by entities.
+ */
+
 public class NumberMobDropsEvent {
 	private static Random rnd = new Random();
+
+	/**
+	 * Called whenever an entity drops an item. This handler is used to ensure
+	 * that when a number mob is killed, it drops a number of the correct value.
+	 * 
+	 * @param event
+	 *            the event which triggered this handler
+	 */
 	@ForgeSubscribe
-	//Handles dropping
-	public void onEntityDrop(LivingDropsEvent event){
-		if(event.source.getDamageType().equals("dummy")){
-			if (event.entityLiving instanceof NumberZombie) {
-				int numberDropped = (rnd.nextInt(10)) + 1;
-				ItemStack droppedItem = new ItemStack(EduCraft.NUMBER.itemID,1,1);
-				droppedItem.setItemDamage(numberDropped);
-				event.entityLiving.entityDropItem(droppedItem, 1.0f);
-			}
-			else if (event.entityLiving instanceof NumberSkeleton) {
-				int numberDropped = ((rnd.nextInt(10)) + 1) * 10;
-				ItemStack droppedItem = new ItemStack(EduCraft.NUMBER.itemID,1,1);
-				droppedItem.setItemDamage(numberDropped);
-				event.entityLiving.entityDropItem(droppedItem, 1.0f);
+	public void onEntityDrop(LivingDropsEvent event) {
+		if (event.source.getDamageType().equals("dummy")) {
+			EntityLivingBase entity = event.entityLiving;
+			if (entity instanceof NumberMob) {
+				ItemStack droppedItem = new ItemStack(EduCraft.NUMBER, 1,
+						((NumberMob) entity).getValue());
+				entity.entityDropItem(droppedItem, 1.0f);
 			}
 		}
 	}
