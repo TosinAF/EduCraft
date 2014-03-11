@@ -34,42 +34,85 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
+/**
+ * The base class for the entire EduCraft mod. This class is responsible for
+ * instantiating every custom-made item and block we want to make available for
+ * players in-game.
+ */
 @Mod(modid = "EduCraft", name = "EduCraft", version = "0.2.0")
 @NetworkMod(clientSideRequired = true)
 public class EduCraft {
 
+	/**
+	 * Standard prefix for every GUI texture created for the mod.
+	 */
 	public static final String GuiTexturePrefix = "educraft" + ":"
 			+ "textures/gui/";
 
-	// EduCraft creative tab
+	/**
+	 * Defines a customised inventory tab for use in creative mode, to collect
+	 * all the EduCraft items together.
+	 */
 	public static CreativeTabs tabEduCraft = new CreativeTabs("tabEduCraft") {
 		public ItemStack getIconItemStack() {
 			return new ItemStack(ADD_OPR, 1, 0);
 		}
 	};
 
-	// max number that we will work with
+	/**
+	 * The maximum number players are allowed to obtain. Used to prevent players
+	 * trying to get numbers we don't have textures for.
+	 */
 	public static final int MAX_NUMBER = 1000;
 
-	// instance of the maths wand
+	/**
+	 * Instance of the maths wand.
+	 */
 	public static final Item MATHS_WAND = new MathsWand(6000);
-	// instance of key
+	/**
+	 * Instance of the key.
+	 */
 	public static final Item KEY = new DoorKey(6006);
-	// instances of the mathematical operators
+
+	/**
+	 * Instance of the addition operator.
+	 */
 	public static final Item ADD_OPR = new AdditionOperator(5000);
+	/**
+	 * Instance of the subtraction operator.
+	 */
 	public static final Item SUB_OPR = new SubtractionOperator(5001);
+	/**
+	 * Instance of the multiplication operator.
+	 */
 	public static final Item MUL_OPR = new MultiplicationOperator(5002);
+	/**
+	 * Instance of the division operator.
+	 */
 	public static final Item DIV_OPR = new DivisionOperator(5003);
+
+	/**
+	 * Instance of the basic number class.
+	 */
 	public static final Item NUMBER = new BaseNumber(6005);
 
-	// instance of the calculator
+	/**
+	 * Instance of the calculator block.
+	 */
 	public static final Block CALCULATOR = new BlockCalculator(500);
-	// instance of the operator bench
+	/**
+	 * Instance of the operator crafting bench.
+	 */
 	public static final Block OPERATOR_BENCH = new BlockOperatorBench(501);
-	// instance of ordering bench
+	/**
+	 * Instance of the number ordering bench.
+	 */
 	public static final Block ORDERING_BENCH = new BlockOrderingBench(502);
 
-	// The instance of your mod that Forge uses.
+	/**
+	 * Instance of the mod that Minecraft Forge detects and uses. This is what
+	 * tells Forge that a mod exists here.
+	 */
 	@Instance(value = "EduCraft")
 	public static EduCraft instance;
 
@@ -80,9 +123,15 @@ public class EduCraft {
 	@SidedProxy(clientSide = "org.educraft.client.ClientProxy", serverSide = "org.educraft.CommonProxy")
 	public static CommonProxy proxy;
 
+	/**
+	 * Called when the mod is loaded. Responsible for registering all blocks,
+	 * items, names, and so forth.
+	 * 
+	 * @param event
+	 *            the event which triggered this method
+	 */
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
-
 		// localised name for the EduCraft tab
 		LanguageRegistry.instance().addStringLocalization(
 				"itemGroup.tabEduCraft", "en_US", "EduCraft");
