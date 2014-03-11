@@ -1,7 +1,7 @@
 package org.educraft.block.calculator;
 
 import org.educraft.EduCraft;
-import org.educraft.number.block.BlockTileEntity;
+import org.educraft.block.BlockTileEntity;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;

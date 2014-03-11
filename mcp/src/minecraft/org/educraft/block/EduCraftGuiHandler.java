@@ -14,7 +14,6 @@ import org.educraft.block.operators.OperatorGui;
 import org.educraft.block.ordering.BlockOrderingBench;
 import org.educraft.block.ordering.OrderingContainer;
 import org.educraft.block.ordering.OrderingGui;
-import org.educraft.number.block.BlockTileEntity;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 

@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import org.educraft.EduCraft;
-import org.educraft.number.block.BlockTileEntity;
+import org.educraft.block.BlockTileEntity;
 
 /**
  * This class is used to keep track of a particular {@link BlockCalculator}'s

@@ -1,7 +1,7 @@
 package org.educraft.block.ordering;
 
 import org.educraft.EduCraft;
-import org.educraft.number.block.BlockTileEntity;
+import org.educraft.block.BlockTileEntity;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

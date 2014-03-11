@@ -16,7 +16,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.world.World;
 
 import org.educraft.EduCraft;
-import org.educraft.number.block.BlockTileEntity;
+import org.educraft.block.BlockTileEntity;
 
 public class OrderingContainer extends Container{
 

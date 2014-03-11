@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.MinecraftForge;
 
+import org.educraft.block.BlockTileEntity;
 import org.educraft.block.EduCraftGuiHandler;
 import org.educraft.block.calculator.BlockCalculator;
 import org.educraft.block.operators.BlockOperatorBench;
@@ -21,7 +22,6 @@ import org.educraft.item.DivisionOperator;
 import org.educraft.item.DoorKey;
 import org.educraft.item.MultiplicationOperator;
 import org.educraft.item.SubtractionOperator;
-import org.educraft.number.block.BlockTileEntity;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
