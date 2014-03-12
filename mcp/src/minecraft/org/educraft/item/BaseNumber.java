@@ -19,7 +19,7 @@ public class BaseNumber extends Item {
 		super(itemID);
 		setHasSubtypes(true);
 		setMaxDamage(0);
-		setMaxStackSize(1); // Change this later perhaps
+		setMaxStackSize(4);
 		setCreativeTab(EduCraft.tabEduCraft);
 		setUnlocalizedName("number");
 	}
