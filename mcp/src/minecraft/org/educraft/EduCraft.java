@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.MinecraftForge;
 
-import org.educraft.block.BlockTileEntity;
+import org.educraft.block.CraftingTileEntity;
 import org.educraft.block.EduCraftGuiHandler;
 import org.educraft.block.calculator.BlockCalculator;
 import org.educraft.block.operators.BlockOperatorBench;
@@ -142,7 +142,7 @@ public class EduCraft {
 		LanguageRegistry.addName(CALCULATOR, "Calculator Table");
 
 		// register TileEntity for Calculator
-		GameRegistry.registerTileEntity(BlockTileEntity.class, "EduCraft");
+		GameRegistry.registerTileEntity(CraftingTileEntity.class, "EduCraft");
 
 		// register the operator bench
 		GameRegistry.registerBlock(OPERATOR_BENCH, "operatorBench");

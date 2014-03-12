@@ -45,16 +45,16 @@ public class EduCraftGuiHandler implements IGuiHandler {
 		switch (id) {
 		case BlockCalculator.GUI_ID:
 			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-			return (tileEntity instanceof BlockTileEntity) ? new CalculatorContainer(
-					player.inventory, (BlockTileEntity) tileEntity, world)
+			return (tileEntity instanceof CraftingTileEntity) ? new CalculatorContainer(
+					player.inventory, (CraftingTileEntity) tileEntity, world)
 					: null;
 		case BlockOperatorBench.GUI_ID:
 			return world.getBlockId(x, y, z) == EduCraft.OPERATOR_BENCH.blockID ? new OperatorContainer(
 					player.inventory, world, x, y, z) : null;
 		case BlockOrderingBench.GUI_ID:
 			tileEntity = world.getBlockTileEntity(x, y, z);
-			return (tileEntity instanceof BlockTileEntity) ? new OrderingContainer(
-					player.inventory, (BlockTileEntity) tileEntity, world)
+			return (tileEntity instanceof CraftingTileEntity) ? new OrderingContainer(
+					player.inventory, (CraftingTileEntity) tileEntity, world)
 					: null;
 		}
 		
@@ -84,16 +84,16 @@ public class EduCraftGuiHandler implements IGuiHandler {
 		switch (id) {
 		case BlockCalculator.GUI_ID:
 			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-			return (tileEntity instanceof BlockTileEntity) ? new CalculatorGui(
-					player.inventory, world, (BlockTileEntity) tileEntity)
+			return (tileEntity instanceof CraftingTileEntity) ? new CalculatorGui(
+					player.inventory, world, (CraftingTileEntity) tileEntity)
 					: null;
 		case BlockOperatorBench.GUI_ID:
 			return world.getBlockId(x, y, z) == EduCraft.OPERATOR_BENCH.blockID ? new OperatorGui(
 					player.inventory, world, x, y, z) : null;
 		case BlockOrderingBench.GUI_ID:
 			tileEntity = world.getBlockTileEntity(x, y, z);
-			return (tileEntity instanceof BlockTileEntity) ? new OrderingGui(
-					player.inventory, world, (BlockTileEntity) tileEntity)
+			return (tileEntity instanceof CraftingTileEntity) ? new OrderingGui(
+					player.inventory, world, (CraftingTileEntity) tileEntity)
 					: null;
 		}
 		

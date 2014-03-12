@@ -7,7 +7,15 @@ import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.tileentity.TileEntity;
 
-public class BlockTileEntity extends TileEntity {
+/**
+ * This tile entity contains the inventories required to maintain a block
+ * responsible for crafting. By storing the inventories in a tile entity, we
+ * allow multiple players to interact with the same inventory.
+ * 
+ * @see BlockCalculator
+ * @see BlockOrderingBench
+ */
+public class CraftingTileEntity extends TileEntity {
 	// data members representing the inventory
 	private Container container;
 	private InventoryCrafting craftMatrix;
@@ -19,7 +27,7 @@ public class BlockTileEntity extends TileEntity {
 	/**
 	 * Default constructor.
 	 */
-	public BlockTileEntity() {
+	public CraftingTileEntity() {
 		this.container = null;
 		this.craftMatrix = null;
 		this.craftResult = null;
@@ -31,16 +39,13 @@ public class BlockTileEntity extends TileEntity {
 	 * <p/>
 	 * We can't set them up in the constructor, because we don't have a
 	 * reference to the container on creation. Should always initialise the tile
-	 * entity as soon as we create the CalculatorContainer.
-	 * <p/>
-	 * The method is synchronized to prevent multiple players from activating
-	 * the tile entity and overwriting each other's references.
+	 * entity as soon as we create the relevant container.
 	 * 
 	 * @param container
 	 *            the container to link the crafting inventory to
 	 * @return the initialised tile entity
 	 */
-	public synchronized BlockTileEntity initialise(Container container) {
+	public synchronized CraftingTileEntity initialise(Container container) {
 		if (this.container == null) {
 			this.container = container;
 			this.craftMatrix = new InventoryCrafting(this.container, 1, 3);

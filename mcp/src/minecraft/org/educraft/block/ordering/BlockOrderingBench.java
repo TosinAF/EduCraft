@@ -1,7 +1,7 @@
 package org.educraft.block.ordering;
 
 import org.educraft.EduCraft;
-import org.educraft.block.BlockTileEntity;
+import org.educraft.block.CraftingTileEntity;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -68,6 +68,6 @@ public class BlockOrderingBench extends BlockContainer {
 	
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new BlockTileEntity();
+		return new CraftingTileEntity();
 	}
 }

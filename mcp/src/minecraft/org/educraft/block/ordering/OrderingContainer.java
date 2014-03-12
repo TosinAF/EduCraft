@@ -16,18 +16,18 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.world.World;
 
 import org.educraft.EduCraft;
-import org.educraft.block.BlockTileEntity;
+import org.educraft.block.CraftingTileEntity;
 
 public class OrderingContainer extends Container{
 
-	private BlockTileEntity tileEntity;
+	private CraftingTileEntity tileEntity;
 	private InventoryCrafting craftMatrix;
 	private IInventory craftResult;
 	
 	private World worldObj;
 
 	public OrderingContainer(InventoryPlayer inventory,
-			BlockTileEntity tileEntity, World world) {
+			CraftingTileEntity tileEntity, World world) {
 
 		this.tileEntity = tileEntity.initialise(this);
 		this.craftMatrix = tileEntity.getCraftMatrix();

@@ -10,7 +10,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 import org.educraft.EduCraft;
-import org.educraft.block.BlockTileEntity;
+import org.educraft.block.CraftingTileEntity;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -136,6 +136,6 @@ public class BlockCalculator extends BlockContainer {
 	 */
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new BlockTileEntity();
+		return new CraftingTileEntity();
 	}
 }

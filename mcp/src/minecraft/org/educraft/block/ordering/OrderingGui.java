@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import org.educraft.EduCraft;
-import org.educraft.block.BlockTileEntity;
+import org.educraft.block.CraftingTileEntity;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
@@ -21,7 +21,7 @@ public class OrderingGui extends GuiContainer {
 			+ "ordering_table.png");
 
 	public OrderingGui(InventoryPlayer inventory, World world,
-			BlockTileEntity tileEntity) {
+			CraftingTileEntity tileEntity) {
 		super(new OrderingContainer(inventory, tileEntity, world));
 	}
 
