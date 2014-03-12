@@ -118,9 +118,10 @@ public class CalculatorContainer extends Container {
 	 * Used to handle shift-clicking.
 	 * 
 	 * @param player
-	 *            the player interacting
+	 *            the player doing the shift-clicking
 	 * @param par2
 	 *            unknown
+	 * @return the results of the shift click
 	 */
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int par2) {

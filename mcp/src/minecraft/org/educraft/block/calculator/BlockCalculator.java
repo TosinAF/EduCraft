@@ -128,11 +128,11 @@ public class BlockCalculator extends BlockContainer {
 	}
 
 	/**
-	 * Creates a new tile entity of type appropriate for this block.
+	 * Obtains a new instance of the appropriate tile entity for this block.
 	 * 
 	 * @param world
-	 *            the world this block is in
-	 * @return the created tile entity
+	 *            the world this block was placed in
+	 * @return the new tile entity
 	 */
 	@Override
 	public TileEntity createNewTileEntity(World world) {
