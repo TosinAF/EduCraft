@@ -20,7 +20,7 @@ import org.educraft.block.CraftingTileEntity;
  * same calculator.
  */
 public class CalculatorContainer extends Container {
-		
+
 	// data members holding the crafting inventory
 	private CraftingTileEntity tileEntity;
 	private InventoryCrafting craftMatrix;
@@ -28,7 +28,7 @@ public class CalculatorContainer extends Container {
 
 	// reference to the world this container is in
 	private World worldObj;
-	
+
 	public CalculatorContainer(InventoryPlayer inventory,
 			CraftingTileEntity tileEntity, World world) {
 		// set inventory
@@ -71,10 +71,9 @@ public class CalculatorContainer extends Container {
 	 */
 	@Override
 	public void onCraftMatrixChanged(IInventory inventory) {
-		this.craftResult.setInventorySlotContents(
-				0,
-				CalculatorCraftingManager.getInstance().findMatchingRecipe(
-						this.craftMatrix));
+		this.craftResult.setInventorySlotContents(0,
+				CalculatorCraftingManager.INSTANCE
+						.findMatchingRecipe(this.craftMatrix));
 	}
 
 	/**

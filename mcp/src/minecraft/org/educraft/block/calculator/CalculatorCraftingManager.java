@@ -16,16 +16,11 @@ import org.educraft.item.MathematicalOperator;
  * @author ianknight
  * 
  */
-public class CalculatorCraftingManager {
-	// static instance of this class
-	private static final CalculatorCraftingManager INSTANCE = new CalculatorCraftingManager();
-
+public enum CalculatorCraftingManager {
 	/**
-	 * Returns the singleton instance of this class
+	 * Singleton instance of the crafting manager.
 	 */
-	public static final CalculatorCraftingManager getInstance() {
-		return INSTANCE;
-	}
+	INSTANCE;
 
 	/**
 	 * Checks whether the given crafting matrix contains the right components

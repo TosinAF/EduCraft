@@ -12,18 +12,11 @@ import org.educraft.item.BaseNumber;
  * @author ianknight
  * 
  */
-public class OrderingCraftingManager {
-	// singleton instance of the class
-	private static final OrderingCraftingManager INSTANCE = new OrderingCraftingManager();
-
+public enum OrderingCraftingManager {
 	/**
-	 * Returns the singleton instance of this class.
-	 * 
-	 * @return the instance
+	 * Singleton instance of the crafting manager.
 	 */
-	public static final OrderingCraftingManager getInstance() {
-		return INSTANCE;
-	}
+	INSTANCE;
 
 	/**
 	 * Checks the given crafting matrix to see whether it matches any of the

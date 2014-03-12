@@ -83,8 +83,9 @@ public class OrderingContainer extends Container {
 	 *            the crafting matrix
 	 */
 	public void onCraftMatrixChanged(IInventory inventory) {
-		this.craftResult.setInventorySlotContents(0, OrderingCraftingManager
-				.getInstance().findMatchingRecipe(this.craftMatrix));
+		this.craftResult.setInventorySlotContents(0,
+				OrderingCraftingManager.INSTANCE
+						.findMatchingRecipe(this.craftMatrix));
 	}
 
 	/**
