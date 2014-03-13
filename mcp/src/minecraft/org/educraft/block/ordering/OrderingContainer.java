@@ -52,12 +52,11 @@ public class OrderingContainer extends Container {
 		// add slots to the crafting inventories
 		this.addSlotToContainer(new SlotCrafting(inventory.player,
 				this.craftMatrix, this.craftResult, 0, 142, 35));
+		
 		int i1;
-
 		for (i1 = 0; i1 < 3; ++i1) {
 			this.addSlotToContainer(new Slot(this.craftMatrix, i1,
 					10 + i1 * 36, 35));
-
 		}
 
 		for (int l = 0; l < 3; ++l) {
@@ -82,6 +81,7 @@ public class OrderingContainer extends Container {
 	 * @param inventory
 	 *            the crafting matrix
 	 */
+	@Override
 	public void onCraftMatrixChanged(IInventory inventory) {
 		this.craftResult.setInventorySlotContents(0,
 				OrderingCraftingManager.INSTANCE
@@ -97,6 +97,7 @@ public class OrderingContainer extends Container {
 	 * @param player
 	 *            the player who just closed the GUI
 	 */
+	@Override
 	public void onContainerClosed(EntityPlayer player) {
 		super.onContainerClosed(player);
 
@@ -120,6 +121,7 @@ public class OrderingContainer extends Container {
 	 *            the player attempting to interact
 	 * @return true if the player is allowed to interact
 	 */
+	@Override
 	public boolean canInteractWith(EntityPlayer player) {
 		return this.tileEntity.isUseableByPlayer(player);
 	}
@@ -129,49 +131,42 @@ public class OrderingContainer extends Container {
 	 * 
 	 * @param player
 	 *            the player doing the shift-clicking
-	 * @param par2
-	 *            unknown
+	 * @param i
+	 *            index of the slot being shift-clicked
 	 * @return the results of the shift click
 	 */
-	public ItemStack transferStackInSlot(EntityPlayer player, int par2) {
-		ItemStack itemstack = null;
-		Slot slot = (Slot) this.inventorySlots.get(par2);
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer player, int i) {
+		ItemStack tempStack = null;
+		Slot slot = (Slot) this.inventorySlots.get(i);
 
 		if (slot != null && slot.getHasStack()) {
-			ItemStack itemstack1 = slot.getStack();
-			itemstack = itemstack1.copy();
+			ItemStack slotStack = slot.getStack();
+			tempStack = slotStack.copy();
 
-			if (par2 == 0) {
-				if (!this.mergeItemStack(itemstack1, 10, 46, true)) {
+			if (i < 4) {
+				// item started off in container, move to player inventory
+				if (!this.mergeItemStack(slotStack, 4, 35, true)) {
 					return null;
 				}
-
-				slot.onSlotChange(itemstack1, itemstack);
-			} else if (par2 >= 10 && par2 < 37) {
-				if (!this.mergeItemStack(itemstack1, 37, 46, false)) {
-					return null;
-				}
-			} else if (par2 >= 37 && par2 < 46) {
-				if (!this.mergeItemStack(itemstack1, 10, 37, false)) {
-					return null;
-				}
-			} else if (!this.mergeItemStack(itemstack1, 10, 46, false)) {
+			} else if (!this.mergeItemStack(slotStack, 1, 4, false)) {
+				// item was in player's inventory, move to container
 				return null;
 			}
 
-			if (itemstack1.stackSize == 0) {
+			if (slotStack.stackSize == 0) {
 				slot.putStack((ItemStack) null);
 			} else {
 				slot.onSlotChanged();
 			}
 
-			if (itemstack1.stackSize == itemstack.stackSize) {
+			if (slotStack.stackSize == tempStack.stackSize) {
 				return null;
 			}
 
-			slot.onPickupFromSlot(player, itemstack1);
+			slot.onPickupFromSlot(player, slotStack);
 		}
 
-		return itemstack;
+		return tempStack;
 	}
 }
