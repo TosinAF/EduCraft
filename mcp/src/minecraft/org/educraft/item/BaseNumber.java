@@ -28,30 +28,30 @@ public class BaseNumber extends Item {
 	public String getUnlocalizedName(ItemStack is) {
 		return getUnlocalizedName() + "." + String.valueOf(is.getItemDamage());
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	public static Icon[] icons;
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getIconFromDamage(int damage) {
 		return icons[damage];
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister icon) {
 		icons = new Icon[EduCraft.MAX_NUMBER];
-		
-		for(int i = 0; i < EduCraft.MAX_NUMBER; i++) {
-			
+
+		for (int i = 0; i < EduCraft.MAX_NUMBER; i++) {
+
 			icons[i] = icon.registerIcon("educraft:" + i);
 		}
 	}
-	
+
 	@Override
 	public void getSubItems(int id, CreativeTabs tab, List list) {
-		for(int i = 0; i < EduCraft.MAX_NUMBER; i++) {
+		for (int i = 0; i < EduCraft.MAX_NUMBER; i++) {
 			ItemStack itemstack = new ItemStack(id, 1, i);
 			list.add(itemstack);
 		}
