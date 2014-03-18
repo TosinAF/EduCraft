@@ -69,6 +69,7 @@ public class EduCraft {
 	 * Instance of the maths wand.
 	 */
 	public static final Item MATHS_WAND = new MathsWand(6000);
+
 	/**
 	 * Instance of the key.
 	 */
@@ -158,7 +159,23 @@ public class EduCraft {
 		// localised name for maths wand
 		LanguageRegistry.addName(MATHS_WAND, "Maths Wand");
 
-		LanguageRegistry.addName(KEY, "Door Key");
+		/* KEYS */
+		// register names for each possible metadata
+		ItemStack stack;
+		for (int i = 0; i < DoorKey.NAMES.length; i++) {
+			stack = new ItemStack(KEY, 1, i);
+			switch (i) {
+			case 0:
+				LanguageRegistry.addName(stack, "Door Key");
+				break;
+			case 1:
+				LanguageRegistry.addName(stack, "Red Key");
+				break;
+			case 2:
+				LanguageRegistry.addName(stack, "Blue Key");
+				break;
+			}
+		}
 
 		/* NUMBERS */
 		// register names for each possible metadata value in turn
