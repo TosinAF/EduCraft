@@ -44,7 +44,7 @@ public enum OrderingCraftingManager {
 			stack = inventory.getStackInSlot(i);
 			stack0 = inventory.getStackInSlot(i + 1);
 			if ((stack.getItemDamage() >= stack0.getItemDamage())
-					|| !isEven(stack, stack0, type)) {
+					|| !isParityCorrect(stack, stack0, type)) {
 				return null;
 			}
 		}
@@ -52,7 +52,7 @@ public enum OrderingCraftingManager {
 		return new ItemStack(EduCraft.KEY, 1, type.getTypeCode());
 	}
 
-	private boolean isEven(ItemStack stack, ItemStack stack0, BenchType type) {
+	private boolean isParityCorrect(ItemStack stack, ItemStack stack0, BenchType type) {
 		switch (type) {
 		case ODD:
 			return (stack.getItemDamage() % 2 == 1)
