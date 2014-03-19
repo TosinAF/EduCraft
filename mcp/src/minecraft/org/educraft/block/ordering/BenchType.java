@@ -5,17 +5,17 @@ package org.educraft.block.ordering;
  */
 public enum BenchType {
 	/**
-	 * A bench which accepts all numbers.
-	 */
-	ALL(0),
-	/**
 	 * A bench which accepts only odd numbers.
 	 */
-	ODD(1),
+	ODD(0),
 	/**
 	 * A bench which accepts only even numbers.
 	 */
-	EVEN(2);
+	EVEN(1),
+	/**
+	 * A bench which accepts all numbers.
+	 */
+	ALL(2);
 	
 	private int type;
 	
