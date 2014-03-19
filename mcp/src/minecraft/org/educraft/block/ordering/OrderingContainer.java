@@ -29,6 +29,8 @@ public class OrderingContainer extends Container {
 	private IInventory craftResult;
 	// the world this container is in
 	private World worldObj;
+	
+	private Boolean flag;
 
 	/**
 	 * Class constructor.
@@ -41,13 +43,14 @@ public class OrderingContainer extends Container {
 	 *            the world this container is in
 	 */
 	public OrderingContainer(InventoryPlayer inventory,
-			CraftingTileEntity tileEntity, World world) {
+			CraftingTileEntity tileEntity, World world, Boolean numberFlag) {
 		// set up the crafting inventories
 		this.tileEntity = tileEntity.initialise(this);
 		this.craftMatrix = tileEntity.getCraftMatrix();
 		this.craftResult = tileEntity.getCraftResult();
-
 		this.worldObj = world;
+		
+		this.flag = numberFlag;
 
 		// add slots to the crafting inventories
 		this.addSlotToContainer(new SlotCrafting(inventory.player,
@@ -85,7 +88,7 @@ public class OrderingContainer extends Container {
 	public void onCraftMatrixChanged(IInventory inventory) {
 		this.craftResult.setInventorySlotContents(0,
 				OrderingCraftingManager.INSTANCE
-						.findMatchingRecipe(this.craftMatrix));
+						.findMatchingRecipe(this.craftMatrix, this.flag));
 	}
 
 	/**

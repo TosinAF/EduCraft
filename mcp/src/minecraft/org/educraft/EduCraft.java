@@ -106,9 +106,12 @@ public class EduCraft {
 	 */
 	public static final Block OPERATOR_BENCH = new BlockOperatorBench(501);
 	/**
-	 * Instance of the number ordering bench.
+	 * Instances of the number ordering benches.
 	 */
-	public static final Block ORDERING_BENCH = new BlockOrderingBench(502);
+	public static final Block ORDERING_BENCH = new BlockOrderingBench(502, null);
+	public static final Block ORDERING_BENCH_ODD = new BlockOrderingBench(503, true);
+	public static final Block ORDERING_BENCH_EVEN = new BlockOrderingBench(504, false);
+	
 
 	/**
 	 * Instance of the mod that Minecraft Forge detects and uses. This is what
@@ -154,6 +157,16 @@ public class EduCraft {
 		GameRegistry.registerBlock(ORDERING_BENCH, "orderingBench");
 		MinecraftForge.setBlockHarvestLevel(ORDERING_BENCH, "axe", 0);
 		LanguageRegistry.addName(ORDERING_BENCH, "Ordering Bench");
+		
+		// register the ordering bench for odd numbers
+		GameRegistry.registerBlock(ORDERING_BENCH_ODD, "orderingBenchOdd");
+		MinecraftForge.setBlockHarvestLevel(ORDERING_BENCH_ODD, "axe", 0);
+		LanguageRegistry.addName(ORDERING_BENCH_ODD, "Ordering Bench Odd");
+		
+		// register the ordering bench for even numbers
+		GameRegistry.registerBlock(ORDERING_BENCH_EVEN, "orderingBenchEven");
+		MinecraftForge.setBlockHarvestLevel(ORDERING_BENCH_EVEN, "axe", 0);
+		LanguageRegistry.addName(ORDERING_BENCH_EVEN, "Ordering Bench Even");
 
 		/* MATHS WAND */
 		// localised name for maths wand

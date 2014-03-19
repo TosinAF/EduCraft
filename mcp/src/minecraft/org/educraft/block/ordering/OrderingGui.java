@@ -19,14 +19,27 @@ public class OrderingGui extends GuiContainer {
 	
 	private ResourceLocation orderingBench = new ResourceLocation(EduCraft.GuiTexturePrefix
 			+ "ordering_table.png");
-
+	private Boolean flag;
+	
 	public OrderingGui(InventoryPlayer inventory, World world,
-			CraftingTileEntity tileEntity) {
-		super(new OrderingContainer(inventory, tileEntity, world));
+			CraftingTileEntity tileEntity, Boolean numberFlag) {
+		super(new OrderingContainer(inventory, tileEntity, world, numberFlag));
+		this.flag = numberFlag;
 	}
 
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		this.fontRenderer.drawString("Ordering", 28, 6, 4210752);
+		
+		String name;
+		
+		if(this.flag == null) {
+			name = "Ordering";
+		} else if (this.flag == true) {
+			name = "Ordering Odd";
+		} else {
+			name = "Ordering Even";
+		} 
+		
+		this.fontRenderer.drawString(name, 28, 6, 4210752);
 		this.fontRenderer.drawString(I18n.getString("container.inventory"), 8,
 				this.ySize - 96 + 2, 4210752);
 	}
