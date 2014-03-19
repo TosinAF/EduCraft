@@ -21,7 +21,7 @@ public class MathsWand extends ItemSword {
 	public MathsWand(int itemID) {
 		super(itemID, EnumToolMaterial.IRON);
 		setCreativeTab(EduCraft.tabEduCraft);
-		setTextureName("stick");
+		setTextureName("educraft:mathswand");
 		setUnlocalizedName("mathsWand");
 	}
 

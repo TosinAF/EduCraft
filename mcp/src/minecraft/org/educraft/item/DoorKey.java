@@ -22,7 +22,7 @@ public class DoorKey extends Item {
 		setUnlocalizedName("doorKey");
 		setMaxStackSize(4);
 		setCreativeTab(EduCraft.tabEduCraft);
-		setTextureName("educraft:doorkey");
+		setTextureName("educraft:key_yellow");
 	}
 
 	@Override
