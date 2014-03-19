@@ -166,13 +166,13 @@ public class EduCraft {
 			stack = new ItemStack(KEY, 1, i);
 			switch (i) {
 			case 0:
-				LanguageRegistry.addName(stack, "Door Key");
-				break;
-			case 1:
 				LanguageRegistry.addName(stack, "Red Key");
 				break;
-			case 2:
+			case 1:
 				LanguageRegistry.addName(stack, "Blue Key");
+				break;
+			case 2:
+				LanguageRegistry.addName(stack, "Yellow Key");
 				break;
 			}
 		}
