@@ -27,8 +27,11 @@ public enum OrderingCraftingManager {
 	 * @return an ItemStack containing the result of the recipe, or null if the
 	 *         pattern is not recognised
 	 */
-	public ItemStack findMatchingRecipe(InventoryCrafting inventory, Boolean numberFlag) {
+	public ItemStack findMatchingRecipe(InventoryCrafting inventory,
+			Boolean numberFlag) {
 		ItemStack stack, stack0;
+
+		int keyType = 2;
 
 		// if any of the input slots is null, or not a number, reject
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {
@@ -39,53 +42,35 @@ public enum OrderingCraftingManager {
 		}
 
 		// if any of the inputs are in the wrong order, reject
-		
-		// any numbers
-		if(numberFlag == null) {
-			
-			for (int i = 0; i < inventory.getSizeInventory() - 1; i++) {
-				stack = inventory.getStackInSlot(i);
-				stack0 = inventory.getStackInSlot(i + 1);
-				if (stack.getItemDamage() >= stack0.getItemDamage()) {
-					return null;
-				}
-			}
-			
-			
-		// only odd numbers
-		} else if (numberFlag == true) {
-			
-			for (int i = 0; i < inventory.getSizeInventory() - 1; i++) {
-				stack = inventory.getStackInSlot(i);
-				stack0 = inventory.getStackInSlot(i + 1);
-				if ((stack.getItemDamage() >= stack0.getItemDamage()) || 
-						!isEven(stack) || !isEven(stack0)) {
-					return null;
-				}
-			}
-			
-		// only even numbers
-		} else {
-			
-			for (int i = 0; i < inventory.getSizeInventory() - 1; i++) {
-				stack = inventory.getStackInSlot(i);
-				stack0 = inventory.getStackInSlot(i + 1);
-				if ((stack.getItemDamage() >= stack0.getItemDamage()) || 
-						isEven(stack) || isEven(stack0)) {
-					return null;
-				}
+		for (int i = 0; i < inventory.getSizeInventory() - 1; i++) {
+			stack = inventory.getStackInSlot(i);
+			stack0 = inventory.getStackInSlot(i + 1);
+			if ((stack.getItemDamage() >= stack0.getItemDamage())
+					|| !isEven(stack, stack0, numberFlag)) {
+				return null;
 			}
 		}
 
-		return new ItemStack(EduCraft.KEY);
+		if(numberFlag != null) {
+			
+			keyType = numberFlag ? 0 : 1;
+		} 
+
+		return new ItemStack(EduCraft.KEY, 1, keyType);
 	}
-	
-	private boolean isEven(ItemStack stack) {
-		
-		if (stack.getItemDamage() % 2 == 1) {
+
+	private boolean isEven(ItemStack stack, ItemStack stack0, Boolean numberFlag) {
+
+		if (numberFlag == null) {
 			return true;
+		} else if (numberFlag == true) {
+
+			return (stack.getItemDamage() % 2 == 1 && stack0.getItemDamage() % 2 == 1);
+			
+		} else {
+
+			return (stack.getItemDamage() % 2 == 0 && stack0.getItemDamage() % 2 == 0);
 		}
-		
-		return false;
+
 	}
 }
