@@ -27,7 +27,7 @@ public enum OrderingCraftingManager {
 	 * @return an ItemStack containing the result of the recipe, or null if the
 	 *         pattern is not recognised
 	 */
-	public ItemStack findMatchingRecipe(InventoryCrafting inventory) {
+	public ItemStack findMatchingRecipe(InventoryCrafting inventory, Boolean numberFlag) {
 		ItemStack stack, stack0;
 
 		// if any of the input slots is null, or not a number, reject
@@ -39,14 +39,53 @@ public enum OrderingCraftingManager {
 		}
 
 		// if any of the inputs are in the wrong order, reject
-		for (int i = 0; i < inventory.getSizeInventory() - 1; i++) {
-			stack = inventory.getStackInSlot(i);
-			stack0 = inventory.getStackInSlot(i + 1);
-			if (stack.getItemDamage() >= stack0.getItemDamage()) {
-				return null;
+		
+		// any numbers
+		if(numberFlag == null) {
+			
+			for (int i = 0; i < inventory.getSizeInventory() - 1; i++) {
+				stack = inventory.getStackInSlot(i);
+				stack0 = inventory.getStackInSlot(i + 1);
+				if (stack.getItemDamage() >= stack0.getItemDamage()) {
+					return null;
+				}
+			}
+			
+			
+		// only odd numbers
+		} else if (numberFlag == true) {
+			
+			for (int i = 0; i < inventory.getSizeInventory() - 1; i++) {
+				stack = inventory.getStackInSlot(i);
+				stack0 = inventory.getStackInSlot(i + 1);
+				if ((stack.getItemDamage() >= stack0.getItemDamage()) || 
+						!isEven(stack) || !isEven(stack0)) {
+					return null;
+				}
+			}
+			
+		// only even numbers
+		} else {
+			
+			for (int i = 0; i < inventory.getSizeInventory() - 1; i++) {
+				stack = inventory.getStackInSlot(i);
+				stack0 = inventory.getStackInSlot(i + 1);
+				if ((stack.getItemDamage() >= stack0.getItemDamage()) || 
+						isEven(stack) || isEven(stack0)) {
+					return null;
+				}
 			}
 		}
 
 		return new ItemStack(EduCraft.KEY);
+	}
+	
+	private boolean isEven(ItemStack stack) {
+		
+		if (stack.getItemDamage() % 2 == 1) {
+			return true;
+		}
+		
+		return false;
 	}
 }

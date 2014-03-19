@@ -53,9 +53,16 @@ public class EduCraftGuiHandler implements IGuiHandler {
 					player.inventory, world, x, y, z) : null;
 		case BlockOrderingBench.GUI_ID:
 			tileEntity = world.getBlockTileEntity(x, y, z);
-			return (tileEntity instanceof CraftingTileEntity) ? new OrderingContainer(
-					player.inventory, (CraftingTileEntity) tileEntity, world)
-					: null;
+			
+			if(tileEntity instanceof CraftingTileEntity) {
+				
+				CraftingTileEntity ordering = (CraftingTileEntity) tileEntity;
+				return new OrderingContainer(
+						player.inventory, (CraftingTileEntity) tileEntity, world, ordering.getFlag());
+				
+			} else {
+				return null;
+			}
 		}
 		
 		return null;
@@ -92,9 +99,16 @@ public class EduCraftGuiHandler implements IGuiHandler {
 					player.inventory, world, x, y, z) : null;
 		case BlockOrderingBench.GUI_ID:
 			tileEntity = world.getBlockTileEntity(x, y, z);
-			return (tileEntity instanceof CraftingTileEntity) ? new OrderingGui(
-					player.inventory, world, (CraftingTileEntity) tileEntity)
-					: null;
+			
+			if(tileEntity instanceof CraftingTileEntity) {
+				
+				CraftingTileEntity ordering = (CraftingTileEntity) tileEntity;
+				
+				return new OrderingGui(player.inventory, world, (CraftingTileEntity) tileEntity, ordering.getFlag());
+				
+			} else {
+				return null;
+			}
 		}
 		
 		return null;

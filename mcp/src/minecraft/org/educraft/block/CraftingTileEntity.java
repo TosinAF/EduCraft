@@ -20,6 +20,7 @@ public class CraftingTileEntity extends TileEntity {
 	private Container container;
 	private InventoryCrafting craftMatrix;
 	private IInventory craftResult;
+	private Boolean flag;
 
 	// the number of players using the tile entity
 	private int playersUsing;
@@ -33,7 +34,16 @@ public class CraftingTileEntity extends TileEntity {
 		this.craftResult = null;
 		this.playersUsing = 0;
 	}
-
+	
+	public CraftingTileEntity(Boolean numberFlag) {
+		this.container = null;
+		this.craftMatrix = null;
+		this.craftResult = null;
+		this.playersUsing = 0;
+		this.flag = numberFlag;
+	}
+	
+	
 	/**
 	 * Set up the crafting matrix and the crafting result.
 	 * <p/>
@@ -120,5 +130,9 @@ public class CraftingTileEntity extends TileEntity {
 		return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) == this
 				&& player.getDistanceSq(xCoord + 0.5, yCoord + 0.5,
 						zCoord + 0.5) < 64;
+	}
+	
+	public  Boolean getFlag() {
+		return this.flag;
 	}
 }
