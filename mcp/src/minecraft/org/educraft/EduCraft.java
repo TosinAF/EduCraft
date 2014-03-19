@@ -108,9 +108,9 @@ public class EduCraft {
 	/**
 	 * Instances of the number ordering benches.
 	 */
-	public static final Block ORDERING_BENCH = new BlockOrderingBench(502, null);
-	public static final Block ORDERING_BENCH_ODD = new BlockOrderingBench(503, true);
-	public static final Block ORDERING_BENCH_EVEN = new BlockOrderingBench(504, false);
+	public static final Block ORDERING_BENCH = new BlockOrderingBench(502, 0);
+	public static final Block ORDERING_BENCH_ODD = new BlockOrderingBench(503, 1);
+	public static final Block ORDERING_BENCH_EVEN = new BlockOrderingBench(504, 2);
 	
 
 	/**

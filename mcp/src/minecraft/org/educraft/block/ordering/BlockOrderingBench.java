@@ -31,7 +31,8 @@ public class BlockOrderingBench extends BlockContainer {
 	private Icon orderingIconTop;
 	@SideOnly(Side.CLIENT)
 	private Icon orderingIconFront;
-	
+
+	private BenchType benchType;
 	private Boolean flag;
 
 	/**
@@ -40,18 +41,28 @@ public class BlockOrderingBench extends BlockContainer {
 	 * @param id
 	 *            the block id to register with the game
 	 */
-	public BlockOrderingBench(int id, Boolean numberFlag) {
+	public BlockOrderingBench(int id, int benchType) {
 		super(id, Material.ground);
 		setCreativeTab(EduCraft.tabEduCraft);
-		this.flag = numberFlag;
 		
-		if(this.flag == null) {
-			setUnlocalizedName("Ordering Bench");
-		} else if (this.flag == true) {
-			setUnlocalizedName("Ordering Bench Odd");
-		} else if (this.flag == false) {
-			setUnlocalizedName("Ordering Bench Even");
+		switch (benchType) {
+		case 1:
+			this.benchType = BenchType.ODD;
+			setUnlocalizedName("orderingBenchOdd");
+			break;
+		case 2:
+			this.benchType = BenchType.EVEN;
+			setUnlocalizedName("orderingBenchEven");
+			break;
+		default:
+			this.benchType = BenchType.ALL;
+			setUnlocalizedName("orderingBench");
+			break;
 		}
+	}
+	
+	public BenchType getBenchType() {
+		return this.benchType;
 	}
 
 	/**
@@ -147,6 +158,6 @@ public class BlockOrderingBench extends BlockContainer {
 	 */
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new CraftingTileEntity(this.flag);
+		return new OrderingTileEntity(this.benchType);
 	}
 }

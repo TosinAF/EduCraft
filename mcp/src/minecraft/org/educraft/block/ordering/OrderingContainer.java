@@ -30,7 +30,8 @@ public class OrderingContainer extends Container {
 	// the world this container is in
 	private World worldObj;
 	
-	private Boolean flag;
+	// the type of bench this container is paired with
+	private BenchType benchType;
 
 	/**
 	 * Class constructor.
@@ -43,14 +44,14 @@ public class OrderingContainer extends Container {
 	 *            the world this container is in
 	 */
 	public OrderingContainer(InventoryPlayer inventory,
-			CraftingTileEntity tileEntity, World world, Boolean numberFlag) {
+			CraftingTileEntity tileEntity, World world, BenchType type) {
 		// set up the crafting inventories
 		this.tileEntity = tileEntity.initialise(this);
 		this.craftMatrix = tileEntity.getCraftMatrix();
 		this.craftResult = tileEntity.getCraftResult();
 		this.worldObj = world;
 		
-		this.flag = numberFlag;
+		this.benchType = type;
 
 		// add slots to the crafting inventories
 		this.addSlotToContainer(new SlotCrafting(inventory.player,
@@ -88,7 +89,7 @@ public class OrderingContainer extends Container {
 	public void onCraftMatrixChanged(IInventory inventory) {
 		this.craftResult.setInventorySlotContents(0,
 				OrderingCraftingManager.INSTANCE
-						.findMatchingRecipe(this.craftMatrix, this.flag));
+						.findMatchingRecipe(this.craftMatrix, this.benchType));
 	}
 
 	/**

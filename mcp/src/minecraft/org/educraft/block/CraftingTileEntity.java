@@ -7,6 +7,10 @@ import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.tileentity.TileEntity;
 
+import org.educraft.block.calculator.BlockCalculator;
+import org.educraft.block.ordering.BenchType;
+import org.educraft.block.ordering.BlockOrderingBench;
+
 /**
  * This tile entity contains the inventories required to maintain a block
  * responsible for crafting. By storing the inventories in a tile entity, we
@@ -20,7 +24,6 @@ public class CraftingTileEntity extends TileEntity {
 	private Container container;
 	private InventoryCrafting craftMatrix;
 	private IInventory craftResult;
-	private Boolean flag;
 
 	// the number of players using the tile entity
 	private int playersUsing;
@@ -34,16 +37,7 @@ public class CraftingTileEntity extends TileEntity {
 		this.craftResult = null;
 		this.playersUsing = 0;
 	}
-	
-	public CraftingTileEntity(Boolean numberFlag) {
-		this.container = null;
-		this.craftMatrix = null;
-		this.craftResult = null;
-		this.playersUsing = 0;
-		this.flag = numberFlag;
-	}
-	
-	
+
 	/**
 	 * Set up the crafting matrix and the crafting result.
 	 * <p/>
@@ -131,8 +125,5 @@ public class CraftingTileEntity extends TileEntity {
 				&& player.getDistanceSq(xCoord + 0.5, yCoord + 0.5,
 						zCoord + 0.5) < 64;
 	}
-	
-	public  Boolean getFlag() {
-		return this.flag;
-	}
+
 }

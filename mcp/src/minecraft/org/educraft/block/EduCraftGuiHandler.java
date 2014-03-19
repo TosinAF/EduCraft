@@ -14,6 +14,7 @@ import org.educraft.block.operators.OperatorGui;
 import org.educraft.block.ordering.BlockOrderingBench;
 import org.educraft.block.ordering.OrderingContainer;
 import org.educraft.block.ordering.OrderingGui;
+import org.educraft.block.ordering.OrderingTileEntity;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 
@@ -41,10 +42,10 @@ public class EduCraftGuiHandler implements IGuiHandler {
 	@Override
 	public Object getServerGuiElement(int id, EntityPlayer player, World world,
 			int x, int y, int z) {
-		
+		TileEntity tileEntity;
 		switch (id) {
 		case BlockCalculator.GUI_ID:
-			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+			tileEntity = world.getBlockTileEntity(x, y, z);
 			return (tileEntity instanceof CraftingTileEntity) ? new CalculatorContainer(
 					player.inventory, (CraftingTileEntity) tileEntity, world)
 					: null;
@@ -53,18 +54,16 @@ public class EduCraftGuiHandler implements IGuiHandler {
 					player.inventory, world, x, y, z) : null;
 		case BlockOrderingBench.GUI_ID:
 			tileEntity = world.getBlockTileEntity(x, y, z);
-			
-			if(tileEntity instanceof CraftingTileEntity) {
-				
-				CraftingTileEntity ordering = (CraftingTileEntity) tileEntity;
-				return new OrderingContainer(
-						player.inventory, (CraftingTileEntity) tileEntity, world, ordering.getFlag());
-				
+
+			if (tileEntity instanceof OrderingTileEntity) {
+				OrderingTileEntity ordering = (OrderingTileEntity) tileEntity;
+				return new OrderingContainer(player.inventory, ordering, world,
+						ordering.getBenchType());
 			} else {
 				return null;
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -99,18 +98,16 @@ public class EduCraftGuiHandler implements IGuiHandler {
 					player.inventory, world, x, y, z) : null;
 		case BlockOrderingBench.GUI_ID:
 			tileEntity = world.getBlockTileEntity(x, y, z);
-			
-			if(tileEntity instanceof CraftingTileEntity) {
-				
-				CraftingTileEntity ordering = (CraftingTileEntity) tileEntity;
-				
-				return new OrderingGui(player.inventory, world, (CraftingTileEntity) tileEntity, ordering.getFlag());
-				
+
+			if (tileEntity instanceof OrderingTileEntity) {
+				OrderingTileEntity ordering = (OrderingTileEntity) tileEntity;
+				return new OrderingGui(player.inventory, world, ordering,
+						ordering.getBenchType());
 			} else {
 				return null;
 			}
 		}
-		
+
 		return null;
 	}
 }

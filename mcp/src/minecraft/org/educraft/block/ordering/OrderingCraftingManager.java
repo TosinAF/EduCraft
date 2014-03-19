@@ -28,10 +28,8 @@ public enum OrderingCraftingManager {
 	 *         pattern is not recognised
 	 */
 	public ItemStack findMatchingRecipe(InventoryCrafting inventory,
-			Boolean numberFlag) {
+			BenchType type) {
 		ItemStack stack, stack0;
-
-		int keyType = 2;
 
 		// if any of the input slots is null, or not a number, reject
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {
@@ -46,31 +44,24 @@ public enum OrderingCraftingManager {
 			stack = inventory.getStackInSlot(i);
 			stack0 = inventory.getStackInSlot(i + 1);
 			if ((stack.getItemDamage() >= stack0.getItemDamage())
-					|| !isEven(stack, stack0, numberFlag)) {
+					|| !isEven(stack, stack0, type)) {
 				return null;
 			}
 		}
 
-		if(numberFlag != null) {
-			
-			keyType = numberFlag ? 0 : 1;
-		} 
-
-		return new ItemStack(EduCraft.KEY, 1, keyType);
+		return new ItemStack(EduCraft.KEY, 1, type.getTypeCode());
 	}
 
-	private boolean isEven(ItemStack stack, ItemStack stack0, Boolean numberFlag) {
-
-		if (numberFlag == null) {
+	private boolean isEven(ItemStack stack, ItemStack stack0, BenchType type) {
+		switch (type) {
+		case ODD:
+			return (stack.getItemDamage() % 2 == 1)
+					&& (stack0.getItemDamage() % 2 == 1);
+		case EVEN:
+			return (stack.getItemDamage() % 2 == 0)
+					&& (stack0.getItemDamage() % 2 == 0);
+		default:
 			return true;
-		} else if (numberFlag == true) {
-
-			return (stack.getItemDamage() % 2 == 1 && stack0.getItemDamage() % 2 == 1);
-			
-		} else {
-
-			return (stack.getItemDamage() % 2 == 0 && stack0.getItemDamage() % 2 == 0);
 		}
-
 	}
 }
