@@ -7,13 +7,15 @@
 *.ear
 
 ## CUSTOM RULES
-# Ignore LaTeX processing
+# Ignore LaTeX processing and images
 *.aux
 *.toc
 *.log
 *.bbl
 *.blg
 *.lof
+*.db
+*ssot*
 
 # By default, ignore everything
 /*
@@ -33,6 +35,10 @@
 /mcp/jars/*
 !/mcp/src/minecraft/
 !/mcp/jars/saves/
+/mcp/jars/saves/*
+!/mcp/jars/saves/Christmas Demonstration/
+!/mcp/jars/saves/Inroductiory Level/
+!/mcp/jars/saves/School Demonstration 21_11_2013/
 /mcp/src/minecraft/*
 !/mcp/src/minecraft/org/
 !/mcp/src/minecraft/assets/
@@ -40,3 +46,9 @@
 !/mcp/src/minecraft/org/educraft/
 /mcp/src/minecraft/assets/*
 !/mcp/src/minecraft/assets/educraft/
+/mcp/src/minecraft/assets/educraft/*
+!/mcp/src/minecraft/assets/educraft/textures/
+/mcp/src/minecraft/assets/educraft/textures/*
+!/mcp/src/minecraft/assets/educraft/textures/blocks/
+!/mcp/src/minecraft/assets/educraft/textures/gui/
+!/mcp/src/minecraft/assets/educraft/textures/items/

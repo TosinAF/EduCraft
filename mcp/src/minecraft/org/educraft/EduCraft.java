@@ -1,22 +1,27 @@
 package org.educraft;
 
+import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.MinecraftForge;
 
-import org.educraft.dummy.DummyAttackHandler;
+import org.educraft.block.CraftingTileEntity;
+import org.educraft.block.EduCraftGuiHandler;
+import org.educraft.block.calculator.BlockCalculator;
+import org.educraft.block.operators.BlockOperatorBench;
+import org.educraft.block.ordering.BlockOrderingBench;
 import org.educraft.dummy.MathsWand;
-import org.educraft.number.AdditionOperator;
-import org.educraft.number.DivisionOperator;
-import org.educraft.number.MultiplicationOperator;
-import org.educraft.number.Number15;
-import org.educraft.number.Number15Zombie;
-import org.educraft.number.Number2;
-import org.educraft.number.Number2Zombie;
-import org.educraft.number.Number30;
-import org.educraft.number.SubtractionOperator;
+import org.educraft.entity.NumberSkeleton;
+import org.educraft.entity.NumberZombie;
+import org.educraft.item.AdditionOperator;
+import org.educraft.item.BaseNumber;
+import org.educraft.item.DivisionOperator;
+import org.educraft.item.DoorKey;
+import org.educraft.item.MultiplicationOperator;
+import org.educraft.item.SubtractionOperator;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -24,69 +29,187 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "EduCraft", name = "EduCraft", version = "0.1.0")
+/**
+ * The base class for the entire EduCraft mod. This class is responsible for
+ * instantiating every custom-made item and block we want to make available for
+ * players in-game.
+ */
+@Mod(modid = "EduCraft", name = "EduCraft", version = "0.2.0")
 @NetworkMod(clientSideRequired = true)
 public class EduCraft {
 
-	// instance of the maths wand
+	/**
+	 * Standard prefix for every GUI texture created for the mod.
+	 */
+	public static final String GuiTexturePrefix = "educraft" + ":"
+			+ "textures/gui/";
+
+	/**
+	 * Defines a customised inventory tab for use in creative mode, to collect
+	 * all the EduCraft items together.
+	 */
+	public static CreativeTabs tabEduCraft = new CreativeTabs("tabEduCraft") {
+		public ItemStack getIconItemStack() {
+			return new ItemStack(ADD_OPR, 1, 0);
+		}
+	};
+
+	/**
+	 * The maximum number players are allowed to obtain. Used to prevent players
+	 * trying to get numbers we don't have textures for.
+	 */
+	public static final int MAX_NUMBER = 1000;
+
+	/**
+	 * Instance of the maths wand.
+	 */
 	public static final Item MATHS_WAND = new MathsWand(6000);
-	// instances of the mathematical operators
-	public static final Item ADD_OPR = new AdditionOperator();
-	public static final Item SUB_OPR = new SubtractionOperator();
-	public static final Item MUL_OPR = new MultiplicationOperator();
-	public static final Item DIV_OPR = new DivisionOperator();
-	public static final Item NUMBER15 = new Number15(6005);
-	public static final Item NUMBER30 = new Number30(6006);
-	public static final Item NUMBER2 = new Number2(6007);
+
+	/**
+	 * Instance of the key.
+	 */
+	public static final Item KEY = new DoorKey(6006);
+
+	/**
+	 * Instance of the addition operator.
+	 */
+	public static final Item ADD_OPR = new AdditionOperator(5000);
+	/**
+	 * Instance of the subtraction operator.
+	 */
+	public static final Item SUB_OPR = new SubtractionOperator(5001);
+	/**
+	 * Instance of the multiplication operator.
+	 */
+	public static final Item MUL_OPR = new MultiplicationOperator(5002);
+	/**
+	 * Instance of the division operator.
+	 */
+	public static final Item DIV_OPR = new DivisionOperator(5003);
+
+	/**
+	 * Instance of the basic number class.
+	 */
+	public static final Item NUMBER = new BaseNumber(6005);
+
+	/**
+	 * Instance of the calculator block.
+	 */
+	public static final Block CALCULATOR = new BlockCalculator(500);
+	/**
+	 * Instance of the operator crafting bench.
+	 */
+	public static final Block OPERATOR_BENCH = new BlockOperatorBench(501);
+	/**
+	 * Instances of the number ordering benches.
+	 */
+	public static final Block ORDERING_BENCH = new BlockOrderingBench(502, 0);
+	public static final Block ORDERING_BENCH_ODD = new BlockOrderingBench(503, 1);
+	public static final Block ORDERING_BENCH_EVEN = new BlockOrderingBench(504, 2);
 	
-	// The instance of your mod that Forge uses.
+
+	/**
+	 * Instance of the mod that Minecraft Forge detects and uses. This is what
+	 * tells Forge that a mod exists here.
+	 */
 	@Instance(value = "EduCraft")
 	public static EduCraft instance;
+
+	// GUIHandler for EduCraft blocks
+	private EduCraftGuiHandler eduCraftGuiHandler = new EduCraftGuiHandler();
 
 	// Says where the client and server 'proxy' code is loaded.
 	@SidedProxy(clientSide = "org.educraft.client.ClientProxy", serverSide = "org.educraft.CommonProxy")
 	public static CommonProxy proxy;
 
+	/**
+	 * Called when the mod is loaded. Responsible for registering all blocks,
+	 * items, names, and so forth.
+	 * 
+	 * @param event
+	 *            the event which triggered this method
+	 */
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
-		// TODO implement with EduCraft files
+		// localised name for the EduCraft tab
+		LanguageRegistry.instance().addStringLocalization(
+				"itemGroup.tabEduCraft", "en_US", "EduCraft");
+
+		// register the calculator table
+		GameRegistry.registerBlock(CALCULATOR, "calculatorTable");
+		MinecraftForge.setBlockHarvestLevel(CALCULATOR, "axe", 0);
+		LanguageRegistry.addName(CALCULATOR, "Calculator Table");
+
+		// register TileEntity for Calculator
+		GameRegistry.registerTileEntity(CraftingTileEntity.class, "EduCraft");
+
+		// register the operator bench
+		GameRegistry.registerBlock(OPERATOR_BENCH, "operatorBench");
+		MinecraftForge.setBlockHarvestLevel(OPERATOR_BENCH, "axe", 0);
+		LanguageRegistry.addName(OPERATOR_BENCH, "Operator Bench");
+
+		// register the ordering bench
+		GameRegistry.registerBlock(ORDERING_BENCH, "orderingBench");
+		MinecraftForge.setBlockHarvestLevel(ORDERING_BENCH, "axe", 0);
+		LanguageRegistry.addName(ORDERING_BENCH, "Ordering Bench");
+		
+		// register the ordering bench for odd numbers
+		GameRegistry.registerBlock(ORDERING_BENCH_ODD, "orderingBenchOdd");
+		MinecraftForge.setBlockHarvestLevel(ORDERING_BENCH_ODD, "axe", 0);
+		LanguageRegistry.addName(ORDERING_BENCH_ODD, "Ordering Bench Odd");
+		
+		// register the ordering bench for even numbers
+		GameRegistry.registerBlock(ORDERING_BENCH_EVEN, "orderingBenchEven");
+		MinecraftForge.setBlockHarvestLevel(ORDERING_BENCH_EVEN, "axe", 0);
+		LanguageRegistry.addName(ORDERING_BENCH_EVEN, "Ordering Bench Even");
 
 		/* MATHS WAND */
 		// localised name for maths wand
 		LanguageRegistry.addName(MATHS_WAND, "Maths Wand");
-		
+
+		/* KEYS */
+		// register names for each possible metadata
+		ItemStack stack;
+		for (int i = 0; i < DoorKey.NAMES.length; i++) {
+			stack = new ItemStack(KEY, 1, i);
+			switch (i) {
+			case 0:
+				LanguageRegistry.addName(stack, "Red Key");
+				break;
+			case 1:
+				LanguageRegistry.addName(stack, "Blue Key");
+				break;
+			case 2:
+				LanguageRegistry.addName(stack, "Yellow Key");
+				break;
+			}
+		}
+
+		/* NUMBERS */
+		// register names for each possible metadata value in turn
+		ItemStack numStack;
+		for (int i = 0; i <= MAX_NUMBER; i++) {
+			numStack = new ItemStack(NUMBER, 1, i);
+			LanguageRegistry.addName(numStack,
+					String.format("Number %d", numStack.getItemDamage()));
+		}
+
 		/* MATHEMATICAL OPERATORS */
-		// localised names for mathematical operators
-		LanguageRegistry.addName(NUMBER15, "15");
-		LanguageRegistry.addName(NUMBER30, "30");
-		LanguageRegistry.addName(NUMBER2, "2");
 		LanguageRegistry.addName(ADD_OPR, "Addition sign");
 		LanguageRegistry.addName(SUB_OPR, "Subtraction sign");
 		LanguageRegistry.addName(MUL_OPR, "Multiplication sign");
 		LanguageRegistry.addName(DIV_OPR, "Division sign");
-		
-		// crafting recipes for mathematical operators
-		ItemStack sticks = new ItemStack(Item.stick);
-		GameRegistry.addRecipe(new ItemStack(NUMBER30), "xyz", 'x', NUMBER15,'y', MUL_OPR,'z', NUMBER2);
-		GameRegistry.addRecipe(new ItemStack(NUMBER30), "xyz", 'x', NUMBER2,'y', MUL_OPR,'z', NUMBER15);
-		GameRegistry.addRecipe(new ItemStack(NUMBER2), "xyz", 'x', NUMBER30,'y', DIV_OPR,'z', NUMBER15);
-		GameRegistry.addRecipe(new ItemStack(NUMBER15), "xyz", 'x', NUMBER30,'y', DIV_OPR,'z', NUMBER2);
-		GameRegistry.addRecipe(new ItemStack(Item.coal), "xyz", 'x', NUMBER15,'y', DIV_OPR,'z', NUMBER30); //Put coal item here instead of COAL
-		GameRegistry.addRecipe(new ItemStack(Item.coal), "xyz", 'x', NUMBER2,'y', DIV_OPR,'z', NUMBER30); //Put coal item here instead of COAL
-		
-		GameRegistry.addRecipe(new ItemStack(ADD_OPR), " s ", "sss", " s ",
-				's', sticks);
-		GameRegistry.addRecipe(new ItemStack(SUB_OPR), "   ", "sss", "   ",
-				's', sticks);
-		GameRegistry.addRecipe(new ItemStack(MUL_OPR), "s s", " s ", "s s",
-				's', sticks);
-		GameRegistry.addRecipe(new ItemStack(DIV_OPR), "  s", " s ", "s  ",
-				's', sticks);
+
+		/* CUSTOM CRAFTING TABLE */
+		LanguageRegistry.addName(CALCULATOR, "Calculator");
+
 		// recipes to break operators down into sticks
+		ItemStack sticks = new ItemStack(Item.stick);
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.stick, 4),
 				new ItemStack(ADD_OPR));
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.stick, 2),
@@ -95,28 +218,30 @@ public class EduCraft {
 				new ItemStack(MUL_OPR));
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.stick, 2),
 				new ItemStack(DIV_OPR));
-		
+
 		/* NUMBER ZOMBIES */
-		// register the number 2 zombie
-		EntityRegistry.registerGlobalEntityID(Number2Zombie.class,
-				"Number 2 Zombie", EntityRegistry.findGlobalUniqueEntityId(),
-				32324, 2243);
-		EntityRegistry.registerModEntity(Number2Zombie.class, "Number 2 Zombie",
+		// register the generic number zombie
+		EntityRegistry.registerGlobalEntityID(NumberZombie.class,
+				"Number Zombie", EntityRegistry.findGlobalUniqueEntityId(),
+				20000, 2500);
+		EntityRegistry.registerModEntity(NumberZombie.class, "Number Zombie",
 				EntityRegistry.findGlobalUniqueEntityId(), this, 60, 3, true);
-		EntityRegistry.addSpawn(Number2Zombie.class, 10, 1, 2,
+		EntityRegistry.addSpawn(NumberZombie.class, 10, 1, 2,
 				EnumCreatureType.monster, BiomeGenBase.plains);
-		// register the number 15 zombie
-		EntityRegistry.registerGlobalEntityID(Number15Zombie.class,
-				"Number 15 Zombie", EntityRegistry.findGlobalUniqueEntityId(),
+
+		/* NUMBER SKELETONS */
+		// register the generic number skeleton
+		EntityRegistry.registerGlobalEntityID(NumberSkeleton.class,
+				"Number Skeleton", EntityRegistry.findGlobalUniqueEntityId(),
 				32324, 2243);
-		EntityRegistry.registerModEntity(Number15Zombie.class, "Number 15 Zombie",
+		EntityRegistry.registerModEntity(NumberZombie.class, "Number Skeleton",
 				EntityRegistry.findGlobalUniqueEntityId(), this, 60, 3, true);
-		EntityRegistry.addSpawn(Number15Zombie.class, 10, 1, 2,
+		EntityRegistry.addSpawn(NumberSkeleton.class, 10, 1, 2,
 				EnumCreatureType.monster, BiomeGenBase.plains);
-		// register the attack handler
-		MinecraftForge.EVENT_BUS.register(new DummyAttackHandler());
+
+		// Important keep it
+		NetworkRegistry.instance().registerGuiHandler(this, eduCraftGuiHandler);
 
 		proxy.registerRenderers();
 	}
-
 }

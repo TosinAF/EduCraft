@@ -1,13 +1,9 @@
 package org.educraft.dummy;
 
-import java.util.Random;
-
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-
-import org.educraft.DummyMod;
 
 /**
  * The DummyZombie exists as a source of DummyCoins. If he is killed by a dummy
@@ -39,7 +35,7 @@ public class DummyZombie extends EntityZombie {
 	public boolean attackEntityFrom(DamageSource source, float damage) {
 		if (source.getDamageType().equals("dummy")) {
 			// dummy damage, set the dropped item to DummyCoin
-			this.droppedItemId = DummyMod.DUMMY_COIN.itemID;
+//			this.droppedItemId = DummyMod.DUMMY_COIN.itemID;
 			return super.attackEntityFrom(source, damage);
 		} else if (source.getDamageType().equals("player")) {
 			// other damage caused by player, set dropped item to rotten flesh
