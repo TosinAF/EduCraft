@@ -1,4 +1,4 @@
-<img src="http://gamerfitnation.com/wp-content/uploads/2013/08/Minecraft-logo.png">
+<img src="https://www.dropbox.com/s/jddj3nqx63iajpu/EduCraft%20%281%29.png">
 
 #Description
 
