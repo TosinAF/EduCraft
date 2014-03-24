@@ -1,4 +1,4 @@
-<img src="https://www.dropbox.com/s/jddj3nqx63iajpu/EduCraft%20%281%29.png">
+<img src="https://raw.githubusercontent.com/TosinAF/EduCraft/master/logo.png">
 
 #Description
 
