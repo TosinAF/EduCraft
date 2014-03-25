@@ -1,11 +1,10 @@
 all: report.pdf
 
 report.pdf: report.tex introduction.tex requirements.tex design.tex implementation.tex testing-analyis.tex reflection.tex
-	pdflatex -output-directory out report.tex
-	bibtex out/report.aux
-	pdflatex -output-directory out report.tex report.tex
-	pdflatex -output-directory out report.tex report.tex
-	mv out/report.pdf .
+	pdflatex report.tex
+	bibtex report.aux
+	pdflatex report.tex report.tex
+	pdflatex report.tex report.tex
 
 clean:
 	rm *.log
