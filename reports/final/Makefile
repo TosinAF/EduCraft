@@ -1,6 +1,6 @@
 all: report.pdf
 
-report.pdf: report.tex introduction.tex requirements.tex design.tex implementation.tex testing-analyis.tex reflection.tex
+report.pdf: report.tex introduction.tex requirements.tex design.tex implementation.tex testing.tex reflection.tex
 	pdflatex report.tex
 	bibtex report.aux
 	pdflatex report.tex report.tex
