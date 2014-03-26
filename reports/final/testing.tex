@@ -1,16 +1,184 @@
 \chapter{Testing and Analysis}
+\label{ch:testing}
 
-This chapter describes the field testing the project underwent,
-along with a discussion of the results obtained.
+\section{Introduction}
+Every project requires testing to ensure that it meets its stated objectives.
+This chapter describes the methods that were adopted to test the EduCraft mod
+`in the field'---a description of the unit tests performed on the code itself
+is given in Appendix \ref{apdx:unit-tests}.
 
-\section{Pilot test}
-This section describes the testing we carried out with Ed (need to
-change his name), and the lessons we learnt.
+
+\section{Game Measures}
+Before describing the tests we performed, we first give a brief outline of the
+measures that we developed in order to give some framework for assessing the success
+of the game.
+
+The measures we developed were based on the work of Nicola Whitton \cite{whitton07},
+and were gathered into three categories: engagement, collaboration, and system.
+These were designed to measure the children's engagement with the game, the level
+of collaboration they displayed, and the integrity of the system respectively.
+A full descripion of the measures is presented in Appendix \ref{apdx:measures}, so
+we omit a full discussion here.
+
+The measures were used as guides to the observations we carried out in the following
+tests, in order to help focus our attention on the key things.
+
+
+\section{Pilot Study}
+The first test we performed was with a simple level containing a single problem. The
+purpose of this test was to see how quickly a child who had never played Minecraft
+before could learn the game and work out how to use the mod; as such, this test
+involved only a single player, an 11 year-old boy. He played through the level
+twice, with the option to ask for as much help as he needed from the observers.
+
+\subsection{Observations}
+On his first attempt, John's\footnote{All children's names have been changed.} unfamiliarity
+with the controls proved to be a rather large obstacle. He was uncertain how to move
+the character around effectively, and without knowing how Minecraft mechanics like
+crafting tables usually worked, he was unable to easily learn how to make the mathematical
+operators required. However, on the second play through he was much more adept---having
+learned the controls, he was more able to focus on the objectives of the level.
+
+Despite his increased engagement with the game in general, John's engagement with the
+level was not quite so high. Once he had learnt the controls he was more interested
+in heading off to try and do his own thing rather than following the set course of
+the level. He missed many of the signs and messages we had set out to provide
+instruction for the player, and so the observers had to verbally guide him through.
+
+\subsection{Conclusions}
+We drew three key conclusions from the pilot study, the first of which provided
+general knowledge of how children learn to play Minecraft, whilst the last two gave
+particular insight into how to design levels more effectively.
+
+\subsubsection{Learning Minecraft}
+From John's initial inexperience, we determined that it would be unrealistic to
+expect any children who were new to Minecraft to try and learn both the basic
+mechanics of the game and how to use our mod at the same time. To use the mod
+in schools, children would either need separate time to learn how to play,
+or would already need to be familiar with the controls.
+
+\subsubsection{Attention to instructions}
+John's lack of attention to the signs and messages placed throughout the level
+was problematic. Although the use of signs to describe the level is an accepted
+standard amongst older players, John simply didn't read any of the messages. This
+knowledge was fed into our design of the final game, since we realised
+that to be successful we would require one of the testers to give verbal instructions
+to the children to guide them through\footnote{See Chapter \ref{ch:design} for
+a discussion of our approaches in game design.}.
+
+\subsubsection{Attention to route}
+John was also more interested in exploring the level for himself rather than following
+the path we had planned. This was facilitated by the very open nature of the level;
+there was nothing forcing John to advance as expected. This was also fed into the
+design of the final level---we realised we had to limit the children's options, so
+as to force them to follow the correct path\footnote{Again, see Chapter \ref{ch:design}.}.
+
 
 \section{Firbeck Academy}
-This section describes the day of testing in Firbeck Academy, with
-some brief observations on what we saw.
+The second test was much more comprehensive, and involved a day-long visit to
+a local primary school. We brought the completed game\footnote{Described in Chapters
+\ref{ch:design} and \ref{ch:implementation}.}, and had intended to have four
+children play through at a time in a place where we could observe their gameplay.
+
+\subsection{Approach}
+The actual day ran somewhat differently from what we had planned for. Instead of
+having a single group of four children to play through the game, we were introduced
+to the entire school, and learned that the day would involve each year group visiting
+various projects including ours. Instead of having the focussed attention of a group
+of four for the full 30--40 minutes we had planned, we had larger groups of children
+for a duration of approximately 10 minutes each.
+
+The children still played through the level, with different groups taking over from
+each other. The two testers were still taking care to observe the groups' progress,
+and offered help to the children where necessary.
+
+\subsection{Observations}
+The children's engagement with the game varied dramatically from group to group
+and from child to child. Some payed very close attention to the game and appeared
+interested in completing the objectives, whilst others were more concerned with
+messing around and trying to break the level. Larger groups nearly always displayed
+lower levels of engagement, whilst the smaller groups tended to engage more. Smaller
+groups were also much more likely to pay attention to the instructions given
+by the testers, and to follow them. As with the pilot study, players who were
+already familiar with the game's controls engaged more than those who were unfamiliar.
+
+There was also a lack of collaboration, shown most fully in a lack of progress through the level:
+no group managed to complete the `introductory' area, and very few made it through
+the first area. The children were communicating with one another, but not about the
+task at hand. However, the groups who payed more attention
+to the testers did manage to achieve some level of collaboration when they were
+prompted to work together: one stage required the children to place three numbers
+in ascending order, and when the tester talked the children through the task---\textit{``Okay,
+who has collected any numbers? Which numbers are they? Okay, which do you
+think is the smallest? Put it in the slot\ldots''}---they did work together and talk
+to each other about the concepts at hand.
+
+\subsection{Conclusions}
+The findings of the test at Firbeck Academy share some similarities with those
+from the pilot study, though there were also a number of additional insights we
+gained from assessing the children's performance on the day.
+
+\subsubsection{Learning environment}
+One of the biggest things we found was that the environment we were testing in
+vastly hindered our efforts to get the children to play through the level as expected---
+having their friends sat behind them trying to advise or take over distracted the
+players, and the children were generally rather excited by the change in their
+routine and so were distracted anyway. The large amounts of noise in the classroom,
+generated by the other projects, made it difficult to get a small group to
+focus on the instructions of the tester. As noted above, the smaller groups were
+able to engage and progress more, which was probably helped by the fact that there
+were fewer distractions.
+
+\subsubsection{Need for guidance}
+Similar to the pilot test, the players at Firbeck Academy appeared to prefer to try
+and do their own thing rather than read the signs and follow the path of the game.
+This had been compensated for in the design of the level by constructing it in
+such a way as to prevent them from going places they weren't meant to, but they
+still required a lot of guidance from the testers to actually make progress.
+
+The solution that was settled on after the first test was to have a fifth player
+in the game, controller by one of the testers, who would guide the other players
+in-game. This helped greatly, as it made it much easier for the players to
+see where they were meant to go, as they had someone in the game that they could follow.
+
 
 \section{Discussion}
-This section then explores the results we obtained, draws conclusions,
-and explores directions for further development of the project.
+In this section, we discuss the lessons learned from the testing process according
+to the three categories of game measures\footnote{See Appendix \ref{apdx:measures}.},
+and then complete the chapter with some general remarks.
+
+\subsection{Engagement}
+Once the children learned the controls, all those who played the game were engaged
+quite well in one way or another. Although the children were not focussed
+explicitly on the learning objectives of the level, they all enjoyed playing Minecraft.
+We believe that the surrounding environment (i.e. the levels of noise and the number
+of players) was the single largest factor that impaced on engagement: those groups
+who experienced fewer distractions made much more progress, and it is felt that
+were these distractions removed entirely the players would engage much more fully.
+
+With reference to the day of testing at Firbeck, the children were not expecting to
+be learing maths---they were having an `ICT day'---but it is felt that if the
+game were set in the context of a proper maths lesson, the players would be more
+committed to paying attention to the maths content. As it was, they were simply
+enjoying playing on computers.
+
+\subsection{Collabration}
+In the test at Firbeck, collaboration was seriously limited by the difficulty of
+communicating with the other players meaningfully in a noisy classroom. Our
+observations appear to indicate that the children required prompting to work
+together, rather than it being a spontaneous action, although this may be because
+time constraints prevented us from fully explaining the aims of the game to
+the children.
+
+When prompted, the children were able to work together, and we believe that given
+time to test in a suitable environment where the players were not distracted
+by friends or noise, a greater level of collaboration would be possible.
+
+\subsection{General remarks}
+The day at Firbeck shows that there is great potential for Minecraft to be used
+in education, provided that it is used in an appropriate environment. Evidence
+from testing would indicate that, at least to begin with, the children playing
+would require supervision and guidance from someone who knew how the game
+worked, which might limit its application in regular classes with limited
+numbers of teaching staff, but it is felt that given further testing EduCraft
+could be developed into an incredibly useful tool for teaching maths.
