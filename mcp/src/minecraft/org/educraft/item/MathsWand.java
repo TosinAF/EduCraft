@@ -1,4 +1,4 @@
-package org.educraft.dummy;
+package org.educraft.item;
 
 import org.educraft.EduCraft;
 

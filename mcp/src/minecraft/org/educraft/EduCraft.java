@@ -13,13 +13,13 @@ import org.educraft.block.EduCraftGuiHandler;
 import org.educraft.block.calculator.BlockCalculator;
 import org.educraft.block.operators.BlockOperatorBench;
 import org.educraft.block.ordering.BlockOrderingBench;
-import org.educraft.dummy.MathsWand;
 import org.educraft.entity.NumberSkeleton;
 import org.educraft.entity.NumberZombie;
 import org.educraft.item.AdditionOperator;
 import org.educraft.item.BaseNumber;
 import org.educraft.item.DivisionOperator;
 import org.educraft.item.DoorKey;
+import org.educraft.item.MathsWand;
 import org.educraft.item.MultiplicationOperator;
 import org.educraft.item.SubtractionOperator;
 
