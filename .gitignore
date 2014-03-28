@@ -17,6 +17,7 @@
 *.lof
 *.db
 *ssot*
+*.synctex.gz
 
 # By default, ignore everything
 /*
