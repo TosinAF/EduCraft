@@ -52,7 +52,21 @@ public enum OrderingCraftingManager {
 		return new ItemStack(EduCraft.KEY, 1, type.getTypeCode());
 	}
 
-	private boolean isParityCorrect(ItemStack stack, ItemStack stack0, BenchType type) {
+	/**
+	 * Checks whether the numbers contained in the two item stacks are of the
+	 * correct parity (odd or even) for this ordering bench (as defined by its
+	 * {@link BenchType}).
+	 * 
+	 * @param stack
+	 *            the first number
+	 * @param stack0
+	 *            the second number
+	 * @param type
+	 *            the bench type
+	 * @return true if the parities is correct
+	 */
+	private boolean isParityCorrect(ItemStack stack, ItemStack stack0,
+			BenchType type) {
 		switch (type) {
 		case ODD:
 			return (stack.getItemDamage() % 2 == 1)
