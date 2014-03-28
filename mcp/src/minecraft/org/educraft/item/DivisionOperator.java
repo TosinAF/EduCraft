@@ -7,7 +7,12 @@ import net.minecraft.item.Item;
 
 
 public class DivisionOperator extends Item implements MathematicalOperator {
-
+	/**
+	 * The Division Operator Constructor
+	 * 
+	 * @param id
+	 *            operator id
+	 */
 	public DivisionOperator(int id) {
 		super(id);
 		setUnlocalizedName("divOperator");
@@ -16,6 +21,9 @@ public class DivisionOperator extends Item implements MathematicalOperator {
 		setTextureName("educraft:division");
 	}
 	
+	/**
+	 * Returns the Operator Type
+	 */
 	@Override
 	public OperatorType getOperator() {
 		return OperatorType.DIVIDE;
