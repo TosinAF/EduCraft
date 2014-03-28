@@ -8,6 +8,12 @@ import net.minecraft.item.Item;
 
 public class SubtractionOperator extends Item implements MathematicalOperator {
 	
+	/**
+	 * The Subtraction Operator Constructor
+	 * 
+	 * @param id
+	 *            operator id
+	 */
 	public SubtractionOperator(int id) {
 		super(id);
 		setUnlocalizedName("subOperator");
@@ -15,7 +21,10 @@ public class SubtractionOperator extends Item implements MathematicalOperator {
 		setCreativeTab(EduCraft.tabEduCraft);
 		setTextureName("educraft:subtraction");
 	}
-
+	
+	/**
+	 * Returns the Operator Type
+	 */
 	@Override
 	public OperatorType getOperator() {
 		return OperatorType.MINUS;
