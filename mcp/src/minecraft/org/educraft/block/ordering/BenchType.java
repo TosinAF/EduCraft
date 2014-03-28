@@ -7,15 +7,15 @@ public enum BenchType {
 	/**
 	 * A bench which accepts only odd numbers.
 	 */
-	ODD(0),
+	ALL(0),
 	/**
 	 * A bench which accepts only even numbers.
 	 */
-	EVEN(1),
+	ODD(1),
 	/**
 	 * A bench which accepts all numbers.
 	 */
-	ALL(2);
+	EVEN(2);
 
 	private int type;
 
