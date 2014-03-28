@@ -14,7 +14,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 
 public class BaseNumber extends Item {
-
+	
+	/**
+	 * The Base Number Constructor
+	 * 
+	 * @param itemID
+	 *           item id
+	 */
 	public BaseNumber(int itemID) {
 		super(itemID);
 		setHasSubtypes(true);
@@ -23,21 +29,44 @@ public class BaseNumber extends Item {
 		setCreativeTab(EduCraft.tabEduCraft);
 		setUnlocalizedName("number");
 	}
-
+	
+	/**
+	 * Returns a string of the item's name & it's damage value
+	 * 
+	 * @param is
+	 *           An Item Stack
+	 */
 	@Override
 	public String getUnlocalizedName(ItemStack is) {
 		return getUnlocalizedName() + "." + String.valueOf(is.getItemDamage());
 	}
+	
 
+	/**
+	 * Array where every index will contain an icon for each damage level
+	 */
 	@SideOnly(Side.CLIENT)
 	public static Icon[] icons;
-
+	
+	/**
+	 * Returns the icon for a specified damage level
+	 * 
+	 * @param damage
+	 *           level of damage of the item
+	 */
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getIconFromDamage(int damage) {
 		return icons[damage];
 	}
-
+	
+	
+	/**
+	 * Populates the icon array with the approitate icons for each damage level
+	 * 
+	 * @param damage
+	 *           level of damage of the item
+	 */
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister icon) {
@@ -48,7 +77,10 @@ public class BaseNumber extends Item {
 			icons[i] = icon.registerIcon("educraft:" + i);
 		}
 	}
-
+	
+	/**
+	 * Returns the children items of the parent item
+	 */
 	@Override
 	public void getSubItems(int id, CreativeTabs tab, List list) {
 		for (int i = 0; i < EduCraft.MAX_NUMBER; i++) {
