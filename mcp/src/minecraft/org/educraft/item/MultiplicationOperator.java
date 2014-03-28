@@ -7,7 +7,13 @@ import net.minecraft.item.Item;
 
 public class MultiplicationOperator extends Item implements
 		MathematicalOperator {
-	
+			
+	/**
+	 * The Multiplication Operator Constructor
+	 * 
+	 * @param id
+	 *            operator id
+	 */		
 	public MultiplicationOperator(int id) {
 		super(id);
 		setUnlocalizedName("multOperator");
@@ -15,7 +21,10 @@ public class MultiplicationOperator extends Item implements
 		setCreativeTab(EduCraft.tabEduCraft);
 		setTextureName("educraft:multiplication");
 	}
-
+	
+	/**
+	 * Returns the Operator Type
+	 */
 	@Override
 	public OperatorType getOperator() {
 		return OperatorType.TIMES;
