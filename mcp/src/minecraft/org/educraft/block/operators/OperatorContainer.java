@@ -62,7 +62,7 @@ public class OperatorContainer extends Container {
 	public void onCraftMatrixChanged(IInventory par1IInventory) {
 		this.craftResult.setInventorySlotContents(
 				0,
-				OperatorCraftingManager.getInstance().findMatchingRecipe(
+				OperatorCraftingManager.INSTANCE.findMatchingRecipe(
 						this.craftMatrix, this.worldObj));
 	}
 

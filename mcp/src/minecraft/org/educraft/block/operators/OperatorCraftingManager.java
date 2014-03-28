@@ -23,19 +23,12 @@ import org.educraft.EduCraft;
  * @author ianknight
  * 
  */
-public class OperatorCraftingManager {
+public enum OperatorCraftingManager {
 	/** The static instance of this class */
-	private static final OperatorCraftingManager INSTANCE = new OperatorCraftingManager();
-
+	INSTANCE;
+	
 	/** A list of all the recipes added */
 	private List<IRecipe> recipes = new ArrayList<IRecipe>();
-
-	/**
-	 * Returns the static instance of this class
-	 */
-	public static final OperatorCraftingManager getInstance() {
-		return INSTANCE;
-	}
 
 	private OperatorCraftingManager() {
 		ItemStack sticks = new ItemStack(Item.stick);
