@@ -6,6 +6,28 @@
 \usepackage{graphicx}
 \usepackage[nottoc]{tocbibind}
 \usepackage[square,comma,numbers]{natbib}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{javared}{rgb}{0.5,0,0.33} % for keywords
+\definecolor{javablue}{rgb}{0.16,0,1} % for strings
+\definecolor{javagreen}{rgb}{0.25,0.5,0.37} % comments
+\definecolor{javadocblue}{rgb}{0.5,0.62,0.75} % javadoc
+
+\lstset{language=Java,
+basicstyle=\ttfamily,
+keywordstyle=\color{javared}\bfseries,
+stringstyle=\color{javablue},
+commentstyle=\color{javagreen},
+morecomment=[s][\color{javadocblue}]{/**}{*/},
+numbers=left,
+numberstyle=\tiny\color{black},
+stepnumber=2,
+numbersep=10pt,
+tabsize=4,
+showspaces=false,
+showstringspaces=false}
+
 \bibliographystyle{IEEEtranS}
 
 \begin{document}
