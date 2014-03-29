@@ -47,12 +47,16 @@ public class CraftingTileEntity extends TileEntity {
 	 * 
 	 * @param container
 	 *            the container to link the crafting inventory to
+	 * @param row
+	 * 			the number of rows in the crafting matrix
+	 * @param column
+	 * 			the number of columns in the crafting matrix
 	 * @return the initialised tile entity
 	 */
-	public synchronized CraftingTileEntity initialise(Container container) {
+	public synchronized CraftingTileEntity initialise(Container container, int row, int column) {
 		if (this.container == null) {
 			this.container = container;
-			this.craftMatrix = new InventoryCrafting(this.container, 1, 3);
+			this.craftMatrix = new InventoryCrafting(this.container, row, column);
 			this.craftResult = new InventoryCraftResult();
 		}
 		incrUsers();

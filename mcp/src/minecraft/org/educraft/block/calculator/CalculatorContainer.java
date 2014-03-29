@@ -32,7 +32,7 @@ public class CalculatorContainer extends Container {
 	public CalculatorContainer(InventoryPlayer inventory,
 			CraftingTileEntity tileEntity, World world) {
 		// set inventory
-		this.tileEntity = tileEntity.initialise(this);
+		this.tileEntity = tileEntity.initialise(this, 1, 3);
 		this.craftMatrix = tileEntity.getCraftMatrix();
 		this.craftResult = tileEntity.getCraftResult();
 		// set world

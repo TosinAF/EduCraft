@@ -46,7 +46,7 @@ public class OrderingContainer extends Container {
 	public OrderingContainer(InventoryPlayer inventory,
 			CraftingTileEntity tileEntity, World world, BenchType type) {
 		// set up the crafting inventories
-		this.tileEntity = tileEntity.initialise(this);
+		this.tileEntity = tileEntity.initialise(this, 1, 3);
 		this.craftMatrix = tileEntity.getCraftMatrix();
 		this.craftResult = tileEntity.getCraftResult();
 		this.worldObj = world;
