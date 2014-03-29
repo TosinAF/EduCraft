@@ -6,6 +6,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+import org.educraft.EduCraft;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
@@ -15,7 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class OperatorGui extends GuiContainer {
 	
 	private static final ResourceLocation craftingTableGuiTextures = new ResourceLocation(
-			"textures/gui/container/crafting_table.png");
+			EduCraft.GuiTexturePrefix + "crafting_table.png");
 
 	public OperatorGui(InventoryPlayer par1InventoryPlayer, World par2World,
 			int par3, int par4, int par5) {

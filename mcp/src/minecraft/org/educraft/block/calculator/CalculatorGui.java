@@ -21,11 +21,9 @@ import net.minecraft.world.World;
 public class CalculatorGui extends GuiContainer {
 
 	/**
-	 * Standard prefix for all textures associated with this GUI.
+	 * Location to where the tecture is stored
 	 */
-	
-	public static String GuiTexturePrefix = "educraft" + ":" + "textures/gui/";
-	private ResourceLocation calculator = new ResourceLocation(GuiTexturePrefix
+	private ResourceLocation calculator = new ResourceLocation(EduCraft.GuiTexturePrefix
 			+ "crafting_table.png");
 	
 	/**
