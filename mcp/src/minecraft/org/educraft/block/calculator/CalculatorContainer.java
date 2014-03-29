@@ -38,16 +38,18 @@ public class CalculatorContainer extends Container {
 		// set world
 		this.worldObj = world;
 
-		// add slots to the containers
+		// adds output slot to the container
 		this.addSlotToContainer(new SlotCrafting(inventory.player,
 				this.craftMatrix, this.craftResult, 0, 124, 35));
 		int i1;
 
+		// adds input slots to the container
 		for (i1 = 0; i1 < 3; ++i1) {
 			this.addSlotToContainer(new Slot(this.craftMatrix, i1,
 					30 + i1 * 18, 35));
 		}
 
+		// adds slots of the WorkBench's inventory area to the container 
 		for (int l = 0; l < 3; ++l) {
 			for (i1 = 0; i1 < 9; ++i1) {
 				this.addSlotToContainer(new Slot(inventory, i1 + l * 9 + 9,
@@ -55,6 +57,7 @@ public class CalculatorContainer extends Container {
 			}
 		}
 
+		// adds slots of player's in hand inventory to the container
 		for (int l = 0; l < 9; ++l) {
 			this.addSlotToContainer(new Slot(inventory, l, 8 + l * 18, 142));
 		}
