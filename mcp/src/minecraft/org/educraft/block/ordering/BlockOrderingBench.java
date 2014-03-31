@@ -33,7 +33,6 @@ public class BlockOrderingBench extends BlockContainer {
 	private Icon orderingIconFront;
 
 	private BenchType benchType;
-	private Boolean flag;
 
 	/**
 	 * Class constructor.

@@ -91,12 +91,12 @@ public class CalculatorContainer extends Container {
 	public void onContainerClosed(EntityPlayer player) {
 		super.onContainerClosed(player);
 		this.tileEntity.decrUsers();
-
+	
 		if (!this.worldObj.isRemote && !this.tileEntity.isBeingUsed()) {
 			for (int i = 0; i < 3; ++i) {
 				ItemStack itemstack = this.craftMatrix
 						.getStackInSlotOnClosing(i);
-
+	
 				if (itemstack != null) {
 					player.dropPlayerItem(itemstack);
 				}

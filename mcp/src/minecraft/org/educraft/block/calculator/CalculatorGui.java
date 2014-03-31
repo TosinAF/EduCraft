@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 public class CalculatorGui extends GuiContainer {
 
 	/**
-	 * Location to where the tecture is stored
+	 * Location to where the texture is stored
 	 */
 	private ResourceLocation calculator = new ResourceLocation(EduCraft.GuiTexturePrefix
 			+ "crafting_table.png");
