@@ -1,0 +1,40 @@
+\chapter{Unit Testing}
+\label{apdx:unit-tests}
+
+\section{Approach}
+Unit testing is considered a vital part of any software engineering
+project, as it allows the team to assert that the individual components
+of the system function as intended \cite{sommerville11}. They also
+provide a convenient means of carrying out regression testing: when
+changes are made, the same tests can be re-run, theoretically with the
+same outcome.
+
+From the outset, the EduCraft developers were concerned with how to
+effectively test the mod, particularly key elements of it such as the
+calculator block.
+
+\section{JUnit and Minecraft Forge}
+JUnit is a simple unit testing framework for the Java langange \cite{website:junit},
+and as the Eclipse IDE has built-in support for JUnit, it was the first choice
+of testing tools to use.
+
+However, on beginning to write unit tests for the mod, we encountered
+a number of problems. A number of the classes comprising the core of
+the Minecraft game cannot be instantiated unless there is an underlying
+game client running, and this includes several key classes used in
+our mod\footnote{\texttt{net.minecraft.item.ItemStack} is a prime
+example.}.
+
+This limitation meant that very few meaningful test cases could be written,
+since the tests requiring these un-instantiatable classes would not
+compile. It was the view of the developers that, although unit testing is
+considered to be best practice in software engineering \cite{sommerville11},
+an alternative testing strategy would have to be devised for the project.
+
+\section{In-Game Testing}
+The approach decided upon was to set up a very basic `Test World'
+with no terrain and no entities apart from the player. New blocks would
+be placed in this world, and their functionality tested in-game.
+Although such an approach means that testing documentation is
+not available, the entire development team agreed that this was the
+best solution available, given the limitations of the API.
