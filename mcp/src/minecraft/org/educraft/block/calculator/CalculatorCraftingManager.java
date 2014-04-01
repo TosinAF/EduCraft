@@ -70,6 +70,21 @@ public enum CalculatorCraftingManager {
 		}
 
 	}
+	
+	/**
+	 * Evaluates the result of an operator on two items
+	 * 
+	 * @param itemstack
+	 *            first item
+	 * 
+	 * @param itemstack
+	 *            second item
+	 * 
+	 * @param operator
+	 *            operator type
+	 * 
+	 * @return 0, if an error or return final value after using the operator on the two items 
+	 */
 
 	private int evaluate(ItemStack x, ItemStack y, OperatorType operator) {
 		// result is initially zero, since zero is our 'error code'
