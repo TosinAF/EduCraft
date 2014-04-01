@@ -11,10 +11,10 @@ public class MathematicalOperator extends Item {
 		super(id);
 		this.type = type;
 		
-		setUnlocalizedName("operator");
+		setUnlocalizedName("operator." + type.getName());
 		setMaxStackSize(4);
 		setCreativeTab(EduCraft.tabEduCraft);
-		setTextureName("educraft:addition");
+		setTextureName("educraft:" + type.getName());
 	}
 	
 	/**

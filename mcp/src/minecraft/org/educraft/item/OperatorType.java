@@ -1,19 +1,18 @@
 package org.educraft.item;
 
 public enum OperatorType {
-	TIMES("Multiplication", "x"), DIVIDE("Division", "/"), PLUS("Addition", "+"), MINUS(
-			"Subtraction", "-");
+	TIMES("multiplication"), DIVIDE("division"), PLUS("addition"), MINUS(
+			"subtraction");
 			
 
-	private String name, symbol;
+	private String name;
 	
 	/**
 	 * The Operator Type Enum Constructor
 	 */
 
-	private OperatorType(String name, String symbol) {
+	private OperatorType(String name) {
 		this.name = name;
-		this.symbol = symbol;
 	}
 	
 	/**
@@ -22,14 +21,6 @@ public enum OperatorType {
 
 	public String getName() {
 		return name;
-	}
-	
-	/**
-	 * Returns the operator symbol
-	 */
-
-	public String getSymbol() {
-		return symbol;
 	}
 
 }
