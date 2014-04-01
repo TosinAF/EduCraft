@@ -2,9 +2,13 @@
 \label{ch:implementation}
 
 \section{Implementation of the mod}
-\subsection{UML diagram of class hierarchy}
+
+\begin{figure}[h!]
+\centering
 \includegraphics[width=17cm]{ClassDiagram}
-\DeclareGraphicsExtensions{.png}
+\caption{"UML class diagram of EduCraft"}
+\end{figure}
+
 \begin{itemize}
 \item \textbf{Base Mod Class}\footnote{``The base class is the class that Forge loads. All the classes in our mod have to be registered through this central location for the mod. It is advised to name this class after the name of the Mod. In our case it is EduCraft''\cite{website:forge-basemods}}\newline
 The Base Mod needs to contain the following line:
@@ -134,14 +138,30 @@ private ResourceLocation calculator = new ResourceLocation(EduCraft.GuiTexturePr
 \subsection{CraftingManager}
 In the Crafting Manager classes for the Calculator and Ordering Bench we simplified the operation of the core version of this class. This was possible as we are not using any Recipes for implementing the logic of how the inputs are checked and the way the output is generated. Both Crafting Tables have only 3 input slots and this allowed us to validate inputs in a simpler manner.\newline\newline
 The logic implemented for the Calculator is to have two operands (instance of BaseNumber) in slots 1 and 3 and an operator (instance of MathematicalOperator) in slot 2 of the input matrix. If this condition is not met then there is nothing to generate or else it gets the metadata value (itemDamage) of the operands and the mod internally performs a mathematical operation depending on the type of operator. An output BaseNumber is generated, with the result of the operation stored in the new items metadata. There are a few cases where there is nothing generated even though the operation would be mathematically correct, but our mod does not cover the use of negative numbers, fractions and decimals. We would like to implement these concepts in future versions of the extension.\newline\newline
-The Crafting Manager for the Ordering Bench works in a similar way, but it first tests if all the inputs are numbers and then it checks if the order and the parity of the numbers are valid depending on the type of the Ordering Table and finally it generates a coloured key.\newline\newline
-We decided to keep the way the core Crafting Manager works for the Operator Bench. This bench has the same behaviour as the core Crafting Table. The only modifications are the visuals and the recipes accepted. We wanted to limit the items that could be crafted by the players in the mod. We achieved this by placing only our own modified versions of the Crafting Tables in our levels. These benches accept only our custom recipes which we defined for the crafting \footnote{``Crafting is the method by which many blocks, tools, and materials are made in Minecraft. In order to craft something, players must move items from their inventory to a crafting grid. A 2×2 crafting grid can be accessed from the player's inventory. A 3×3 grid can be accessed by right-clicking a Crafting Table.''} of the mathematical operators. All these recipes are ShapedRecipes\footnote{``Shaped recipes come in all sizes from 1x1 to 3x3. Strings are used for the recipe shape and values.''\cite{website:forge-shaped}} used in the original version of Minecraft.\newline The method signature is roughly as follows:
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{calculator_use_top}
+\caption{Screenshot of the Calculator's crafting matrix in use}
+\end{figure}
 
+The Crafting Manager for the Ordering Bench works in a similar way, but it first tests if all the inputs are numbers and then it checks if the order and the parity of the numbers are valid depending on the type of the Ordering Table and finally it generates a coloured key.\newline\newline
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{ordering_use_top}
+\caption{Screenshot of the Ordering Bench's crafting matrix in use}
+\end{figure}
+
+We decided to keep the way the core Crafting Manager works for the Operator Bench. This bench has the same behaviour as the core Crafting Table. The only modifications are the visuals and the recipes accepted. We wanted to limit the items that could be crafted by the players in the mod. We achieved this by placing only our own modified versions of the Crafting Tables in our levels. These benches accept only our custom recipes which we defined for the crafting \footnote{``Crafting is the method by which many blocks, tools, and materials are made in Minecraft. In order to craft something, players must move items from their inventory to a crafting grid. A 2×2 crafting grid can be accessed from the player's inventory. A 3×3 grid can be accessed by right-clicking a Crafting Table.''} of the mathematical operators. All these recipes are ShapedRecipes\footnote{``Shaped recipes come in all sizes from 1x1 to 3x3. Strings are used for the recipe shape and values.''\cite{website:forge-shaped}} used in the original version of Minecraft.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{operator_use_top}
+\caption{Screenshot of the Operator Bench's crafting matrix in use}
+\end{figure}
+The method signature is roughly as follows:
 \begin{lstlisting}
 this.addRecipe(String row1, [String row2[, String row3]]
         char itemType1, ItemStack itemStackType1[, ... char itemTypeN, ItemStack itemStackTypeN]);
 \end{lstlisting}
-
 A list of all the recipes added to the Operator Bench:
 \begin{lstlisting}
 /** A list of all the recipes added */
@@ -162,6 +182,11 @@ We have also created our own tab for easier access of custom elements in the inv
 \begin{lstlisting}
 setCreativeTab(EduCraft.tabEduCraft);
 \end{lstlisting}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.4]{educraft_tab}
+\caption{"Screenshot of EduCraft custom tab in game inventory"}
+\end{figure}
 
 \subsection{Castle}
 The collaborative element of this level was implemented by setting a task to create four different operators, which would open doors to four different rooms using the hopper system in the first part of the level. Each room has a key inside and all four keys are needed to allow the players to progress to the next part of this level.\newline\newline
@@ -175,8 +200,11 @@ There is an exit through the top of the Pyramid for the inside team. The inside 
 In each section the resources available are limited for each subteam, for example in one section the inside team has access to sticks and an Operator Bench, but not to any numbers. In the same section the outside team has the opportunity to kill Zombies or Skeletons to be able to collect numbers and they also have a Calculator to generate numbers.\newline\newline
 We implemented a system that allows the teams to send items back and forth in minecarts that move on rails. This will force them to communicate their requirements to each other.\newline
 
-\includegraphics[width=17cm]{pyramid}
-\DeclareGraphicsExtensions{.png}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.65]{pyramid}
+\caption{Sketch of the Pyramid's layout}
+\end{figure}
 
 \subsection{Rook}
 The Rook has two floors and on each floor there are two rooms. Only the first two players to arrive can enter each room. The subteams’ resources are limited in a similar manner to the Pyramid. The rooms on the same floors share a wall. In each of these walls there is a Calculator built-in, which can be used by the subteams to pass items to each other and to execute some mathematical operations together.\newline\newline
