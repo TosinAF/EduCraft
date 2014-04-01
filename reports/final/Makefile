@@ -1,6 +1,6 @@
 ROOT = report.tex
 CHAPTERS = introduction.tex requirements.tex design.tex implementation.tex testing.tex reflection.tex
-APPENDICES = unittests.tex measures.tex
+APPENDICES = unittests.tex measures.tex userguide.tex
 BIBLIOGRAPHY = bibliography.bib
 
 all: report.pdf
