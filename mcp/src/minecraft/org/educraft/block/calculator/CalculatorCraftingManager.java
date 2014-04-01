@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import org.educraft.EduCraft;
 import org.educraft.item.BaseNumber;
 import org.educraft.item.MathematicalOperator;
+import org.educraft.item.OperatorType;
 
 /**
  * This class is essentially identical to
@@ -35,6 +36,7 @@ public enum CalculatorCraftingManager {
 		// reject instantly if any stack is empty
 		for (int i = 0; i < matrix.getSizeInventory(); i++) {
 			if (matrix.getStackInSlot(i) == null) {
+				System.err.println("CalculatorCraftingManager: rejecting due to empty slots");
 				return null;
 			}
 		}
@@ -48,25 +50,28 @@ public enum CalculatorCraftingManager {
 				&& (stack2.getItem() instanceof BaseNumber)) {
 			// inventory contents are correct, accept if the result would be
 			// a whole number greater than zero
-			int eval = evaluate(stack0, stack2,
-					(MathematicalOperator) stack1.getItem());
-			
-			if(eval > 0) {
+			MathematicalOperator operator = (MathematicalOperator) stack1
+					.getItem();
+			int eval = evaluate(stack0, stack2, operator.getType());
+
+			if (eval > 0) {
 				ItemStack result = new ItemStack(EduCraft.NUMBER);
 				result.setItemDamage(eval);
 				return result;
 			}
-			
+
+			System.err.println("CalculatorCraftingManager: rejecting due to result < 0");
 			return null;
-			
+
 		} else {
 			// one or more stacks have the wrong type, reject
+			System.err.println("CalculatorCraftingManager: rejecting due to incorrect types");
 			return null;
 		}
 
 	}
 
-	private int evaluate(ItemStack x, ItemStack y, MathematicalOperator operator) {
+	private int evaluate(ItemStack x, ItemStack y, OperatorType operator) {
 		// result is initially zero, since zero is our 'error code'
 		int eval = 0;
 
@@ -76,7 +81,7 @@ public enum CalculatorCraftingManager {
 
 		// do the appropriate calculation depending on which
 		// operator was given
-		switch (operator.getOperator()) {
+		switch (operator) {
 		case PLUS:
 			eval = opr1 + opr2;
 			break;

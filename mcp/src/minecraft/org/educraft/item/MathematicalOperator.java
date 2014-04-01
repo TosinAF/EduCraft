@@ -20,7 +20,7 @@ public class MathematicalOperator extends Item {
 	/**
 	 * Interface for the operators
 	 */
-	public OperatorType getOperator() {
+	public OperatorType getType() {
 		return this.type;
 	}
 
