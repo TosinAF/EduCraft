@@ -15,13 +15,11 @@ import org.educraft.block.operators.BlockOperatorBench;
 import org.educraft.block.ordering.BlockOrderingBench;
 import org.educraft.entity.NumberSkeleton;
 import org.educraft.entity.NumberZombie;
-import org.educraft.item.AdditionOperator;
 import org.educraft.item.BaseNumber;
-import org.educraft.item.DivisionOperator;
 import org.educraft.item.DoorKey;
+import org.educraft.item.MathematicalOperator;
 import org.educraft.item.MathsWand;
-import org.educraft.item.MultiplicationOperator;
-import org.educraft.item.SubtractionOperator;
+import org.educraft.item.OperatorType;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -78,19 +76,23 @@ public class EduCraft {
 	/**
 	 * Instance of the addition operator.
 	 */
-	public static final Item ADD_OPR = new AdditionOperator(5000);
+	public static final Item ADD_OPR = new MathematicalOperator(5000,
+			OperatorType.PLUS);
 	/**
 	 * Instance of the subtraction operator.
 	 */
-	public static final Item SUB_OPR = new SubtractionOperator(5001);
+	public static final Item SUB_OPR = new MathematicalOperator(5001,
+			OperatorType.MINUS);
 	/**
 	 * Instance of the multiplication operator.
 	 */
-	public static final Item MUL_OPR = new MultiplicationOperator(5002);
+	public static final Item MUL_OPR = new MathematicalOperator(5002,
+			OperatorType.TIMES);
 	/**
 	 * Instance of the division operator.
 	 */
-	public static final Item DIV_OPR = new DivisionOperator(5003);
+	public static final Item DIV_OPR = new MathematicalOperator(5003,
+			OperatorType.DIVIDE);
 
 	/**
 	 * Instance of the basic number class.
@@ -109,9 +111,10 @@ public class EduCraft {
 	 * Instances of the number ordering benches.
 	 */
 	public static final Block ORDERING_BENCH = new BlockOrderingBench(502, 0);
-	public static final Block ORDERING_BENCH_ODD = new BlockOrderingBench(503, 1);
-	public static final Block ORDERING_BENCH_EVEN = new BlockOrderingBench(504, 2);
-	
+	public static final Block ORDERING_BENCH_ODD = new BlockOrderingBench(503,
+			1);
+	public static final Block ORDERING_BENCH_EVEN = new BlockOrderingBench(504,
+			2);
 
 	/**
 	 * Instance of the mod that Minecraft Forge detects and uses. This is what
@@ -157,12 +160,12 @@ public class EduCraft {
 		GameRegistry.registerBlock(ORDERING_BENCH, "orderingBench");
 		MinecraftForge.setBlockHarvestLevel(ORDERING_BENCH, "axe", 0);
 		LanguageRegistry.addName(ORDERING_BENCH, "Ordering Bench");
-		
+
 		// register the ordering bench for odd numbers
 		GameRegistry.registerBlock(ORDERING_BENCH_ODD, "orderingBenchOdd");
 		MinecraftForge.setBlockHarvestLevel(ORDERING_BENCH_ODD, "axe", 0);
 		LanguageRegistry.addName(ORDERING_BENCH_ODD, "Ordering Bench Odd");
-		
+
 		// register the ordering bench for even numbers
 		GameRegistry.registerBlock(ORDERING_BENCH_EVEN, "orderingBenchEven");
 		MinecraftForge.setBlockHarvestLevel(ORDERING_BENCH_EVEN, "axe", 0);
