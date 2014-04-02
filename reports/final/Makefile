@@ -3,13 +3,14 @@ CHAPTERS = introduction.tex requirements.tex design.tex implementation.tex testi
 APPENDICES = unittests.tex measures.tex userguide.tex
 BIBLIOGRAPHY = bibliography.bib
 
-all: report.pdf
+all: gp13-pxb1-fgr.pdf
 
-report.pdf: report.tex $(CHAPTERS) $(APPENDICES) $(BIBLIOGRAPHY)
-	pdflatex report.tex
+gp13-pxb1-fgr.pdf: report.tex $(CHAPTERS) $(APPENDICES) $(BIBLIOGRAPHY)
+	pdflatex $<
 	bibtex report.aux
-	pdflatex report.tex
-	pdflatex report.tex
+	pdflatex $<
+	pdflatex $<
+	mv report.pdf $@
 
 clean:
 	rm *.log
