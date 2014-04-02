@@ -4,9 +4,10 @@
 \section{Implementation of the mod}
 
 \begin{figure}[H]
+\label{fig:class-diagram}
+\caption{UML class diagram of EduCraft}
 \centering
 \includegraphics[width=17cm, height=11cm]{ClassDiagram}
-\caption{"UML class diagram of EduCraft"}
 \end{figure}
 
 \begin{itemize}
@@ -18,14 +19,14 @@ public static CommonProxy proxy;
 \end{lstlisting}
 
 \item \textbf{Proxy Classes}\footnote{``Minecraft uses a client and server setup even on single player. The server side does all the maintaining of the world’s state while the client render’s the world. All code runs on both sides unless specified otherwise.\newline
-The annotation @SidedProxy is used when we want the server to call the constructor of one class and the client the other. We use the proxy for registering images and hosting our GUI handler.\cite{website:forge-proxy}}
+The annotation \texttt{@SidedProxy} is used when we want the server to call the constructor of one class and the client the other. We use the proxy for registering images and hosting our GUI handler.'' \cite{website:forge-proxy}}
 \end{itemize}
 
 \section{Implementation of Constraints}
 This section explains how we implemented the concept of the room and how we forced collaboration through level constraints. All levels used blocks, such as the Stone Brick block, which can not be broken with fists or an axe. This stops the player from breaking out of the level and skipping certain parts of the level without creating the correct item because we restricted the items the player could collect and create to ones which could not break through vital game blocks. We also put the game mode into adventure mode which means the player cannot take blocks from the creative tab or break any block instantly (both are possible when the player is in creative mode).
 
 \subsection{Door Hopper Combination}
-To stop players from progressing without creating the correct numbers or keys we used a door and hopper combination. We put a hopper next to the door so that when the player thinks they have the correct item they can easily throw the item into the hopper and if it is correct the door will open. By the door (as well as underneath it) there are two hoppers on top of each other and a chest next to the top hopper. The top hopper is the hopper that the player can see [Show picture]. We then add the item that we want the player to throw, into each of the five slots in the bottom hopper. We then place five redstone powder trails down, four of which will be powered, if the player throws the right item in the top hopper it will drop the item into the bottom hopper and add it to the stack. If the wrong item is thrown into the top hopper it gets pushed into the chest. This is because we can only stack identical items in the same slot therefore if all slots are taken up in the bottom hopper we can only stack those item thus forcing the player to throw the correct item. 
+To stop players from progressing without creating the correct numbers or keys we used a door and hopper combination. We put a hopper next to the door so that when the player thinks they have the correct item they can easily throw the item into the hopper and if it is correct the door will open. By the door (as well as underneath it) there are two hoppers on top of each other and a chest next to the top hopper. The top hopper is the hopper that the player can see [Show picture]. We then add the item that we want the player to throw, into each of the five slots in the bottom hopper. We then place five redstone powder trails down, four of which will be powered, if the player throws the right item in the top hopper it will drop the item into the bottom hopper and add it to the stack. If the wrong item is thrown into the top hopper it gets pushed into the chest. This is because we can only stack identical items in the same slot therefore if all slots are taken up in the bottom hopper we can only stack those item thus forcing the player to throw the correct item.
 
 When the correct item is thrown into the hopper the fifth powder is then powered. We can then use a repeater to boost the weak signal and place a trail of powders leading to the block below the door. The door, when powered, will open. Doors become powered when the block they sit on is powered this is why we feed the redstone powder into the block below the door and not the door itself.
 
@@ -44,14 +45,12 @@ This, along with the operator item, is the most important item in the game. To i
 When then come to the methods we have the getUnlocalizedName method which is simple terms uses the already set unlocalizedname (number) and adds a dot followed by the number that object is representing. So for example “number.35” would be the the unlocalizedName of the object representing 35. This function takes an ItemStack as its parameter this is because the actual number component of each object is encapsulated by metadata. Each item has metadata which holds the item’s damage value this can be changed for each number object so that this metadata holds is number value. We use a similar method to determine which icon each number object should have. The icon is chosen by taking the damage value and using that as the index of the icon you want in the icon array.
 
 \subsection{Operator Items}
-Once again all operators inherit from the item class. Therefore we implement the constructor in the same way as specified previously. Each construction sets the unlocalized name to a 3 letter representation of the operator plus the string “operator”. The maxStackSize is set to 4 so players can hold no more than 4 in a stack at a time. The creative tab the operators are put in is our custom educraft tab for convinience and finally we set the texture which is simply “educraft:” and the name of the operator. All operators implement the MathematicalOperator interface. The only method this interface forces is the getOperator method. This method simply returns what operator the current object is, we can use this later on in calculations because if we have two numbers and an operator object we don’t know what operator it is we just know that its some kind of operator. In addition it means we then cannot calculate the result. The method will then counteract this problem and let us know what operator that object represents. The return type of the getOperator function is actually the type ‘OperatorType’ which is an enumerated type. So for example the multiplication type is represented by the name ‘TIMES’ and contains two strings “Multiplication” and “x”. Every other operator type is represented in a similar way. 
+Once again all operators inherit from the item class. Therefore we implement the constructor in the same way as specified previously. Each construction sets the unlocalized name to a 3 letter representation of the operator plus the string “operator”. The maxStackSize is set to 4 so players can hold no more than 4 in a stack at a time. The creative tab the operators are put in is our custom educraft tab for convinience and finally we set the texture which is simply “educraft:” and the name of the operator. All operators implement the MathematicalOperator interface. The only method this interface forces is the getOperator method. This method simply returns what operator the current object is, we can use this later on in calculations because if we have two numbers and an operator object we don’t know what operator it is we just know that its some kind of operator. In addition it means we then cannot calculate the result. The method will then counteract this problem and let us know what operator that object represents. The return type of the getOperator function is actually the type ‘OperatorType’ which is an enumerated type. So for example the multiplication type is represented by the name ‘TIMES’ and contains two strings “Multiplication” and “x”. Every other operator type is represented in a similar way.
 
 \section{Implementation of Blocks}
 This section covers the most important steps that allowed us to create our own Crafting Tables with custom looks and specific behaviours.\newline\newline
 During our initial attempts to create a modified Crafting Table we came across the problem of implementing our Numbers efficiently. We initially thought that we would have to hardcode every single class for each Number item that could be used in the Calculator without having to create separate recipes. This stalled our progress for while, but luckily after a substantial amount of research we found a solution. This workaround allowed us to have one BaseNumber class and every time a new BaseNumber object is created a random metadata is assigned to that specific item. The metadata defines the value, the texture used and the onscreen text displayed for that Number item. After this issue was resolved we were able to proceed with the implementation of the Calculator.\newline\newline
 Minecraft distinguishes between two different ways of handling information due to being a multiplayer game, we will refer to these as Server Side and Client Side. The original Crafting Table only opens on the Client Side, which limits the interaction with this object to one player at a time. Initially we started with an implementation that only added custom looks and behaviours to our Crafting Tables. Later on, we recognised the importance of making the Crafting Tables Server Side to allow multiple players to interact with the same block simultaneously. This helped us to create an even more collaborative gaming experience.
-
-\subsection{Chain of method calls during the use of Crafting Table}
 
 \subsection{Extended Block Types}
 The Ordering Table has three different types depending on the parity of the input numbers accepted by it. We have created an enum type named BenchType to describe the different types of Ordering Tables. OrderingTileEntity classes are created with an additional field differentiating the specific Ordering Table in the world when the block is created. This attribute will determine the behaviour of the Ordering Tables based on their type.
@@ -103,7 +102,7 @@ this.tileEntity = tileEntity.initialise(this, x, y);
 \begin{lstlisting}
 // adds output slot to the container
 this.addSlotToContainer(new SlotCrafting(inventory.player,	this.craftMatrix, this.craftResult, 0, 124, 35));
-			
+
 	// adds input slots to the container
 	for (int l = 0; l < x; ++l) {
 		for (int i1 = 0; i1 < y; ++i1) {
@@ -116,13 +115,13 @@ this.addSlotToContainer(new SlotCrafting(inventory.player,	this.craftMatrix, thi
 \let\thefootnote\relax\footnote{y = the number of columns}
 \let\thefootnote\relax\footnote{Please note that in Slot(..., x, y, z) and SlotCrafting(..., x, y, z) the last three arguments passed in are slotIndex, xDisplayPosition and yDisplayPosition in this order. Coordinates are represented in pixels. The default size of a slot is 18x18 pixels.}
 
-\item in the case of a Server Side Crafting Table, in the onContainerClosed() method:	
+\item in the case of a Server Side Crafting Table, in the onContainerClosed() method:
 \begin{lstlisting}
 /**
  * Called whenever the container is closed. If no one is using the container
  * any more, then it should drop everything inside it, like a crafting
  * table.
- * 
+ *
  * @param player
  *            the player who closed the container
  */
@@ -134,7 +133,7 @@ public void onContainerClosed(EntityPlayer player) {
 	if (!this.worldObj.isRemote && !this.tileEntity.isBeingUsed()) {
 			for (int i = 0; i < 3; ++i) {
 				ItemStack itemstack = this.craftMatrix.getStackInSlotOnClosing(i);
-            
+
 				if (itemstack != null) {
 					player.dropPlayerItem(itemstack;
 				}
@@ -146,7 +145,8 @@ public void onContainerClosed(EntityPlayer player) {
 
 \subsection{Gui}
 This class is responsible for the creation and display of GUIs.
-There are two methods within this class. One is responsible for drawing the background and the other one is for drawing the foreground.\newline\newline
+There are two methods within this class. One is responsible for drawing the background and the other one is for drawing the foreground.
+
 \begin{lstlisting}
 /**
 * Standard prefix for every GUI texture created for the mod.
@@ -157,27 +157,39 @@ private ResourceLocation calculator = new ResourceLocation(EduCraft.GuiTexturePr
 \end{lstlisting}
 
 \subsection{CraftingManager}
-In the Crafting Manager classes for the Calculator and Ordering Bench we simplified the operation of the core version of this class. This was possible as we are not using any Recipes for implementing the logic of how the inputs are checked and the way the output is generated. Both Crafting Tables have only 3 input slots and this allowed us to validate inputs in a simpler manner.\newline\newline
-The logic implemented for the Calculator is to have two operands (instance of BaseNumber) in slots 1 and 3 and an operator (instance of MathematicalOperator) in slot 2 of the input matrix. If this condition is not met then there is nothing to generate or else it gets the metadata value (itemDamage) of the operands and the mod internally performs a mathematical operation depending on the type of operator. An output BaseNumber is generated, with the result of the operation stored in the new items metadata. There are a few cases where there is nothing generated even though the operation would be mathematically correct, but our mod does not cover the use of negative numbers, fractions and decimals. We would like to implement these concepts in future versions of the extension.\newline\newline
+In the Crafting Manager classes for the Calculator and Ordering Bench we simplified the operation of the core version of this class. This was possible as we are not using any Recipes for implementing the logic of how the inputs are checked and the way the output is generated. Both Crafting Tables have only 3 input slots and this allowed us to validate inputs in a simpler manner.
+
+The logic implemented for the Calculator is to have two operands (instance of BaseNumber) in slots 1 and 3 and an operator (instance of MathematicalOperator) in slot 2 of the input matrix\footnote{See Figure \ref{fig:ssot-calculator}.}.
+If this condition is not met then there is nothing to generate or else it gets the metadata value (itemDamage) of the operands and the mod internally performs a mathematical operation depending on the type of operator. An output BaseNumber is generated, with the result of the operation stored in the new items metadata. There are a few cases where there is nothing generated even though the operation would be mathematically correct, but our mod does not cover the use of negative numbers, fractions and decimals. We would like to implement these concepts in future versions of the extension.
+
 \begin{figure}[H]
+\label{fig:ssot-calculator}
+\caption{Screenshot of the Calculator's crafting matrix in use}
 \centering
 \includegraphics[scale=0.4]{calculator_use_top}
-\caption{Screenshot of the Calculator's crafting matrix in use}
 \end{figure}
 
-The Crafting Manager for the Ordering Bench works in a similar way, but it first tests if all the inputs are numbers and then it checks if the order and the parity of the numbers are valid depending on the type of the Ordering Table and finally it generates a coloured key.\newline\newline
+The Crafting Manager for the Ordering Bench works in a similar way, but it first tests if all the inputs are numbers and then it checks if the order and the parity of the numbers are valid depending on the type of the Ordering Table.
+Finally it generates a coloured key, with the colour depending on whether the bench was set to accept odd numbers,
+even numbers, or all numbers\footnote{See Figure \ref{fig:ssot-ordering}.}.
+
 \begin{figure}[H]
+\label{fig:ssot-ordering}
+\caption{Screenshot of the Ordering Bench's crafting matrix in use}
 \centering
 \includegraphics[scale=0.4]{ordering_use_top}
-\caption{Screenshot of the Ordering Bench's crafting matrix in use}
 \end{figure}
 
-We decided to keep the way the core Crafting Manager works for the Operator Bench. This bench has the same behaviour as the core Crafting Table. The only modifications are the visuals and the recipes accepted. We wanted to limit the items that could be crafted by the players in the mod. We achieved this by placing only our own modified versions of the Crafting Tables in our levels. These benches accept only our custom recipes which we defined for the crafting \footnote{``Crafting is the method by which many blocks, tools, and materials are made in Minecraft. In order to craft something, players must move items from their inventory to a crafting grid. A 2×2 crafting grid can be accessed from the player's inventory. A 3×3 grid can be accessed by right-clicking a Crafting Table.''} of the mathematical operators. All these recipes are ShapedRecipes\footnote{``Shaped recipes come in all sizes from 1x1 to 3x3. Strings are used for the recipe shape and values.''\cite{website:forge-shaped}} used in the original version of Minecraft.
+We decided to keep the way the core Crafting Manager works for the Operator Bench. This bench has the same behaviour as the core Crafting Table. The only modifications are the visuals and the recipes accepted. We wanted to limit the items that could be crafted by the players in the mod. We achieved this by placing only our own modified versions of the Crafting Tables in our levels. These benches accept only our custom recipes which we defined for the crafting \footnote{``Crafting is the method by which many blocks, tools, and materials are made in Minecraft. In order to craft something, players must move items from their inventory to a crafting grid. A 2×2 crafting grid can be accessed from the player's inventory. A 3×3 grid can be accessed by right-clicking a Crafting Table.''} of the mathematical operators\footnote{See Figure \ref{fig:ssot-operators}.}.
+All these recipes are ShapedRecipes\footnote{``Shaped recipes come in all sizes from 1x1 to 3x3. Strings are used for the recipe shape and values.''\cite{website:forge-shaped}} used in the original version of Minecraft.
+
 \begin{figure}[H]
+\label{fig:ssot-operators}
+\caption{Screenshot of the Operator Bench's crafting matrix in use}
 \centering
 \includegraphics[scale=0.4]{operator_use_top}
-\caption{Screenshot of the Operator Bench's crafting matrix in use}
 \end{figure}
+
 The method signature is roughly as follows:
 \begin{lstlisting}
 this.addRecipe(String row1, [String row2[, String row3]]
@@ -198,7 +210,7 @@ private OperatorCraftingManager() {
 
 \section{Implementation of Mobs}
 \subsection{General Mob Implementation Guide}
-All monsters(mobs) in the game are entities. Each monster we implemented was therefore also an entity and since we decided to use well known minecraft monsters the zombie and the skeleton it was natural we would just inherit from these two already existent classes. When implementing a mob there are a few simple steps. Firstly the constructor, the constructor should pass the world to the super constructor. The world should be passed into the constructor as a parameter. You can then set what item for the mob to drop by using the this keyword followed by ‘droppedItemId’ and make it equal to the ID of the item you wish the mob to drop. You can then set the name of the monster which is seen by the player in game by using the method setCustomNameTag and then giving it a string. 
+All monsters(mobs) in the game are entities. Each monster we implemented was therefore also an entity and since we decided to use well known minecraft monsters the zombie and the skeleton it was natural we would just inherit from these two already existent classes. When implementing a mob there are a few simple steps. Firstly the constructor, the constructor should pass the world to the super constructor. The world should be passed into the constructor as a parameter. You can then set what item for the mob to drop by using the this keyword followed by ‘droppedItemId’ and make it equal to the ID of the item you wish the mob to drop. You can then set the name of the monster which is seen by the player in game by using the method setCustomNameTag and then giving it a string.
 
 Each monster class has many methods which help with setting which will drop. In many classes such as the skeleton class it does not use the normal method of dropping a default item. It uses the ‘dropFewItems’ method so a skeleton will always drop multiple items, it may also drop a rare item through the dropRareDrop item this has a significantly lower chance. Most monsters have the rare drop method and use it, our custom monsters only implement the getDropItemId so that we can get what item the monster will drop. Not only do we not implement the other drop methods we override them and leave them empty. If they’re not overridden and left empty the monster may begin to drop other items such as helmets and bows because the minecraft engine has a chance to randomly invoke the rare drop or the case of the skeleton it will always invoke the multiple item drop method. These methods will of course be those from the superclass.
 
@@ -207,6 +219,7 @@ The ‘numberMobDropsEvent’ is a class which handles the dropping of number it
 
 \section{Implementation of Locations}
 We used creative mode\footnote{``Creative mode is one of the main game modes in Minecraft. This mode strips away the survival aspects of Minecraft and allows players to easily create and destroy structures. Creative mode allows players to destroy all blocks instantly (including normally-indestructible blocks such as bedrock) and the ability to fly. Players are given an infinite number of blocks to build with and no health or hunger bar thus rendering the player immune to all damage.''\cite{website:minecraft-creative}} in Minecraft to create all the different locations (levels) in our world. In order to make the visual experience in the mod more enjoyable we used a world editing tool called MCEdit to create a small forest and mountains in the surrounding area of the locations.
+
 We have also created our own tab for easier access of custom elements in the inventory list. We added the following line to the constructors of all elements created by us:
 \begin{lstlisting}
 setCreativeTab(EduCraft.tabEduCraft);
@@ -218,25 +231,35 @@ setCreativeTab(EduCraft.tabEduCraft);
 \end{figure}
 
 \subsection{Castle}
-The collaborative element of this level was implemented by setting a task to create four different operators, which would open doors to four different rooms using the hopper system in the first part of the level. Each room has a key inside and all four keys are needed to allow the players to progress to the next part of this level.\newline\newline
-In the next part each player will have to pick up a Maths Wand and kill some Zombies and collect enough numbers to be able to use the Ordering Bench. A correct ordering of numbers will generate a key that opens the door leading to the final part of this level.\newline\newline
-In the final part the team has to obtain a specific number through a series of mathematical operations to be able to leave the level through the exit. There is a chest full of Mathematical Operators which they can use within the Calculator. The team has to kill Zombies and Skeletons to collect the numbers dropped by the monsters.\newline\newline
+The collaborative element of this level was implemented by setting a task to create four different operators, which would open doors to four different rooms using the hopper system in the first part of the level. Each room has a key inside and all four keys are needed to allow the players to progress to the next part of this level.
+
+In the next part each player will have to pick up a Maths Wand and kill some Zombies and collect enough numbers to be able to use the Ordering Bench. A correct ordering of numbers will generate a key that opens the door leading to the final part of this level.
+
+In the final part the team has to obtain a specific number through a series of mathematical operations to be able to leave the level through the exit. There is a chest full of Mathematical Operators which they can use within the Calculator. The team has to kill Zombies and Skeletons to collect the numbers dropped by the monsters.
+
 All tasks in this part are designed so no one can progress without the help of the others. This was set to be a tutorial level which would allow the players to familiarise themselves with the game play of the mod.
+
 \subsection{Pyramid}
-This level forces the team to split up at the beginning. This is achieved by only allowing two players inside the Pyramid. As soon as there are two players inside the entrance is blocked.\newline\newline
-The interior of the Pyramid has two floors and it is divided into four sections. The Pyramid is surrounded by a garden with fences and walls so as to prevent the outside team from wandering around in the world. Each inner section has its own corresponding outer garden section. Neither the inside nor the outside team can go to the next section without collaboratively working towards a goal set for each section of the level.\newline\newline
-There is an exit through the top of the Pyramid for the inside team. The inside team can only leave once each subteam has generated a key in the fourth section of the level. The outside team can climb the stairs on the side of the Pyramid in the fourth section and throw their key inside for the other team. The inside team should have two keys by this point and each key will move a block, creating a path to leave. Once all the players are reunited, they can leave through the level exit, which located in the final garden section.\newline\newline
-In each section the resources available are limited for each subteam, for example in one section the inside team has access to sticks and an Operator Bench, but not to any numbers. In the same section the outside team has the opportunity to kill Zombies or Skeletons to be able to collect numbers and they also have a Calculator to generate numbers.\newline\newline
-We implemented a system that allows the teams to send items back and forth in minecarts that move on rails. This will force them to communicate their requirements to each other.\newline
+This level forces the team to split up at the beginning. This is achieved by only allowing two players inside the Pyramid;
+as soon as there are two players inside the entrance is blocked. A plan of this level's design is shown in
+Figure \ref{fig:pyramid-layout}.
+
+The interior of the Pyramid has two floors and it is divided into four sections. The Pyramid is surrounded by a garden with fences and walls so as to prevent the outside team from wandering around in the world. Each inner section has its own corresponding outer garden section. Neither the inside nor the outside team can go to the next section without collaboratively working towards a goal set for each section of the level.
+
+There is an exit through the top of the Pyramid for the inside team. The inside team can only leave once each subteam has generated a key in the fourth section of the level. The outside team can climb the stairs on the side of the Pyramid in the fourth section and throw their key inside for the other team. The inside team should have two keys by this point and each key will move a block, creating a path to leave. Once all the players are reunited, they can leave through the level exit, which located in the final garden section.
+
+In each section the resources available are limited for each subteam, for example in one section the inside team has access to sticks and an Operator Bench, but not to any numbers. In the same section the outside team has the opportunity to kill Zombies or Skeletons to be able to collect numbers and they also have a Calculator to generate numbers.
+
+We implemented a system that allows the teams to send items back and forth in minecarts that move on rails. This will force them to communicate their requirements to each other.
 
 \begin{figure}[h!]
+\label{fig:pyramid-layout}
+\caption{Sketch of the Pyramid's layout}
 \centering
 \includegraphics[scale=0.65]{pyramid}
-\caption{Sketch of the Pyramid's layout}
 \end{figure}
 
 \subsection{Rook}
-The Rook has two floors and on each floor there are two rooms. Only the first two players to arrive can enter each room. The subteams’ resources are limited in a similar manner to the Pyramid. The rooms on the same floors share a wall. In each of these walls there is a Calculator built-in, which can be used by the subteams to pass items to each other and to execute some mathematical operations together.\newline\newline
+The Rook has two floors and on each floor there are two rooms. Only the first two players to arrive can enter each room. The subteams’ resources are limited in a similar manner to the Pyramid. The rooms on the same floors share a wall. In each of these walls there is a Calculator built-in, which can be used by the subteams to pass items to each other and to execute some mathematical operations together.
+
 In order to leave the rooms the teams must generate a specific number and throw that number in the hopper by the exit. Each exit is connected to a staircase that leads to the floor above. The “roof top” of the Rook is the final destination in our game. It is relatively elevated, so the players can have a look around and see the world and all the levels they have completed.
-
-
