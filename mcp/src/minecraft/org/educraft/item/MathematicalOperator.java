@@ -7,6 +7,20 @@ import org.educraft.EduCraft;
 public class MathematicalOperator extends Item {
 	private OperatorType type;
 	
+	/**
+	 * Math Operator Constructor 
+	 * for creating new math operators for players to 
+	 * use to combine numbers to match a value 
+	 * that allows the player to progress to the next level
+	 * 
+	 * @param id
+	 *          id of the operator
+	 * 
+	 * @param type
+	 *          the operator type
+	 * 
+	 */
+	
 	public MathematicalOperator(int id, OperatorType type) {
 		super(id);
 		this.type = type;
