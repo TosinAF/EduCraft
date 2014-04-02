@@ -17,18 +17,33 @@ public class OperatorGui extends GuiContainer {
 	
 	private static final ResourceLocation craftingTableGuiTextures = new ResourceLocation(
 			"textures/gui/container/crafting_table.png");
-
+	
+	/**
+	 * Operator GUI Constructor for creating the interface 
+	 * where players perform operators on numbers in order to obtain a value
+	 * 
+	 */
 	public OperatorGui(InventoryPlayer par1InventoryPlayer, World par2World,
 			int par3, int par4, int par5) {
 		super(new OperatorContainer(par1InventoryPlayer, par2World, par3, par4,
 				par5));
 	}
+	
+	/**
+	 * Draw the forground layer of the Operator Gui
+	 * 
+	 */
 
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		this.fontRenderer.drawString("Operators", 28, 6, 4210752);
 		this.fontRenderer.drawString(I18n.getString("container.inventory"), 8,
 				this.ySize - 96 + 2, 4210752);
 	}
+	
+	/**
+	 * Draw the background layer of the Operator Gui
+	 * 
+	 */
 
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2,
 			int par3) {
