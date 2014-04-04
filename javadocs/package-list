@@ -1,0 +1,8 @@
+org.educraft
+org.educraft.block
+org.educraft.block.calculator
+org.educraft.block.operators
+org.educraft.block.ordering
+org.educraft.client
+org.educraft.entity
+org.educraft.item
