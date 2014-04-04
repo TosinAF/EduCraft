@@ -1,0 +1,74 @@
+\documentclass[11pt,a4paper]{report}
+
+\usepackage[top=1.5in,bottom=1.5in,left=1in,right=1in]{geometry}
+\usepackage{pdflscape}
+\usepackage{pdfpages}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage[nottoc]{tocbibind}
+\usepackage[square,comma,numbers]{natbib}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{float}
+\usepackage[parfill]{parskip}
+
+\graphicspath{ {./images/} }
+
+\definecolor{javared}{rgb}{0.5,0,0.33} % for keywords
+\definecolor{javablue}{rgb}{0.16,0,1} % for strings
+\definecolor{javagreen}{rgb}{0.25,0.5,0.37} % comments
+\definecolor{javadocblue}{rgb}{0.5,0.62,0.75} % javadoc
+
+\renewcommand{\labelitemi}{$-$}
+\renewcommand{\labelitemii}{$\bullet$}
+\renewcommand{\labelitemiii}{$\diamond$}
+
+\lstset{language=Java,
+basicstyle=\ttfamily,
+keywordstyle=\color{javared}\bfseries,
+stringstyle=\color{javablue},
+commentstyle=\color{javagreen},
+morecomment=[s][\color{javadocblue}]{/**}{*/},
+numbers=left,
+numberstyle=\tiny\color{black},
+stepnumber=2,
+numbersep=10pt,
+tabsize=4,
+showspaces=false,
+showstringspaces=false,
+breaklines=true,
+}
+
+\bibliographystyle{IEEEtranS}
+
+\begin{document}
+\title{{\normalsize G52GRP Final Report}\\EduCraft\\\textit{Minecraft as a Collaborative Learning Tool}}
+\author{Group \texttt{gp13-pxb1}:\\
+            Tosin Afolabi (\texttt{ooa02u})\\
+            Janos Bana (\texttt{jxb12u})\\
+            Eze Benson (\texttt{exb02u})\\
+            Alastair Kerr (\texttt{axk02u})\\
+            Ian Knight (\texttt{iak12u})\\
+            Ying Wang (\texttt{yxw03u})
+            }
+\maketitle
+
+\tableofcontents
+
+\input{introduction}
+\input{requirements}
+\input{design}
+\input{implementation}
+\input{testing}
+\input{reflection}
+
+\appendix
+\input{classdiagram.tex}
+\input{unittests}
+\input{measures}
+\input{userguide}
+\input{minutes}
+
+\bibliography{bibliography}
+
+\end{document}
