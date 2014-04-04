@@ -4,7 +4,6 @@
 
 <a href="https://code.cs.nott.ac.uk/p/gp13-pxb1/source/tree/9/Interim%20Report.pdf">Interim report</a><br>
 <a href="https://code.cs.nott.ac.uk/p/gp13-pxb1/source/tree/HEAD/Master/reports/final/gp13-pxb1-fgr.pdf">Final report</a><br>
-<a href="https://github.com/TosinAF/EduCraft">Github Repo</a><br>
 <a href="http://tosinaf.github.io/EduCraft">Website</a><br>
 <a href="http://tosinaf.github.io/EduCraft/videos/">Tutorial Videos</a><br>
 <a href="http://tosinaf.github.io/EduCraft/javadocs/">Documentation</a><br>
