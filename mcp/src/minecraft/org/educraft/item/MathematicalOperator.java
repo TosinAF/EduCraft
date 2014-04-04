@@ -4,6 +4,10 @@ import net.minecraft.item.Item;
 
 import org.educraft.EduCraft;
 
+/**
+ * A mathematical operator which a player can craft and then use in
+ * calculations.
+ */
 public class MathematicalOperator extends Item {
 	private OperatorType type;
 

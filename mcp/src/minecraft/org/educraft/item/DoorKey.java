@@ -13,7 +13,15 @@ import org.educraft.EduCraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/**
+ * A key which a player can use to open a door using redstone.
+ *
+ */
 public class DoorKey extends Item {
+	/**
+	 * Defines the possible unlocalised names this item can have, based on its
+	 * metadata.
+	 */
 	public static final String[] NAMES = { "key_red", "key_blue", "key_yellow" };
 
 	/**
