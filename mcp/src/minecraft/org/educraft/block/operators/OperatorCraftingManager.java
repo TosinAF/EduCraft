@@ -156,7 +156,9 @@ public enum OperatorCraftingManager {
 	}
 
 	/**
-	 * returns the List<> of all recipes
+	 * Returns the list of all recipes this crafting manager recognises.
+	 * 
+	 * @return a list of {@link IRecipe}s
 	 */
 	public List getRecipeList() {
 		return this.recipes;

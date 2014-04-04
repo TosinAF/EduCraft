@@ -15,12 +15,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class DoorKey extends Item {
 	public static final String[] NAMES = { "key_red", "key_blue", "key_yellow" };
-	
+
 	/**
-	 * The Door Key Constructor
+	 * Class constructor.
 	 * 
-	 * @param itemID
-	 *           item id
+	 * @param itemId
+	 *            the unique item ID to assign to this item
 	 */
 
 	public DoorKey(int itemId) {
@@ -35,23 +35,31 @@ public class DoorKey extends Item {
 		setMaxStackSize(4);
 		setCreativeTab(EduCraft.tabEduCraft);
 	}
-	
+
 	/**
-	 * Returns a string of the item's name & it's damage value
+	 * Returns a string used to identify this item internally. Takes the form
+	 * "doorKey.x", where x is the item's metadata.
 	 * 
 	 * @param is
-	 *           An Item Stack
+	 *            the item stack to get the name of
 	 */
-
 	@Override
 	public String getUnlocalizedName(ItemStack is) {
 		return getUnlocalizedName() + "." + NAMES[is.getItemDamage()];
 	}
-	
+
 	/**
-	 * Returns the children items of the parent item
+	 * Populates the given list with instances of this class. Every possible
+	 * metadata value is added, so that we can display them all in the creative
+	 * mode inventory.
+	 * 
+	 * @param id
+	 *            the id of the item to register
+	 * @param tab
+	 *            the creative tab to display the items in
+	 * @param list
+	 *            the list to add the metadata items to
 	 */
-	 
 	@Override
 	public void getSubItems(int id, CreativeTabs creativeTab, List list) {
 		for (int i = 0; i < NAMES.length; i++) {
@@ -59,34 +67,31 @@ public class DoorKey extends Item {
 			list.add(stack);
 		}
 	}
-	
-	/**
-	 * Array where every index will contain an icon for each damage level
-	 */
 
+	/**
+	 * Contains icons for every possible metadata value of this item.
+	 */
 	@SideOnly(Side.CLIENT)
 	public static Icon[] icons;
-	
+
 	/**
-	 * Returns the icon for a specified damage level
+	 * Returns the appropriate icon to display this item, based on its metadata.
 	 * 
 	 * @param damage
-	 *           level of damage of the item
+	 *            level of damage of the item
 	 */
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getIconFromDamage(int damage) {
 		return icons[damage];
 	}
-	
+
 	/**
 	 * Populates the icon array with the approitate icons for each damage level
 	 * 
-	 * @param damage
-	 *           level of damage of the item
+	 * @param icon
+	 *            the icon store we will add our icons to
 	 */
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister icon) {

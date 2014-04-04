@@ -13,59 +13,64 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 
+/**
+ * A number between 1 and {@link org.educraft.EduCraft.MAX_NUMBER}.
+ * 
+ * This can be dropped by a hostile mob, or collected through other means.
+ *
+ */
 public class BaseNumber extends Item {
-	
+
 	/**
-	 * The Base Number Constructor
+	 * Class constructor.
 	 * 
-	 * @param itemID
-	 *           item id
+	 * @param itemId
+	 *            unique item ID to assign to this item
 	 */
-	public BaseNumber(int itemID) {
-		super(itemID);
+	public BaseNumber(int itemId) {
+		super(itemId);
 		setHasSubtypes(true);
 		setMaxDamage(0);
 		setMaxStackSize(4);
 		setCreativeTab(EduCraft.tabEduCraft);
 		setUnlocalizedName("number");
 	}
-	
+
 	/**
-	 * Returns a string of the item's name & it's damage value
+	 * Returns a string used to identify this item internally. Takes the format
+	 * "number.x", where x is the value of the number.
 	 * 
 	 * @param is
-	 *           An Item Stack
+	 *            the item stack to get the name of
 	 */
 	@Override
 	public String getUnlocalizedName(ItemStack is) {
 		return getUnlocalizedName() + "." + String.valueOf(is.getItemDamage());
 	}
-	
 
 	/**
-	 * Array where every index will contain an icon for each damage level
+	 * Contains icons for every possible metadata value of this item.
 	 */
 	@SideOnly(Side.CLIENT)
 	public static Icon[] icons;
-	
+
 	/**
-	 * Returns the icon for a specified damage level
+	 * Returns the appropriate icon to display this item, based on its metadata.
 	 * 
 	 * @param damage
-	 *           level of damage of the item
+	 *            level of damage of the item
 	 */
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getIconFromDamage(int damage) {
 		return icons[damage];
 	}
-	
-	
+
 	/**
 	 * Populates the icon array with the approitate icons for each damage level
 	 * 
-	 * @param damage
-	 *           level of damage of the item
+	 * @param icon
+	 *            the icon store we will add our icons to
 	 */
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -77,9 +82,18 @@ public class BaseNumber extends Item {
 			icons[i] = icon.registerIcon("educraft:" + i);
 		}
 	}
-	
+
 	/**
-	 * Returns the children items of the parent item
+	 * Populates the given list with instances of this class. Every possible
+	 * metadata value is added, so that we can display them all in the creative
+	 * mode inventory.
+	 * 
+	 * @param id
+	 *            the id of the item to register
+	 * @param tab
+	 *            the creative tab to display the items in
+	 * @param list
+	 *            the list to add the metadata items to
 	 */
 	@Override
 	public void getSubItems(int id, CreativeTabs tab, List list) {

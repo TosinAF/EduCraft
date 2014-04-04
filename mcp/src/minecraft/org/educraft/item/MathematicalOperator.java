@@ -6,33 +6,31 @@ import org.educraft.EduCraft;
 
 public class MathematicalOperator extends Item {
 	private OperatorType type;
-	
+
 	/**
-	 * Math Operator Constructor 
-	 * for creating new math operators for players to 
-	 * use to combine numbers to match a value 
-	 * that allows the player to progress to the next level
+	 * Class constructor.
 	 * 
-	 * @param id
-	 *          id of the operator
+	 * @param itemId
+	 *            unique ID to assign to this item
 	 * 
 	 * @param type
-	 *          the operator type
+	 *            the type of operator this item represents
 	 * 
 	 */
-	
-	public MathematicalOperator(int id, OperatorType type) {
-		super(id);
+	public MathematicalOperator(int itemId, OperatorType type) {
+		super(itemId);
 		this.type = type;
-		
+
 		setUnlocalizedName("operator." + type.getName());
 		setMaxStackSize(4);
 		setCreativeTab(EduCraft.tabEduCraft);
 		setTextureName("educraft:" + type.getName());
 	}
-	
+
 	/**
-	 * Interface for the operators
+	 * Returns the type of operator this item represents.
+	 * 
+	 * @return this item's operator type
 	 */
 	public OperatorType getType() {
 		return this.type;

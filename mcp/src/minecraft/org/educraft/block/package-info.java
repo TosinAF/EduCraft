@@ -1,4 +1,4 @@
 /**
- * Provides the classes necessary to create the crafting block
+ * Provides everything required to create and manage EduCraft blocks.
  */
 package org.educraft.block;

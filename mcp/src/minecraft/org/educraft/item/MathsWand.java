@@ -7,19 +7,20 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemSword;
 
 /**
- * The DummySword is an iron sword with the texture of a gold sword. It is used
- * to kill zombies in order to obtain DummyCoins.
- * 
- * @author iak12u
+ * A Maths Wand is used to obtain numbers by killing the skeletons and zombies
+ * defined in {@link org.educraft.entity}.
  * 
  */
 public class MathsWand extends ItemSword {
-	
+
 	/**
-	 * Constructor for the DummySword.
+	 * Class constructor.
+	 * 
+	 * @param itemId
+	 *            unique item ID to assign to this item
 	 */
-	public MathsWand(int itemID) {
-		super(itemID, EnumToolMaterial.IRON);
+	public MathsWand(int itemId) {
+		super(itemId, EnumToolMaterial.IRON);
 		setCreativeTab(EduCraft.tabEduCraft);
 		setTextureName("educraft:mathswand");
 		setUnlocalizedName("mathsWand");

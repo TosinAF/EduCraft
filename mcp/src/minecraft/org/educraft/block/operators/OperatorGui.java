@@ -14,21 +14,29 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class OperatorGui extends GuiContainer {
-	
+
 	private static final ResourceLocation craftingTableGuiTextures = new ResourceLocation(
 			"textures/gui/container/crafting_table.png");
-	
+
 	/**
-	 * Operator GUI Constructor for creating the interface 
-	 * where players perform operators on numbers in order to obtain a value
+	 * Operator GUI Constructor for creating the interface where players perform
+	 * operators on numbers in order to obtain a value
 	 * 
+	 * @param player
+	 *            the player whose inventory to display
+	 * @param world
+	 *            the world the player is in
+	 * @param x
+	 *            x co-ordinate of the underlying block
+	 * @param y
+	 *            y co-ordinate of the underlying block
+	 * @param z
+	 *            z co-ordinate of the underlying block
 	 */
-	public OperatorGui(InventoryPlayer par1InventoryPlayer, World par2World,
-			int par3, int par4, int par5) {
-		super(new OperatorContainer(par1InventoryPlayer, par2World, par3, par4,
-				par5));
+	public OperatorGui(InventoryPlayer player, World world, int x, int y, int z) {
+		super(new OperatorContainer(player, world, x, y, z));
 	}
-	
+
 	/**
 	 * Draw the forground layer of the Operator Gui
 	 * 
@@ -39,7 +47,7 @@ public class OperatorGui extends GuiContainer {
 		this.fontRenderer.drawString(I18n.getString("container.inventory"), 8,
 				this.ySize - 96 + 2, 4210752);
 	}
-	
+
 	/**
 	 * Draw the background layer of the Operator Gui
 	 * 
