@@ -115,14 +115,6 @@ this.addSlotToContainer(new SlotCrafting(inventory.player,	this.craftMatrix, thi
 
 \item in the case of a Server Side Crafting Table, in the onContainerClosed() method:
 \begin{lstlisting}
-/**
- * Called whenever the container is closed. If no one is using the container
- * any more, then it should drop everything inside it, like a crafting
- * table.
- *
- * @param player
- *            the player who closed the container
- */
 @Override
 public void onContainerClosed(EntityPlayer player) {
 	super.onContainerClosed(player);
@@ -146,9 +138,6 @@ This class is responsible for the creation and display of GUIs.
 There are two methods within this class. One is responsible for drawing the background and the other one is for drawing the foreground.
 
 \begin{lstlisting}
-/**
-* Standard prefix for every GUI texture created for the mod.
-*/
 public static final String GuiTexturePrefix = "educraft" + ":" + "textures/gui/";
 
 private ResourceLocation calculator = new ResourceLocation(EduCraft.GuiTexturePrefix+ "FileName.png");
@@ -195,7 +184,6 @@ this.addRecipe(String row1, [String row2[, String row3]]
 \end{lstlisting}
 A list of all the recipes added to the Operator Bench:
 \begin{lstlisting}
-/** A list of all the recipes added */
 private List<IRecipe> recipes = new ArrayList<IRecipe>();
 
 private OperatorCraftingManager() {
@@ -260,4 +248,4 @@ We implemented a system that allows the teams to send items back and forth in mi
 \subsection{Rook}
 The Rook has two floors and on each floor there are two rooms. Only the first two players to arrive can enter each room. The subteams’ resources are limited in a similar manner to the Pyramid. The rooms on the same floors share a wall. In each of these walls there is a Calculator built-in, which can be used by the subteams to pass items to each other and to execute some mathematical operations together.
 
-In order to leave the rooms the teams must generate a specific number and throw that number in the hopper by the exit. Each exit is connected to a staircase that leads to the floor above. The “rooftop” of the Rook is the final destination in our game. It is relatively elevated, so the players can have a look around and see the world and all the levels they have completed.
+In order to leave the rooms the teams must generate a specific number and throw that number in the hopper by the exit. Each exit is connected to a staircase that leads to the floor above. The ``rooftop'' of the Rook is the final destination in our game. It is relatively elevated, so the players can have a look around and see the world and all the levels they have completed.
