@@ -1,5 +1,13 @@
 <img src="https://raw.githubusercontent.com/TosinAF/EduCraft/master/logo.png" width="200%">
 
+#Quick Links
+
+<a href="https://code.cs.nott.ac.uk/p/gp13-pxb1/source/tree/9/Interim%20Report.pdf">Interim report</a><br>
+<a href="https://code.cs.nott.ac.uk/p/gp13-pxb1/source/tree/HEAD/Master/reports/final/gp13-pxb1-fgr.pdf">Final report</a><br>
+<a href="http://tosinaf.github.io/EduCraft">Website</a><br>
+<a href="http://tosinaf.github.io/EduCraft/videos/">Tutorial Videos</a><br>
+<a href="http://tosinaf.github.io/EduCraft/javadocs/">Documentation</a><br>
+
 #Description
 
 The EduCraft project is concerned with developing a series of
@@ -30,16 +38,24 @@ Weekly Backups of the codebase are stored on this site.
 
 #Minutes
 
-<a href="https://code.cs.nott.ac.uk/p/gp13-pxb1/source/tree/HEAD/Minutes/minutes-20131007.pdf">07/10/2013</a><br>
-<a href="https://code.cs.nott.ac.uk/p/gp13-pxb1/source/tree/HEAD/Minutes/minutes-20131017%20-%202nd%20formal%20meeting.pdf">10/10/2013</a><br>
-<a href="https://code.cs.nott.ac.uk/p/gp13-pxb1/source/tree/HEAD/Minutes/minutes-group-20131014.pdf">14/10/2013</a><br>
-<a href="https://code.cs.nott.ac.uk/p/gp13-pxb1/source/tree/10/Minutes/Supervisormeeting03-03-2014.pdf">03/03/2014</a>
+<a href="https://code.cs.nott.ac.uk/p/gp13-pxb1/source/tree/HEAD/Minutes/minutes-20131007.pdf">07-10-2013</a><br>
+<a href="https://code.cs.nott.ac.uk/p/gp13-pxb1/source/tree/HEAD/Minutes/minutes-20131024.pdf">24-10-2013</a><br>
+<a href="https://code.cs.nott.ac.uk/p/gp13-pxb1/source/tree/HEAD/Minutes/minutes-20131031.pdf">31-10-2013</a><br>
+<a href="https://code.cs.nott.ac.uk/p/gp13-pxb1/source/tree/HEAD/Minutes/minutes-20131107.pdf">07-11-2013</a><br>
+<a href="https://code.cs.nott.ac.uk/p/gp13-pxb1/source/tree/HEAD/Minutes/minutes-20131121.pdf">21-11-2013</a><br>
+<a href="https://code.cs.nott.ac.uk/p/gp13-pxb1/source/tree/HEAD/Minutes/minutes-20131205.pdf">05-12-2013</a><br>
+<a href="https://code.cs.nott.ac.uk/p/gp13-pxb1/source/tree/HEAD/Minutes/minutes-20140203.pdf">03-02-2014</a><br>
+<a href="https://code.cs.nott.ac.uk/p/gp13-pxb1/source/tree/HEAD/Minutes/minutes-20140217.pdf">17-12-2014</a><br>
+<a href="https://code.cs.nott.ac.uk/p/gp13-pxb1/source/tree/HEAD/Minutes/minutes-20140303.pdf">03-03-2014</a><br>
+<a href="https://code.cs.nott.ac.uk/p/gp13-pxb1/source/tree/HEAD/Minutes/minutes-20140324.pdf">24-03-2014</a><br>
+<a href="https://code.cs.nott.ac.uk/p/gp13-pxb1/source/tree/HEAD/Minutes/minutes-20140331.pdf">31-03-2014</a><br>
 
 #Deliverables
 
 Group Project Site - Done<br>
 Interim reports - <a href="https://code.cs.nott.ac.uk/p/gp13-pxb1/source/tree/9/Interim%20Report.pdf">View</a><br>
-Final reports - April 4 2014 4:30 pm<br>
-Software - April 4 2014 4:30 pm<br>
+Final reports - <a href="https://code.cs.nott.ac.uk/p/gp13-pxb1/source/tree/HEAD/Master/reports/final/gp13-pxb1-fgr.pdf">View</a><br>
+Documentation - <a href="http://tosinaf.github.io/EduCraft/javadocs/">View</a><br>
+Software - Done<br>
 Open Day Stand - April 9 2014<br>
 Presentation - April 11 2014<br>
